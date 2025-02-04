@@ -23,4 +23,6 @@ public class RootController {
     public String index(Model model) {
         return "index";
     }
+
+
 }
