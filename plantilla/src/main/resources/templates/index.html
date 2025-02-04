@@ -4,6 +4,18 @@
 <head>
     <th:block th:replace="fragments/head :: header" />
     <title>IW: Welcome</title>
+
+    <style>
+        .gold-text {
+            color: rgb(255, 217, 0);
+            font-weight: bold;
+            font-family: Cambria;
+        }
+        .no-space {
+            letter-spacing: 0;
+        }
+    </style>
+
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -11,7 +23,10 @@
 
     <main class="flex-shrink-0">
         <div class="container">
-            <h1 class="mt-5">Bienvenid@</h1>
+            <h1 class="mt-5 no-space">
+                Bienvenid@ a <span class="gold-text">GOLD</span>2<span class="gold-text">WIN</span> donde la suerte está de tu lado
+            </h1>
+            
         </div>
     </main>
 

@@ -114,6 +114,12 @@ public class UserController {
         return "user";
     }
 
+	
+	@GetMapping("/ingresar")
+    public String ingresar(Model model, HttpSession session) {
+        return "ingresar"; // Redirige a ingresar.html
+    }
+
     /**
      * Alter or create a user
      */
