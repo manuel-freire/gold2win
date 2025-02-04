@@ -1,0 +1,12 @@
+/* usa este fichero para personalizar tus vistas */
+
+#navPrincipal{
+    background-color: #6A0DAD;
+    height: 70px;
+}
+
+#logoNav{
+    width: 200px;
+    height: 35px;
+    margin: 17px;
+}

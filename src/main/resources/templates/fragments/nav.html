@@ -9,11 +9,11 @@
 
     <!-- barra de navegación bootstrap 5 -->
     <header th:fragment="nav">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg" data-bs-theme="dark" id = "navPrincipal">
             <div class="container-fluid">
                 <!-- nombre del sitio; es un enlace que lleva a la página ppal -->
                 <a class="navbar-brand" th:href="@{/}" href="/">
-                    <img th:src="@{/img/gold2winlogo.png}" src="/img/logo.png" alt="logo G2W" width="140" height="32" class="d-inline-block align-text-top">
+                    <img th:src="@{/img/logo.svg}" alt="logo G2W" width="170" height="32" class="d-inline-block align-text-top" id = "logoNav">
                 </a>
                 <!-- menu hamburguesa si no cabe todo -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
