@@ -114,11 +114,7 @@ public class UserController {
         return "user";
     }
 
-	
-	
-
-	@RequestMapping("ingreso")
-	@GetMapping("/")
+	@GetMapping("ingreso/ingresar")
 	public String ingreso(Model model, HttpSession session) {
     User user = (User) session.getAttribute("u");
     if (user == null || !user.hasRole(Role.USER)) {
@@ -127,16 +123,20 @@ public class UserController {
     	return "ingreso";
 	}
 
-	@GetMapping("/retirar")
+	@GetMapping("ingreso/retirar")
 	public String retirar(Model model) {
     	return "retirar";
 	}
 
-	@GetMapping("/ingresar")
-	public String ingresar(Model model) {
-    	return "ingresar";
+	@GetMapping("ingreso/ingresar/paypal")
+	public String paypal(Model model) {
+    	return "paypal";
 	}
 
+	@GetMapping("ingreso/ingresar/tarjeta")
+	public String tarjeta(Model model) {
+    	return "tarjeta";
+	}
     /**
      * Alter or create a user
      */

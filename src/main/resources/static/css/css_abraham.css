@@ -1,1 +1,135 @@
-/* usa este fichero para personalizar tus vistas */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.dropdown-item:hover{
+    background-color: #f3f2f2;
+    font-weight: bold;
+}
+
+.dropdown-button-select{
+    background-color:#6A0DAD;
+    font-weight: bold;
+}
+
+#sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: 500px;
+    margin-left: auto;
+    margin-right: 0;
+    position: fixed;
+}
+
+.nav-link-ingresar {
+    background-color: #ffffff;
+    color: #6A0DAD;
+    font-weight: bold;
+    margin-bottom: 100px;
+    margin-left: 100px;
+}
+
+.nav-item {
+    margin-bottom: 30px;
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+
+.nav-link-ingresar:hover{
+    background-color:#ffffff;
+    color:#FFD700;
+    font-weight: bold;
+}
+
+.btn.btn-secondary.dropdown-toggle {
+    background-color: #6A0DAD;
+    color: white;
+    border-radius: 10px;
+    font-weight: 650;
+}
+
+.h1-ingresar {
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #6A0DAD;
+}
+
+.btn.btn-secondary.dropdown-toggle:hover {
+    background-color: #6A0DAD;
+    color: white;
+    border-radius: 10px;
+}
+
+.login-form {
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.login-form .form-label {
+    font-weight: bold;
+}
+
+.login-form .btn-paypal {
+    width: 100%;
+    padding: 10px;
+    background-color: #3481e5;
+    color: #ffffff;
+    border: none;
+}
+
+.login-form .btn-paypal:hover {
+    background-color: #0e5cc3;
+}
+
+.login-form .btn-tarjeta {
+    width: 100%;
+    padding: 10px;
+    background-color: #f1800e;
+    color: #ffffff;
+    border: none;
+}
+
+.login-form .btn-tarjeta:hover {
+    background-color: #f1520e;
+}
+
+.login-form .form-text {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+body {
+    background-color: #f5f5f5; 
+    background-size: cover;
+    background-position: center;
+}
+
+.centered-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+footer {
+    position: relative;
+    z-index: 10;
+    margin-top: 20px;
+}
+
