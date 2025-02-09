@@ -114,9 +114,6 @@ public class UserController {
         return "user";
     }
 
-	
-	
-
 	@RequestMapping("ingreso")
 	@GetMapping("/")
 	public String ingreso(Model model, HttpSession session) {
