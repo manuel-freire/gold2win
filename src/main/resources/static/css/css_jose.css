@@ -4,29 +4,22 @@
 }
 
 .nav-pills .nav-link {
-    border-radius: 20px; /* Bordes redondeados */
-    padding: 10px 20px;
-    transition: all 0.3s ease-in-out;
-    font-weight: bold;
+    color: var(--bs-secondary-color);
+    border-radius: 30px; /* Bordes redondeados */
+    padding: 2px 4px;
+    font-size: 13px;
 }
 
 /* Estado inactivo */
-.nav-pills .nav-link {
-    color: #ccc; /* Texto gris */
-    background-color: transparent;
-    border: 2px solid transparent;
-}
 
 /* Hover */
 .nav-pills .nav-link:hover {
-    color: #FFD700; /* Texto dorado */
-    background-color: #222; /* Fondo oscuro */
-    border-color: #FFD700;
+    color: var(--bs-body-color);
 }
 
 /* Estado activo */
 .nav-pills .nav-item.active .nav-link {
-    color: black; /* Texto negro */
-    background-color: #FFD700; /* Fondo dorado */
-    border-color: #FFD700;
+    color: var(--bs-body-bg); /* Texto dorado */
+    background-color: #8A2BE2; /* Fondo oscuro */
+    font-weight: bold;
 }

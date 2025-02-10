@@ -9,16 +9,15 @@
 <body class="d-flex flex-column h-100">
     <div th:fragment="navMisApuestas(active)">
         <ul class="nav nav-pills">
+            <li class="nav-item" th:classappend="${active == 'todas'} ? 'active'">
+                <a class="nav-link" th:href="${active == 'todas'} ? '#' : @{/}">Todas</a>
+            </li>
             <li class="nav-item" th:classappend="${active == 'determinadas'} ? 'active'">
                 <a class="nav-link" th:href="${active == 'determinadas'} ? '#' : @{/}">Determinadas</a>
             </li>
             <li class="nav-item" th:classappend="${active == 'pendientes'} ? 'active'">
                 <a class="nav-link" th:href="${active == 'pendientes'} ? '#' : @{/}">Pendientes</a>
             </li>
-            <li class="nav-item" th:classappend="${active == 'todas'} ? 'active'">
-                <a class="nav-link" th:href="${active == 'todas'} ? '#' : @{/}">Todas</a>
-            </li>
-
         </ul>
     </div>
 </body>
