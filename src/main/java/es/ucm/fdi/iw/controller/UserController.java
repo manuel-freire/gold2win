@@ -113,30 +113,7 @@ public class UserController {
         model.addAttribute("user", target);
         return "user";
     }
-	@RequestMapping("ingreso")
-	@GetMapping("/")
-	public String ingreso(Model model, HttpSession session) {
-    User user = (User) session.getAttribute("u");
-    if (user == null || !user.hasRole(Role.USER)) {
-        return "/login";  // Redirige si no es un usuario autenticado ¿¿ESTA BIEN?? 
-    }
-    	return "ingreso";
-	}
 
-	@GetMapping("/retirar")
-	public String retirar(Model model) {
-    	return "retirar";
-	}
-
-	@GetMapping("/ingresar/paypal")
-	public String paypal(Model model) {
-    	return "paypal";
-	}
-
-	@GetMapping("/ingresar/tarjeta")
-	public String tarjeta(Model model) {
-    	return "tarjeta";
-	}
     /**
      * Alter or create a user
      */

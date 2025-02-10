@@ -1,24 +1,36 @@
 <!DOCTYPE html>
-<html class="h-100" xmlns:th="http://www.thymeleaf.org">
+<html class="h-100" xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
 
 <head>
-    <th:block th:replace="fragments/head :: header" />
-    <title> INGRESO </title>
+    <th:block th:replace="fragments/head :: header"/>
+    <title> CARTERA </title>
+
+    <style>
+        .gold-text {
+            color: rgb(255, 217, 0);
+            font-weight: bold;
+            font-family: Cambria;
+        }
+        .no-space {
+            letter-spacing: 0;
+        }
+    </style>
+
 </head>
 
 <body class="d-flex flex-column h-100">
-    <header th:replace="fragments/nav.html :: nav"></header>
-    
+    <header th:replace="fragments/nav.html :: nav('ingresar')"></header>
+
     <div class="row">
         <nav id="sidebar" class="col-2 bg-light">
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link-ingresar" th:if="${session.u.hasRole('USER')}" 
-                           th:href="@{/user/ingreso/ingresar}">INGRESAR</a>
+                           th:href="@{/cartera/ingresar}">INGRESAR</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link-ingresar" th:if="${session.u.hasRole('USER')}" 
-                           th:href="@{/user/ingreso/retirar}">RETIRAR</a>
+                           th:href="@{/cartera/retirar}">RETIRAR</a>
                     </li>
                 </ul>
         </nav>
@@ -27,16 +39,16 @@
             <h1 class = "h1-ingresar">Ingresar</h1>
             <div class="dropdown">
                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    SELECCIONA UN MÉTODO DE PAGO
+                    SELECCIONA UN MÉTODO DE PAGO!
                 </a>
                 <ul class="dropdown-menu">
                     <li class="dropdown-item">
                         <a class="dropdown-item" th:if="${session.u.hasRole('USER')}" 
-                           th:href="@{/user/ingreso/ingresar/paypal}">PayPal</a>
+                           th:href="@{/cartera/ingresar/paypal}">PayPal</a>
                     </li>
                     <li class="dropdown-item">
                         <a class="dropdown-item" th:if="${session.u.hasRole('USER')}" 
-                           th:href="@{/user/ingreso/ingresar/tarjeta}">Tarjeta de crédito/débito</a>
+                           th:href="@{/cartera/ingresar/tarjeta}">Tarjeta de crédito/débito</a>
                     </li>
                 </ul>
             </div>
@@ -44,7 +56,6 @@
     </div>
 
     <th:block th:replace="fragments/footer.html :: footer" />
-    <script th:src="@{/js/ajax-demo.js}"></script>
 </body>
 
 </html>

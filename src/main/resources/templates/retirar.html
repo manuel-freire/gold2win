@@ -3,19 +3,16 @@
 
 <head>
     <th:block th:replace="fragments/head :: header" />
-    <title>RETIRAR DINERO</title>
+    <title> RETIRO </title>
 </head>
 
 <body class="d-flex flex-column h-100">
+    <header th:replace="fragments/nav.html :: nav('ingresar')"></header>
 
-    <header th:replace="fragments/nav.html :: nav"></header>
-    
-    AQUI RETIRAS DINERO
 
     <th:block th:replace="fragments/footer.html :: footer" />
 
     <script th:src="@{/js/ajax-demo.js}"></script>
-
 </body>
 
 </html>
