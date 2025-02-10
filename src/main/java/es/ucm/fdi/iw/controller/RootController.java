@@ -5,6 +5,8 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 /**
  *  Non-authenticated requests only.
@@ -24,5 +26,13 @@ public class RootController {
         return "index";
     }
 
+    @GetMapping("/misApuestas")
+    public String misApuestas(Model model){
+        return "misApuestas";
+    }
 
+    @GetMapping("/crearApuesta/{id}")
+    public String crearApuesta(Model model){
+        return "crearApuesta";
+    }
 }
