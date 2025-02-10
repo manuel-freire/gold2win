@@ -23,7 +23,11 @@
                                 <a class="nav-link" th:href="${active == 'deportes'} ? '#' : @{/}">Todos los deportes</a>
                             </li>
                             <li class="nav-item mx-3 " th:if="${session?.u?.hasRole('USER')}" th:classappend="${active == 'apuestas'} ? 'active'">
+<<<<<<< HEAD
                                 <a class="nav-link"  th:href="${active == 'apuestas'} ? '#' : @{/}">Mis apuestas</a>
+=======
+                                <a class="nav-link"  th:href="${active == 'apuestas'} ? '#' : @{/misApuestas}">Mis apuestas</a>
+>>>>>>> dfb046ed63b822f561053c3bb425890fbde96694
                             </li>
                             <li class="nav-item mx-3" th:if="${session?.u?.hasRole('USER')}" th:classappend="${active == 'ingresar'} ? 'active'">
                                 <a class="nav-link"  th:href="${active == 'ingresar'} ? '#' : @{/}">Ingresar</a>
@@ -161,7 +165,11 @@
                             <a class="nav-link" th:classappend="${active == 'deportes'} ? 'active'" th:href="${active == 'deportes'} ? '#' : @{/}">Todos los deportes</a>
                         </li>
                         <li class="nav-item" th:if="${session?.u?.hasRole('USER')}" >
+<<<<<<< HEAD
                             <a class="nav-link" th:classappend="${active == 'apuestas'} ? 'active'" th:href="${active == 'apuestas'} ? '#' : @{/}">Mis apuestas</a>
+=======
+                            <a class="nav-link" th:classappend="${active == 'apuestas'} ? 'active'" th:href="${active == 'apuestas'} ? '#' : @{/misApuestas}">Mis apuestas</a>
+>>>>>>> dfb046ed63b822f561053c3bb425890fbde96694
                         </li>
                         <li class="nav-item" th:if="${session?.u?.hasRole('USER')}">
                             <a class="nav-link" th:classappend="${active == 'chats'} ? 'active'" th:href="${active == 'chats'} ? '#' : @{/}">Chats</a>
