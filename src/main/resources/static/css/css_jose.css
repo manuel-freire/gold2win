@@ -1,1 +1,32 @@
 /* usa este fichero para personalizar tus vistas */
+.nav-pills .nav-item {
+    margin: 5px;
+}
+
+.nav-pills .nav-link {
+    border-radius: 20px; /* Bordes redondeados */
+    padding: 10px 20px;
+    transition: all 0.3s ease-in-out;
+    font-weight: bold;
+}
+
+/* Estado inactivo */
+.nav-pills .nav-link {
+    color: #ccc; /* Texto gris */
+    background-color: transparent;
+    border: 2px solid transparent;
+}
+
+/* Hover */
+.nav-pills .nav-link:hover {
+    color: #FFD700; /* Texto dorado */
+    background-color: #222; /* Fondo oscuro */
+    border-color: #FFD700;
+}
+
+/* Estado activo */
+.nav-pills .nav-item.active .nav-link {
+    color: black; /* Texto negro */
+    background-color: #FFD700; /* Fondo dorado */
+    border-color: #FFD700;
+}
