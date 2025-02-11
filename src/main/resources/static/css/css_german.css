@@ -1,1 +1,82 @@
-/* usa este fichero para personalizar tus vistas */
+#flecha-atras-apuesta{
+    transform: translate(5px, 5px);
+}
+
+#tablaTuApuesta{
+    margin-top: 20px;
+    
+    font-weight: bold;
+}
+
+#tablaApuestasSeleccionadas{
+    font-weight: 400;
+}
+
+.apuestaSeleccionada{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.botonDesplegable {
+    background-color: transparent;
+    color: white;
+    padding: 10px 0px 20px 0px;
+}
+
+.botonDesplegable:hover {
+    color: #A78BFA;
+}
+
+.tablaSeleccionApuesta{
+    border-radius: 5px;
+    padding: 0px 15px;
+}
+
+#etiquetaTabla{
+    margin-left: 5px
+}
+
+.colsNumeros{
+    background-color: transparent;  
+    height: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+}
+
+.colsLineas{
+    background-color: transparent; 
+    height: 50px;
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 10px;
+    font-weight: bold;
+}
+
+.colsCuotas{
+    background-color: transparent; 
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFD700;
+} 
+
+.colsCuotas:hover{
+    background-color: rgba(255, 255,255,0.2);
+}
+
+.separador-vertical-apuestas {
+    color: inherit;
+    border-right: 2px solid;
+    opacity: 0.25;
+    height: 100%;
+}
+
+.separador-horizontal-apuestas {
+    border: 1px solid;
+    opacity: 0.25;
+    margin: 0;
+}
