@@ -1,26 +1,34 @@
 <!DOCTYPE html>
 <html class="h-100" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalles de Apuesta</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Betting-box fragment - rest is empty</title>
 </head>
 <body>
-    <div class="apuesta-box">
-        <div class="header">
-            <span>50,00€ Simple</span>
-            <span class="perdida">Perdida</span>
-        </div>
-        <div class="item">
-            <p><strong>Mattia Bellucci Más de 1.5</strong> <span style="float: right;">2.20</span></p>
-            <p>Encuentro - Jugador - Total de roturas de servicio</p>
-            <p><em>Alex De Minaur</em></p>
-            <p><em>Mattia Bellucci</em></p>
-        </div>
-        <div class="footer">
-            <span>Imp: <strong>50,00€</strong></span>
-            <span class="ganancias">Ganancias: 0,00€</span>
+    <div th:fragment="betting-box">
+        <div class="bettingBox">
+            <div class="headRowBettingBox">
+                <div class="left">50,00€</div>
+                <div class="right headRowBettingBoxRightElement">Perdida</div>
+            </div>
+            <div class="infoRowBettingBox">
+                <p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"/>
+                </svg>
+                 CREAR APUESTA >> 12000.5</p>
+                <p>MALLORCA-VILLARREAL</p>
+                <p> gana villarreal-más de 0.5 remates a puerta-108 corners o más</p>
+            </div>
+            <div class="footerRowBettingBox">
+                <div class="left">
+                    <p>Imp:<br>
+                        50,00€</p>
+                </div>
+                <div class="mid">
+                    <p>Ganancias<br>
+                        0,00€</p>
+                </div>
+                <div class="right footerRowBettingBoxRightElement">Ganancias 0,00€</div>
+            </div>
         </div>
     </div>
 </body>

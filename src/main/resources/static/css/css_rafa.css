@@ -1,61 +1,58 @@
 /* usa este fichero para personalizar tus vistas */
 
-.apuesta-box {
-    background-color: #2a2a2a;
-    border: 1px solid #4caf50;
-    border-radius: 8px;
-    padding: 20px;
-    max-width: 400px;
-    width: 100%;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-    font-size: 0.9rem;
+.bettingBox{
+    background-color: #f0f0f048; /* Color de fondo */
+    /*border: 2px solid #000000; /* Borde */
+    border-radius: 10px; /* Bordes redondeados */
+    /*padding: 5px; /* Espaciado interno */
+    font-family: Arial, sans-serif; /* Fuente */
+    margin: 50px 200px 0px 200px;
 }
-
-.apuesta-box .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.apuesta-box .header span {
-    color: #4caf50;
+/*width: 800; /* Ancho de la caja */
+/*height: 10px; /* Alto de la caja */
+.headRowBettingBox{
+    padding: 10px 15px 10px 15px; /* Espaciado interno */
+    margin: 0px;
+    border-bottom: 1px solid #000000;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     font-weight: bold;
+    font-size: large;
+    color:#41a838;
+    display: flex; /* Activa flexbox */
+    justify-content: space-between; /* Alinea elementos a los extremos */
+    align-items: center; /* Centra los elementos verticalmente */
 }
 
-.apuesta-box .item {
-    border-top: 1px solid #444;
-    padding-top: 10px;
-    margin-top: 10px;
+.headRowBettingBoxRightElement{
+    padding: 5px;
+    background-color: #f0f0f048;
+    color: #f0f0f0;
+    font-weight: normal;
+    font-size: medium;
 }
 
-.apuesta-box .item:first-of-type {
-    border-top: none;
-    padding-top: 0;
-    margin-top: 0;
+.infoRowBettingBox{
+    padding: 10px 15px 10px 15px; /* Espaciado interno */
+    margin: 0px;
+    border-bottom: 1px solid #000000;
 }
 
-.apuesta-box .item p {
-    margin: 5px 0;
+.footerRowBettingBox{
+    padding: 10px 15px 5px 15px; /* Espaciado interno */
+    margin: 0px;
+    border-bottom: none;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    display: flex; /* Activa flexbox */
+    justify-content: space-between; /* Alinea elementos a los extremos */
+    align-items: center; /* Centra los elementos verticalmente */
 }
 
-.apuesta-box .footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 15px;
-}
-
-.apuesta-box .footer .ganancias {
-    color: #4caf50;
-    font-weight: bold;
-}
-
-.apuesta-box .perdida {
-    background-color: #b71c1c;
-    color: white;
-    border-radius: 4px;
-    padding: 5px 10px;
-    font-size: 0.8rem;
-    font-weight: bold;
+.footerRowBettingBoxRightElement{
+    padding: 5px;
+    background-color: #f0f0f048;
+    color: #f0f0f0;
+    font-weight: normal;
+    font-size: medium;
 }

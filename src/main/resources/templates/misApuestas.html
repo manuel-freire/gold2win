@@ -32,14 +32,18 @@
                 <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#miDesplegable" aria-expanded="false" aria-controls="miDesplegable">
                   Abrir desplegable
                 </button>
-              </div>
+            </div>
               
-              <div class="collapse" id="miDesplegable">
+            <div class="collapse" id="miDesplegable">
                 <div class="card card-body mt-3">
-                  Aquí va el contenido del desplegable.
-                  <p>¡Esto es un texto dentro del desplegable! Puedes agregar más contenido como imágenes, formularios, etc.</p>
+                    Aquí va el contenido del desplegable.
+                    <p>¡Esto es un texto dentro del desplegable! Puedes agregar más contenido como imágenes, formularios, etc.</p>
                 </div>
-              </div>
+            </div>
+
+            <div th:replace="fragments/betting-box.html :: betting-box"></div>
+
+            <div th:replace="fragments/betting-box.html :: betting-box"></div>
               
         </div>
     </main>
