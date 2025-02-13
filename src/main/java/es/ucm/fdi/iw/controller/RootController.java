@@ -31,7 +31,7 @@ public class RootController {
         return "misApuestas";
     }
 
-    @GetMapping("/crearApuesta/{id}")
+    @GetMapping("/crearApuesta")
     public String crearApuesta(Model model){
         return "crearApuesta";
     }
