@@ -1,25 +1,21 @@
 /* usa este fichero para personalizar tus vistas */
-.nav-pills .nav-item {
+#nav-pills .nav-item {
     margin: 5px;
 }
 
-.nav-pills .nav-link {
+#nav-pills .nav-link {
     color: var(--bs-secondary-color);
-    border-radius: 30px; /* Bordes redondeados */
+    border-radius: 30px;
     padding: 2px 4px;
     font-size: 13px;
 }
 
-/* Estado inactivo */
-
-/* Hover */
-.nav-pills .nav-link:hover {
+#nav-pills .nav-link:hover {
     color: var(--bs-body-color);
 }
 
-/* Estado activo */
-.nav-pills .nav-item.active .nav-link {
-    color: var(--bs-body-bg); /* Texto dorado */
-    background-color: #8A2BE2; /* Fondo oscuro */
+#nav-pills .nav-item.active .nav-link {
+    color: var(--bs-body-bg);
+    background-color: #8A2BE2;
     font-weight: bold;
 }
