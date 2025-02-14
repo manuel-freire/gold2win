@@ -56,3 +56,24 @@
     font-weight: normal;
     font-size: medium;
 }
+
+.btn-custom:hover{
+    color: #f0f0f048 !important;
+    border-color: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.btn-custom:active{
+    color: none; /* Color personalizado (naranja) */
+    border-color: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.btn-custom:focus{
+    color: none; /* Color personalizado (naranja) */
+    border-color: none;
+    outline: none;
+    box-shadow: none;
+}
