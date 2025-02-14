@@ -21,26 +21,27 @@
 <body class="d-flex flex-column h-100">
     <header th:replace="fragments/nav.html :: nav('deportes')"></header>
 
-    <main class="flex-shrink-0">
-        <div class="container">
-            <h1 class="mt-5 no-space">
-                Bienvenid@ a <span class="gold-text">GOLD</span>2<span class="gold-text">WIN</span> donde la suerte está de tu lado
-            </h1>
+    <main class="d-flex flex-grow-1" style="height: calc(100vh - 126px);">
+        <nav th:replace="fragments/navSecciones.html :: navSecciones"></nav>
+        
+        <div class="d-flex flex-column flex-grow-1">
+            <div class="barraBuscador mt-4 ms-4">
+                <svg viewBox="0 0 24 24" aria-hidden="true" class="iconoBuscador">
+                <g>
+                    <path
+                    d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"
+                    ></path>
+                </g>
+                </svg>
             
-            <div class="container mt-5">
-                <!-- Botón para abrir el desplegable -->
-                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#miDesplegable" aria-expanded="false" aria-controls="miDesplegable">
-                  Abrir desplegable
-                </button>
-              </div>
-              
-              <div class="collapse" id="miDesplegable">
-                <div class="card card-body mt-3">
-                  Aquí va el contenido del desplegable.
-                  <p>¡Esto es un texto dentro del desplegable! Puedes agregar más contenido como imágenes, formularios, etc.</p>
-                </div>
-              </div>
-              
+                <input
+                id="query"
+                class="inputBuscador"
+                type="search"
+                placeholder="Search..."
+                name="searchbar"
+                />
+            </div>
         </div>
     </main>
 
