@@ -41,6 +41,17 @@ public class RootController {
         return "crearApuesta";
     }
 
+    @GetMapping("/admin")
+    public String admin(Model model){
+        return "admin";
+    }
+
+    @GetMapping("/admin/verificarEvento")
+    public String verificarEvento(Model model){
+        return "verificarEvento";
+    }
+
+
     @GetMapping("/cartera/ingresar")
     public String ingresar(Model model, HttpSession session) {
         User user = (User) session.getAttribute("u");
@@ -69,11 +80,6 @@ public class RootController {
 	public String tarjeta(Model model) {
     	return "tarjeta";
 	}
-
-    @GetMapping("/verificarEvento")
-    public String verificarEvento(Model model){
-        return "verificarEvento";
-    }
 
     @GetMapping("/misApuestas/todas")
     public String todasMisApuestas(Model model){

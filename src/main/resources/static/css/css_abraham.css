@@ -168,12 +168,6 @@
     background-color: #f5820f;
 }
 
-.row {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-}
-
 .centered-div {
     display: flex;
     justify-content: flex-start;
