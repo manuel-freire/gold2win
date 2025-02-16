@@ -76,11 +76,6 @@ public class RootController {
     	return "tarjeta";
 	}
 
-    @GetMapping("/verificarEvento")
-    public String verificarEvento(Model model){
-        return "verificarEvento";
-    }
-
     @GetMapping("/misApuestas/todas")
     public String todasMisApuestas(Model model){
         return "misApuestas-todas";
