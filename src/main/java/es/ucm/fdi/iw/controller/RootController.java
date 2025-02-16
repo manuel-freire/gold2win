@@ -1,11 +1,16 @@
 package es.ucm.fdi.iw.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import es.ucm.fdi.iw.model.User;
+import es.ucm.fdi.iw.model.User.Role;
 
 
 /**
@@ -31,8 +36,42 @@ public class RootController {
         return "misApuestas";
     }
 
-    @GetMapping("/crearApuesta/{id}")
+    @GetMapping("/crearApuesta")
     public String crearApuesta(Model model){
         return "crearApuesta";
+    }
+
+    @GetMapping("/cartera/ingresar")
+    public String ingresar(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("u");
+        if (user == null || !user.hasRole(Role.USER)) {
+            return "redirect:/login";  // Redirige si no es un usuario autenticado
+        }
+        return "ingresar";
+    }
+
+	@GetMapping("/cartera/retirar")
+	public String retirar(Model model) {
+    	return "retirar";
+	}
+
+    @GetMapping("/cartera/ingreso")
+	public String ingreso(Model model) {
+    	return "ingreso";
+	}
+
+	@GetMapping("/cartera/ingresar/paypal")
+	public String paypal(Model model) {
+    	return "paypal";
+	}
+
+	@GetMapping("/cartera/ingresar/tarjeta")
+	public String tarjeta(Model model) {
+    	return "tarjeta";
+	}
+
+    @GetMapping("/verificarEvento")
+    public String verificarEvento(Model model){
+        return "verificarEvento";
     }
 }

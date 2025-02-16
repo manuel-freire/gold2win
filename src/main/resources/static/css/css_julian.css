@@ -194,3 +194,120 @@ a.botonOvalado.nav-link:hover{
     --bs-btn-disabled-border-color: #f8f9fa;
     --bs-gradient: none;
 }
+
+/*Scroll Bar*/
+
+.scrollBarPerso::-webkit-scrollbar-track {
+    border-color: transparent;
+    background-color: transparent;
+    border: 2px solid transparent;
+}
+.scrollBarPerso::-webkit-scrollbar-thumb {
+    background-clip: padding-box;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    background-color: var(--bs-secondary-color);
+    min-height: 40px;
+}
+.scrollBarPerso::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+.scrollBarPerso::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+/*ESTILO PARA BARRA BUSCADOR*/
+.barraBuscador {
+    display: flex;
+    line-height: 28px;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 30px;
+    max-width: 500px;
+}
+
+.inputBuscador {
+    font-family: "Montserrat", sans-serif;
+    width: 100%;
+    height: 100%;
+    padding-left: 2.5rem;
+    font-size: 14px;
+    box-shadow: 0 0 0 1.5px #2b2c37, 0 0 25px -17px #000;
+    border: 0;
+    border-radius: 12px;
+    background-color: #16171d;
+    outline: none;
+    color: #bdbecb;
+    transition: all 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+    cursor: text;
+    z-index: 0;
+}
+
+.inputBuscador::placeholder {
+    color: #bdbecb;
+}
+
+.inputBuscador:hover {
+    box-shadow: 0 0 0 2.5px #2f303d, 0px 0px 25px -15px #000;
+}
+
+.inputBuscador:active {
+    transform: scale(0.95);
+}
+
+.inputBuscador:focus {
+    box-shadow: 0 0 0 2.5px #2f303d;
+}
+
+.iconoBuscador {
+    position: absolute;
+    left: 1rem;
+    fill: #bdbecb;
+    width: 1rem;
+    height: 1rem;
+    pointer-events: none;
+    z-index: 1;
+}     
+
+.inputBuscador::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+}
+
+/*ESTILOS PARA EL NAVEGADOR DE SECCIONES*/
+
+.navSecciones{
+    overflow-y: auto;
+    height: 100%;
+    width: 200px;
+    padding: 0px 15px 0 15px;
+    border-right: 1px solid var(--bs-tertiary-color);
+}
+
+.tituloSeccion{
+    font-size: 14px;
+    margin: 0px 0 1px 0;
+    color: #C6A1FF ;
+}
+
+.enlaceSeccion{
+    font-size: 13px;
+    margin: 5px 0 0 7px;
+}
+
+.spanAjustado{
+    box-sizing: border-box;
+}
+
+.logoClase{
+    margin-bottom: 0px;
+}
+
+.enlaceSeccion:hover span{
+    color: #FFD700;
+}
+
+.grupoSecciones{
+    margin: 0 0 10px 0;
+}
