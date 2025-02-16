@@ -16,18 +16,20 @@
     border-top: none;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    font-weight: bold;
-    font-size: large;
-    color:#41a838;
     display: flex; /* Activa flexbox */
     justify-content: space-between; /* Alinea elementos a los extremos */
     align-items: center; /* Centra los elementos verticalmente */
 }
 
+.headRowBettingBoxLeftElement{
+    color:#41a838;
+    font-weight: bold;
+    font-size: large;
+}
+
 .headRowBettingBoxRightElement{
     padding: 5px;
     background-color: #f0f0f048;
-    color: #f0f0f0;
     font-weight: normal;
     font-size: medium;
 }
@@ -52,7 +54,6 @@
 .footerRowBettingBoxRightElement{
     padding: 5px;
     background-color: #f0f0f048;
-    color: #f0f0f0;
     font-weight: normal;
     font-size: medium;
 }
