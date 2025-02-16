@@ -46,7 +46,7 @@ public class RootController {
         return "admin";
     }
 
-    @GetMapping("/verificarEvento")
+    @GetMapping("/admin/verificarEvento")
     public String verificarEvento(Model model){
         return "verificarEvento";
     }
