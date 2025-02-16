@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Menu Admin</title>
+</head>
+<body class="d-flex flex-column h-100">
+    <div th:fragment="navAdmin(active)">
+        <ul class="nav nav-pills" id="nav-pills">
+            <li class="nav-item" id="nav-item" th:classappend="${active == 'usuarios'} ? 'active'">
+                <a class="nav-link" id="nav-link" th:href="${active == 'usuarios'} ? '#' : @{/}">Usuarios</a>
+            </li>
+            <li class="nav-item" id="nav-item" th:classappend="${active == 'eventos'} ? 'active'">
+                <a class="nav-link" id="nav-link" th:href="${active == 'eventos'} ? '#' : @{/}">Eventos</a>
+            </li>
+            <li class="nav-item" id="nav-item" th:classappend="${active == 'reportes'} ? 'active'">
+                <a class="nav-link" id="nav-link" th:href="${active == 'reportes'} ? '#' : @{/}">Reportes</a>
+            </li>
+        </ul>
+    </div>
+</body>
