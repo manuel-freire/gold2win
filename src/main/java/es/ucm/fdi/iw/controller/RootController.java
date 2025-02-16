@@ -77,16 +77,16 @@ public class RootController {
 
     @GetMapping("/misApuestas/todas")
     public String todasMisApuestas(Model model){
-        return "todas";
+        return "misApuestas-todas";
     }
 
     @GetMapping("/misApuestas/determinadas")
     public String apuestasDeterminadas(Model model){
-        return "determinadas";
+        return "misApuestas-determinadas";
     }
 
     @GetMapping("/misApuestas/pendientes")
     public String apuestasPendientes(Model model){
-        return "pendientes";
+        return "misApuestas-pendientes";
     }
 }
