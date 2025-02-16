@@ -41,6 +41,12 @@ public class RootController {
         return "crearApuesta";
     }
 
+    @GetMapping("/admin/verificarEvento")
+    public String verificarEvento(Model model){
+        return "verificarEvento";
+    }
+
+
     @GetMapping("/cartera/ingresar")
     public String ingresar(Model model, HttpSession session) {
         User user = (User) session.getAttribute("u");
