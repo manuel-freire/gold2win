@@ -7,13 +7,13 @@
     <div th:fragment="navMisApuestas(active)">
         <ul class="nav nav-pills" id="nav-pills">
             <li class="nav-item" id="nav-item" th:classappend="${active == 'todas'} ? 'active'">
-                <a class="nav-link" id="nav-link" th:href="${active == 'todas'} ? '#' : @{/}">Todas</a>
+                <a class="nav-link" id="nav-link" th:href="${active == 'todas'} ? '#' : @{/misApuestas/todas}">Todas</a>
             </li>
             <li class="nav-item" id="nav-item" th:classappend="${active == 'determinadas'} ? 'active'">
-                <a class="nav-link" id="nav-link" th:href="${active == 'determinadas'} ? '#' : @{/}">Determinadas</a>
+                <a class="nav-link" id="nav-link" th:href="${active == 'determinadas'} ? '#' : @{/misApuestas/determinadas}">Determinadas</a>
             </li>
             <li class="nav-item" id="nav-item" th:classappend="${active == 'pendientes'} ? 'active'">
-                <a class="nav-link" id="nav-link" th:href="${active == 'pendientes'} ? '#' : @{/}">Pendientes</a>
+                <a class="nav-link" id="nav-link" th:href="${active == 'pendientes'} ? '#' : @{/misApuestas/pendientes}">Pendientes</a>
             </li>
         </ul>
     </div>

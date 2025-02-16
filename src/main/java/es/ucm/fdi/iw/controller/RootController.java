@@ -74,4 +74,19 @@ public class RootController {
     public String verificarEvento(Model model){
         return "verificarEvento";
     }
+
+    @GetMapping("/misApuestas/todas")
+    public String todasMisApuestas(Model model){
+        return "todas";
+    }
+
+    @GetMapping("/misApuestas/determinadas")
+    public String apuestasDeterminadas(Model model){
+        return "determinadas";
+    }
+
+    @GetMapping("/misApuestas/pendientes")
+    public String apuestasPendientes(Model model){
+        return "pendientes";
+    }
 }
