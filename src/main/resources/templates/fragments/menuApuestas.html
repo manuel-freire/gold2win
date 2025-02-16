@@ -6,15 +6,16 @@
 <body class="d-flex flex-column h-100">
     <div th:fragment="navMisApuestas(active)">
         <ul class="nav nav-pills" id="nav-pills">
-            <li class="nav-item" id="nav-item" th:classappend="${active == 'todas'} ? 'active'">
-                <a class="nav-link" id="nav-link" th:href="${active == 'todas'} ? '#' : @{/misApuestas/todas}">Todas</a>
+            <li class="nav-item" th:class="${active == 'todas'} ? 'nav-item active' : 'nav-item'">
+                <a class="nav-link" th:href="${active == 'todas'} ? '#' : @{/misApuestas/todas}">Todas</a>
             </li>
-            <li class="nav-item" id="nav-item" th:classappend="${active == 'determinadas'} ? 'active'">
-                <a class="nav-link" id="nav-link" th:href="${active == 'determinadas'} ? '#' : @{/misApuestas/determinadas}">Determinadas</a>
+            <li class="nav-item" th:class="${active == 'determinadas'} ? 'nav-item active' : 'nav-item'">
+                <a class="nav-link" th:href="${active == 'determinadas'} ? '#' : @{/misApuestas/determinadas}">Determinadas</a>
             </li>
-            <li class="nav-item" id="nav-item" th:classappend="${active == 'pendientes'} ? 'active'">
-                <a class="nav-link" id="nav-link" th:href="${active == 'pendientes'} ? '#' : @{/misApuestas/pendientes}">Pendientes</a>
+            <li class="nav-item" th:class="${active == 'pendientes'} ? 'nav-item active' : 'nav-item'">
+                <a class="nav-link" th:href="${active == 'pendientes'} ? '#' : @{/misApuestas/pendientes}">Pendientes</a>
             </li>
         </ul>
     </div>
 </body>
+</html>
