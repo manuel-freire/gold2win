@@ -11,7 +11,7 @@
 
 <body class="d-flex flex-column h-100" data-bs-theme="dark">
     
-    <header th:replace="fragments/nav.html :: nav('deportes')"></header> <!-- no sé si dejarlo o no-->
+    <header th:replace="fragments/nav.html :: nav('deportes')"></header>
 
     <a id = "flecha-atras-apuesta" href="/">
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-arrow-left-short" viewBox="0 0 16 16" id = "flecha-atras-apuesta">
@@ -19,46 +19,66 @@
         </svg>
     </a>
 
-    <div id = "tablaTuApuesta" class = "mx-auto w-50 bg-body-secondary">
-        <span class = "d-flex flex-column justify-content-center align-items-center pb-4">Tu apuesta</span>
+    <div id = "tablaTuApuesta" class = "mx-auto w-50">
+        <span class = "d-flex flex-column justify-content-center align-items-center pb-2 pt-3 fs-5">Tu apuesta</span>
         <hr class="separador-horizontal-apuestas">
         <div class = "p-2">
-            <div class = "d-flex justify-content-between mb-2" style = "color:gray">
-                <span class = "ms-4">@Mallorca vs Osasuna</span>
-                <span class = "col text-end me-4">3</span>
+            <div class = "d-flex justify-content-between mb-2">
+                <span class = "ms-2">Evento: Mallorca vs Osasuna</span>
+                <span class = "col text-end me-4">81</span>
             </div>
             <div id = "tablaApuestasSeleccionadas">
-                <div class = "apuestaSeleccionada ms-5">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
-                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                    </svg>
-                    <span class = "ms-2 texto-sm">Total de goles: Más de 2,5</span>
+                <div class = "line"></div>
+                <div class = "apuestaSeleccionada ms-4">
+                    <div class = "iconoCirculoApuesta">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                        </svg>       
+                    </div>
+                    <div class = "textoIconoApuesta">
+                        <span class = "ms-3">Total de goles: Más de 2,5</span>
+                    </div>                  
                 </div>
-                <div class = "apuestaSeleccionada ms-5">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
-                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                    </svg>
-                    <span class = "ms-2">Ambos equipos anotarán: Sí</span>
+                <div class = "apuestaSeleccionada ms-4">
+                    <div class = "iconoCirculoApuesta">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                        </svg>
+                    </div>
+                    <div class = "textoIconoApuesta">
+                        <span class = "ms-3">Ambos equipos anotarán: Sí</span>
+                    </div>        
+                </div>
+                <div class = "apuestaSeleccionada ms-4">
+                    <div class = "iconoCirculoApuesta">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                        </svg>
+                    </div>
+                    <div class = "textoIconoApuesta">
+                        <span class = "ms-3">Ambos equipos recibirán: Una tarjeta roja</span>
+                    </div>
                 </div>
             </div>
             
         </div>
 
-        <div class="row gx-0" style = "background-color:black">
+        <div class="row gx-0 bg-body-secondary">
             <hr class="separador-horizontal-apuestas">
             <div class="col-6 d-flex justify-content-center align-items-center">
-                <span>Establecer cantidad:</span>
+                <div class = "botonesTuApuesta">
+                    <span class = "ms-3">Establecer cantidad:</span>
+                </div>
                 <div class="separador-vertical-apuestas ms-auto"></div>
-            </div>
-            
-            <div class="col-6 d-flex justify-content-center align-items-center" style = "color: gold">Apostar</div>
+            </div>     
+            <div class="col-6 d-flex justify-content-center align-items-center botonesTuApuesta">Apostar</div>
         </div>
     </div>
 
     <div class="container mt-4 d-flex flex-column bg-body-secondary tablaSeleccionApuesta">
         <div class="align-items-center justify-content-center d-flex flex-grow-1 botonDesplegable" data-bs-toggle="collapse" data-bs-target="#tablaDesplegable" aria-expanded="false">
             <span id="etiquetaTabla">Total de Goles</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-down ms-auto me-2" viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-down ms-auto me-2 iconoFlechaDesplegableAbajo" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M1.553 6.776a.5.5 0 0 1 .67-.223L8 9.44l5.776-2.888a.5.5 0 1 1 .448.894l-6 3a.5.5 0 0 1-.448 0l-6-3a.5.5 0 0 1-.223-.67"/>
             </svg>
         </div>
@@ -101,7 +121,7 @@
     <div class="container mt-4 d-flex flex-column bg-body-secondary tablaSeleccionApuesta">
         <div class="align-items-center justify-content-center d-flex flex-grow-1 botonDesplegable" data-bs-toggle="collapse" data-bs-target="#tablaDesplegable2" aria-expanded="false">
             <span id="etiquetaTabla">Equipo - Mayor número</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-down ms-auto me-2" viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-down ms-auto me-2 iconoFlechaDesplegableAbajo" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M1.553 6.776a.5.5 0 0 1 .67-.223L8 9.44l5.776-2.888a.5.5 0 1 1 .448.894l-6 3a.5.5 0 0 1-.448 0l-6-3a.5.5 0 0 1-.223-.67"/>
             </svg>
         </div>
@@ -173,7 +193,7 @@
     <div class="container mt-4 d-flex flex-column bg-body-secondary tablaSeleccionApuesta">
         <div class="align-items-center justify-content-center d-flex flex-grow-1 botonDesplegable" data-bs-toggle="collapse" data-bs-target="#tablaDesplegable3" aria-expanded="false">
             <span id="etiquetaTabla">Ambos equipos recibirán tarjetas</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-down ms-auto me-2" viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-down ms-auto me-2 iconoFlechaDesplegableAbajo" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M1.553 6.776a.5.5 0 0 1 .67-.223L8 9.44l5.776-2.888a.5.5 0 1 1 .448.894l-6 3a.5.5 0 0 1-.448 0l-6-3a.5.5 0 0 1-.223-.67"/>
             </svg>
         </div>
@@ -228,7 +248,7 @@
     <div class="container mt-4 d-flex flex-column bg-body-secondary tablaSeleccionApuesta">
         <div class="align-items-center justify-content-center d-flex flex-grow-1 botonDesplegable" data-bs-toggle="collapse" data-bs-target="#tablaDesplegable4" aria-expanded="false">
             <span id="etiquetaTabla">Ambos equipos anotarán</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-down ms-auto me-2" viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-down ms-auto me-2 iconoFlechaDesplegableAbajo" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M1.553 6.776a.5.5 0 0 1 .67-.223L8 9.44l5.776-2.888a.5.5 0 1 1 .448.894l-6 3a.5.5 0 0 1-.448 0l-6-3a.5.5 0 0 1-.223-.67"/>
             </svg>
         </div>

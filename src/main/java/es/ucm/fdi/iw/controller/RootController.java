@@ -35,4 +35,9 @@ public class RootController {
     public String crearApuesta(Model model){
         return "crearApuesta";
     }
+
+    @GetMapping("/verificarEvento")
+    public String verificarEvento(Model model){
+        return "verificarEvento";
+    }
 }
