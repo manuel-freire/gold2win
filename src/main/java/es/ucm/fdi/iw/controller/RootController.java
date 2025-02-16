@@ -55,6 +55,11 @@ public class RootController {
     	return "retirar";
 	}
 
+    @GetMapping("/cartera/ingreso")
+	public String ingreso(Model model) {
+    	return "ingreso";
+	}
+
 	@GetMapping("/cartera/ingresar/paypal")
 	public String paypal(Model model) {
     	return "paypal";
