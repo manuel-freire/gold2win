@@ -194,3 +194,25 @@ a.botonOvalado.nav-link:hover{
     --bs-btn-disabled-border-color: #f8f9fa;
     --bs-gradient: none;
 }
+
+/*Scroll Bar*/
+
+.scrollBarPerso::-webkit-scrollbar-track {
+    border-color: transparent;
+    background-color: transparent;
+    border: 2px solid transparent;
+}
+.scrollBarPerso::-webkit-scrollbar-thumb {
+    background-clip: padding-box;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    background-color: var(--bs-secondary-color);
+    min-height: 40px;
+}
+.scrollBarPerso::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+.scrollBarPerso::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
