@@ -115,6 +115,7 @@ a.botonOvalado.nav-link:hover{
 .desplegableNavbar{
     position: absolute;
     background-color: #312A40;
+    z-index: 9999;
     top: 55px;
     right: -7px;
     width: 240px;
