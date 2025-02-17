@@ -23,7 +23,7 @@
                                 <a class="nav-link" th:href="${active == 'deportes'} ? '#' : @{/}">Todos los eventos</a>
                             </li>
                             <li class="nav-item mx-3 " th:if="${session?.u?.hasRole('USER')}" th:classappend="${active == 'apuestas'} ? 'active'">
-                                <a class="nav-link"  th:href="${active == 'apuestas'} ? '#' : @{/misApuestas}">Mis apuestas</a>
+                                <a class="nav-link"  th:href="${active == 'apuestas'} ? '#' : @{/misApuestas/todas}">Mis apuestas</a>
                             </li>
                             <li class="nav-item mx-3" th:if="${session?.u?.hasRole('USER')}" th:classappend="${active == 'ingresar'} ? 'active'">
                                 <a class="nav-link"  th:href= "@{/cartera/ingresar}">Cartera</a>
@@ -161,7 +161,7 @@
                             <a class="nav-link" th:classappend="${active == 'deportes'} ? 'active'" th:href="${active == 'deportes'} ? '#' : @{/}">Todos los eventos</a>
                         </li>
                         <li class="nav-item" th:if="${session?.u?.hasRole('USER')}" >
-                            <a class="nav-link" th:classappend="${active == 'apuestas'} ? 'active'" th:href="${active == 'apuestas'} ? '#' : @{/misApuestas}">Mis apuestas</a>
+                            <a class="nav-link" th:classappend="${active == 'apuestas'} ? 'active'" th:href="${active == 'apuestas'} ? '#' : @{/misApuestas/todas}">Mis apuestas</a>
                         </li>
                         <li class="nav-item" th:if="${session?.u?.hasRole('USER')}">
                             <a class="nav-link" th:classappend="${active == 'chats'} ? 'active'" th:href="${active == 'chats'} ? '#' : @{/}">Chats</a>
