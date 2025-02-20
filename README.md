@@ -25,3 +25,6 @@ Por otro lado una vez la apuesta hecha no sabemos si incluir una cancelación ta
 - Chat gpt: Sobretodo para entender como funciona bootstrap, html y css. Para detectar donde están los erres mas rapido y para fragmentos de codigo basicos.
 - https://icons.getbootstrap.com/ (diferentes iconos usados en toda la web
 )
+- https://getbootstrap.com/docs/5.3/components/modal/ :Para pulsar en crear mi propia apuesta y apostar. 
+-https://getbootstrap.com/docs/5.3/components/collapse/ : para los menús desplegables de la navBar
+-https://getbootstrap.com/docs/5.3/components/navbar/#offcanvas para el menú al contraerse la pagina
