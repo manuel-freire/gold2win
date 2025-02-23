@@ -40,7 +40,22 @@
 
                 <div class="flex-grow-0 collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav">
-                        <th:block th:if="${session.u}">
+                        <li class="d-flex">
+                            <a class= "nav-link" href="/cartera/ingresar" style="font-size: 11px;">
+                                <div class="d-flex flex-column justify-content-center align-items-center">
+                                    <span>Disponible</span>
+                                    <span class="text-success">0,00$</span>
+                                </div>
+                            </a>
+                            <a class= "nav-link" href="/cartera/ingresar" style="font-size: 11px;">
+                                <div class=" d-flex flex-column justify-content-center align-items-center">
+                                    <span>Retenido</span>
+                                    <span class="text-danger">0,00$</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
                             <li class="nav-item mx-2">
                                 <!-- div con posicion relative según el cual se establece la posición del desplegable -->
                                 <div class="position-relative">
