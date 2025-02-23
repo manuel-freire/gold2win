@@ -78,3 +78,9 @@
     outline: none;
     box-shadow: none;
 }
+
+#mensajeDesplegable {
+    display: block;
+    padding: 0px 0px 0px 10px;
+    font-size: small;
+}

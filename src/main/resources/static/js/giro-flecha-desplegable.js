@@ -5,6 +5,7 @@ console.log("El DOM ha cargado. Script inicializado.");
 const toggleButton = document.getElementById("toggleButton");
 const collapseElement = document.getElementById("miDesplegable1");
 const arrowIconPath = document.querySelector("#arrowIcon path");
+const messageElement = document.getElementById("mensajeDesplegable"); // Elemento del mensaje
 
 // Definimos los paths de las flechas
 const arrowDownPath =
@@ -15,12 +16,14 @@ const arrowUpPath =
 // Evento cuando el desplegable se abre
 collapseElement.addEventListener("shown.bs.collapse", function () {
     arrowIconPath.setAttribute("d", arrowUpPath); // Flecha hacia arriba
+    messageElement.style.display = "none"; // Oculta el mensaje
     console.log("Flecha cambiada a 'hacia arriba'. Desplegable abierto.");
 });
 
 // Evento cuando el desplegable se cierra
 collapseElement.addEventListener("hidden.bs.collapse", function () {
     arrowIconPath.setAttribute("d", arrowDownPath); // Flecha hacia abajo
+    messageElement.style.display = "block"; // Muestra el mensaje
     console.log("Flecha cambiada a 'hacia abajo'. Desplegable cerrado.");
 });
 
