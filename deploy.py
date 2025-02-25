@@ -14,7 +14,7 @@ Cómo ejecutar:
                          dependencias vía pip install -r requirements.txt
     2. asegúrate de que tu base de datos está escribiéndose a disco, con JDBC URL jdbc:h2:file:./iwdb
     3. asegúrate de que estás guardando ficheros de usuario a disco, a ./iwdata
-    4. ejecuta el script: python deploy.py      
+    4. ejecuta el script: python deploy.py
 """
 
 import sys
