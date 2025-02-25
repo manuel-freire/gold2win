@@ -1,4 +1,4 @@
-credentials.json.template
+credentials.json
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
