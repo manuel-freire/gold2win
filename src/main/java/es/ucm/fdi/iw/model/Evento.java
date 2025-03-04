@@ -25,7 +25,7 @@ public class Evento {
     private boolean cancelado;
 
     @ElementCollection
-    private List<String> etiqueta = new ArrayList<>();
+    private List<String> etiquetas = new ArrayList<>();
     
     @ManyToOne
     @JoinColumn(name = "seccion_id")

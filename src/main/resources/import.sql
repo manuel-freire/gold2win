@@ -1,3 +1,50 @@
+-- insert secciones
+INSERT INTO SECCION (ID, ENABLED, GRUPO, NOMBRE) VALUES
+(1, true, 'Deportes en Equipo', 'Futbol'),
+(2, true, 'Deportes en Equipo', 'baloncesto'),
+(3, true, 'Deportes en Equipo', 'Beisbol'),
+(4, true, 'Deportes en Equipo', 'balonmano'),
+(5, true, 'Deportes individuales', 'Esgrima'),
+(6, true, 'Deportes individuales', 'Tenis'),
+(7, true, 'Deportes individuales', 'ping pong'),
+(8, true, 'Deportes individuales', 'Ciclismo'),
+(9, true, 'Deportes individuales', 'Golf'),
+(10, true, 'eSports', 'League of Legends'),
+(11, true, 'eSports', 'Counter Strike'),
+(12, true, 'eSports', 'Valorant'),
+(13, true, 'eSports', 'Overwatch'),
+(14, true, 'eSports', 'Rocket League');
+
+-- insert eventos
+INSERT INTO EVENTO (ID, CANCELADO, FECHA_CIERRE, FECHA_CREACION, NOMBRE, SECCION_ID) VALUES
+(1, false, '2025-06-10 18:00:00', '2025-03-01 12:00:00', 'Final Liga Española', 1),
+(2, false, '2025-06-22 20:30:00', '2025-03-02 14:15:00', 'NBA Playoffs - Lakers vs Celtics', 2),
+(3, false, '2025-06-10 16:00:00', '2025-03-03 10:30:00', 'Serie Mundial de Beisbol', 3),
+(4, false, '2025-05-20 19:00:00', '2025-03-05 09:45:00', 'Copa Europa de Balonmano', 4),
+(5, false, '2025-1-02 15:00:00', '2025-03-06 08:00:00', 'Campeonato Mundial de Esgrima', 5),
+(6, false, '2025-06-22 21:00:00', '2025-03-07 13:20:00', 'Roland Garros - Final Masculina', 6),
+(7, false, '2025-06-23 11:00:00', '2025-03-08 07:30:00', 'Torneo Internacional de Ping Pong', 7),
+(8, false, '2025-06-23 09:00:00', '2025-03-09 06:00:00', 'Tour de Francia - Etapa 5', 8),
+(9, false, '2025-05-20 13:00:00', '2025-03-10 11:15:00', 'Masters de Golf en Augusta', 9),
+(10, false, '2025-05-20 17:30:00', '2025-03-11 15:45:00', 'Worlds - League of Legends', 10),
+(11, false, '2025-06-08 19:00:00', '2025-03-12 10:50:00', 'Major de Counter Strike', 11),
+(12, false, '2025-06-08 20:00:00', '2025-03-13 14:25:00', 'Final de Valorant Champions', 12);
+
+-- inserta etiquetas
+INSERT INTO EVENTO_ETIQUETAS (EVENTO_ID, ETIQUETAS) VALUES
+(1, 'futbol'), (1, 'liga'), (1, 'España'), (1, 'final'), (1, 'deportes'),
+(2, 'baloncesto'), (2, 'NBA'), (2, 'playoffs'), (2, 'Lakers'), (2, 'Celtics'), (2, 'USA'),
+(3, 'beisbol'), (3, 'Serie Mundial'), (3, 'final'), (3, 'MLB'), (3, 'deportes'),
+(4, 'balonmano'), (4, 'Copa Europa'), (4, 'clubes'), (4, 'Europa'), (4, 'final'),
+(5, 'esgrima'), (5, 'Mundial'), (5, 'campeonato'), (5, 'individual'), (5, 'deporte'),
+(6, 'tenis'), (6, 'Roland Garros'), (6, 'Grand Slam'), (6, 'final'), (6, 'Francia'),
+(7, 'ping pong'), (7, 'torneo'), (7, 'internacional'), (7, 'rápido'), (7, 'Asia'),
+(8, 'ciclismo'), (8, 'Tour de Francia'), (8, 'etapa'), (8, 'montaña'), (8, 'Francia'),
+(9, 'golf'), (9, 'Masters'), (9, 'Augusta'), (9, 'USA'), (9, 'profesional'),
+(10, 'eSports'), (10, 'League of Legends'), (10, 'Worlds'), (10, 'final'), (10, 'MOBA'),
+(11, 'eSports'), (11, 'Counter Strike'), (11, 'Major'), (11, 'FPS'), (11, 'torneo'),
+(12, 'eSports'), (12, 'Valorant'), (12, 'Champions'), (12, 'final'), (12, 'shooter');
+
 -- insert admin (username a, password aa)
 INSERT INTO IWUser (ID, DINERO_DISPONIBLE, DINERO_RETENIDO, EMAIL, ENABLED, FIRST_NAME, LAST_NAME, PASSWORD, ROLES, USERNAME) VALUES
 (1, 0.0, 0.0, 'julianix882@gmail.com', TRUE, 'julián', 'Reguera Peñalosa', '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'ADMIN,USER', 'julianix'),

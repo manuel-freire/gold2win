@@ -373,9 +373,10 @@ a.botonOvalado.nav-link:hover{
 
 .etiquetaEvento{
     background-color: var(--bs-tertiary-color);
-    border-radius: 10px;
-    padding: 0px 5px;
+    border-radius: 5px;
+    padding: 2px 5px;
     margin-left: 3px;
+    text-align: center;
 }
 
 .Evento{
