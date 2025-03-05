@@ -10,12 +10,12 @@
             <th:block th:each="seccion,i: ${secciones}">
                 <th:block th:if="${i.first or seccion.grupo != secciones[i.index - 1]?.grupo}">
                     <div class="d-flex flex-column grupoSecciones"></div>
-                        <span class="tituloSeccion" th:text="${seccion.grupo}"></span>
+                        <span class="tituloSeccion text-nowrap" th:text="${seccion.grupo}"></span>
                 </th:block>
                 
-                <a class="enlaceSeccion nav-link "> 
+                <a class="enlaceSeccion nav-link text-nowrap"> 
                     <img width="20" height="20" th:src="@{/seccion/{id}/pic(id=${seccion.id})}">
-                    <span class="ms-1 spanAjustado" th:text="${seccion.nombre}">texto1</span>
+                    <span class="ms-1 spanAjustado " th:text="${seccion.nombre}">texto1</span>
                 </a>
 
                 <th:block th:if="${i.last or seccion.grupo != secciones[i.index + 1]?.grupo}">
