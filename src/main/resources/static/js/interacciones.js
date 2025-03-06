@@ -155,6 +155,24 @@ if(apostarForm != null){
     });
 }
 
+var botonIzSecciones = document.getElementById("btnIzSecciones");
+if(botonIzSecciones != null){
+    botonIzSecciones.addEventListener("click", function(event){
+        var contenedor = document.getElementById("menuSeccionesComprimido");
+        contenedor.scrollLeft -= contenedor.clientWidth/2;
+
+    });
+}
+
+var botonDrsecciones = document.getElementById("btnDrSecciones");
+if(botonDrsecciones != null){
+    botonDrsecciones.addEventListener("click", function(event){
+        var contenedor = document.getElementById("menuSeccionesComprimido");
+        contenedor.scrollLeft += contenedor.clientWidth/2;
+
+    });
+}
+
 
 var crearApuestaForm = document.getElementById("crearApuestaForm");
 if(crearApuestaForm != null){
