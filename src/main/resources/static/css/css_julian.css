@@ -317,10 +317,12 @@ a.botonOvalado.nav-link:hover{
 }
 
 .navSeccionescomprimido{
-    height: 50px;
-    min-height: 50px;
-    overflow-x: auto;
+    height: 54px;
+    min-height: 54px;
+    overflow: hidden;
     width: calc(100vw - 40px);;
+    font-weight: 700;
+    line-height: 17px;
 }
 
 .tituloSeccion{
@@ -362,7 +364,8 @@ a.botonOvalado.nav-link:hover{
 .caja-etiquetas {
     margin-top: 12px;
     font-size: 13px;
-    width: 100%;
+    flex-grow: 1;
+    min-width: 0;
     display: flex;
     overflow-x: auto;
 }
@@ -375,7 +378,8 @@ a.botonOvalado.nav-link:hover{
     background-color: rgba(33, 37, 41, 0.1);
     border-radius: 5px;
     padding: 2px 5px;
-    margin-left: 3px;
+    margin-right: 3px;
+    max-height: 24px;
     text-align: center;
 }
 
