@@ -317,10 +317,12 @@ a.botonOvalado.nav-link:hover{
 }
 
 .navSeccionescomprimido{
-    height: 50px;
-    min-height: 50px;
-    overflow-x: auto;
+    height: 54px;
+    min-height: 54px;
+    overflow: hidden;
     width: calc(100vw - 40px);;
+    font-weight: 700;
+    line-height: 17px;
 }
 
 .tituloSeccion{
@@ -362,7 +364,8 @@ a.botonOvalado.nav-link:hover{
 .caja-etiquetas {
     margin-top: 12px;
     font-size: 13px;
-    width: 100%;
+    flex-grow: 1;
+    min-width: 0;
     display: flex;
     overflow-x: auto;
 }
@@ -372,16 +375,24 @@ a.botonOvalado.nav-link:hover{
 }
 
 .etiquetaEvento{
-    background-color: var(--bs-tertiary-color);
-    border-radius: 10px;
-    padding: 0px 5px;
-    margin-left: 3px;
+    background-color: rgba(33, 37, 41, 0.1);
+    border-radius: 5px;
+    padding: 2px 5px;
+    margin-right: 3px;
+    max-height: 24px;
+    text-align: center;
+}
+
+[data-bs-theme="dark"] .etiquetaEvento{
+    background-color: rgba(222, 226, 230, 0.5);;
+    color: #c6c7c8;
 }
 
 .Evento{
     width: 100%;
     min-width: 150px;
-    max-height: 90px;
+    min-height: 94px;
+    max-height: 94px;
     margin: 15px 0px;
     border-radius: 10px;
 }
@@ -526,4 +537,25 @@ a.botonOvalado.nav-link:hover{
     border-style: solid;
     border-width: 0px;
     border-top-width: 1px;
+}
+
+.textoColapsable{
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: .6em;
+    font-size: 1.25em;
+    line-height: normal;
+}
+
+.estilo-contenedor-adaptable{
+    background-color: #f2f3f5;
+    border-radius: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-bs-theme="dark"] .estilo-contenedor-adaptable{
+    border: 0px solid rgba(0, 0, 0, 0.1);
+    background-color: #313338;
 }

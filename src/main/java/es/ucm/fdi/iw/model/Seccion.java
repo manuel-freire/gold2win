@@ -18,13 +18,12 @@ public class Seccion {
     private Long id;
     
     private String nombre;
-    private String plantilla; // definición de variables
     private String grupo;
     private boolean enabled;
     
     // Lista de variables definidas en esta sección
     @OneToMany(mappedBy = "seccion")
-    private List<VariableSeccion> variables;
+    private List<VariableSeccion> plantilla;
     
     // Eventos que usan esta sección
     @OneToMany(mappedBy = "seccion")
