@@ -41,11 +41,17 @@
                         </div>
 
                        <div id = "contenedorVariables" class="row g-3 justify-content-center mt-2">
-                            <button id = "botonCrearVariable" style="min-height: 30px; " class = "col-3 btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearVariables"> 
+                            <button id = "botonCrearVariable" style="min-height: 30px; max-height: 80px;" class = "col-3 btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearVariables"> 
                                 Crear variable
                             </button>
                        </div>
-                            
+                        
+                       <div id = "contConfirmarSeccion">
+                            <button style="min-height: 30px;" class="col-3 btn btn-secondary mt-4" onclick="window.location.href='secciones'">Cancelar</button>
+                            <button style="min-height: 30px; " class = "col-3 btn btn-success mt-4 ms-5"> 
+                                Confirmar seccion
+                            </button>
+                       </div>
                     </div>
                 </div>
             </div>
@@ -87,18 +93,36 @@
                         </div>
                     </form>
                 </div>
-                
-
-                <svg id="confirmacionApuesta" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-check-circle-fill text-success invisible" viewBox="0 0 16 16">
-                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-                </svg>
             </div>
         </div>
     </div>
     
+    <div class="modal fade" id="modalEliminarSeccion" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+            <div class="modal-content" style="position: relative;">
+                <div id="ocultador-formulario">
+                    <form id="apostarForm">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Eliminar sección</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
+                    
+                        <div class="modal-body">
+                            <span> ¿Seguro que quiere eliminar permanentemente esta sección?</span>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button class="btn btn-danger" data-bs-dismiss="modal">Eliminar sección</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="menuOpcionesSeccion">
         <a href="#">Editar evento</a>
-        <a href="#">Eliminar evento</a>
+        <a href="#" data-bs-toggle="modal" data-bs-target="#modalEliminarSeccion">Eliminar evento</a>
     </div>
 
     <th:block th:replace="fragments/footer.html :: footer" />
