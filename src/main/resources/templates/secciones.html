@@ -21,21 +21,33 @@
                     Crear seccion
                 </div>
 
-                <div class = "formularioSeccion">
-                    <div class = "zonaDatos">
-    
+                <div class = "formularioSeccion mt-4">
+                    <div class = "zonaDatos row">
+                        <div class = "col-6 d-flex flex-column">
+                            <label for="inputNombreSeccion" class="form-label">Nombre de la sección:</label>
+                            <input class="form-control" id="inputNombreSeccion" name="cantidad" >
+                            <label for="inputTipoSeccion" class="form-label mt-5">Nombre del tipo de sección:</label>
+                            <input class="form-control" id="inputTipoSeccion" name="cantidad" >
+                        </div>
+                        
+                        <div class = "col-6 d-flex flex-column align-items-center">
+                            <label for="imagen">Selecciona una imagen:</label>
+                            <input type="file" id="imagen" name="imagen" accept="image/*" class="form-control">
+
+                            <img id="preview" src="" alt="Vista previa" style="display: none; max-width: 200px; margin-top: 10px;">
+                        </div>
                     </div>
 
                     <div class = "formularioVariables mt-3">
                         <div class = "encabezadoVariables mb-3">
-                            <span class = "tituloSecciones mt-4"> Variables de la sección</span>
-                            <div role = "button" id = "botonCrearVariable" style="min-height: 30px;" class = "mt-4" data-bs-toggle="modal" data-bs-target="#modalCrearVariables" data-bs-whatever="@getbootstrap">
-                                Crear variable
-                            </div>
+                            <span class = "mt-4"> Variables de la sección</span>
+                            
                         </div>
 
-                       <div id = "contenedorVariables" class="row g-3 mt-2">
-
+                       <div id = "contenedorVariables" class="row g-3 justify-content-center mt-2">
+                            <button id = "botonCrearVariable" style="min-height: 30px; " class = "col-3 btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearVariables"> 
+                                Crear variable
+                            </button>
                        </div>
                             
                     </div>
@@ -96,6 +108,21 @@
     <th:block th:replace="fragments/footer.html :: footer" />
 
     <script>
+        document.getElementById('imagen').addEventListener('change', function(event) {
+            var file = event.target.files[0]; // Obtener el archivo seleccionado
+            if (file) {
+                var reader = new FileReader(); 
+                reader.onload = function(e) {
+                    var imgPreview = document.getElementById('preview');
+                    imgPreview.src = e.target.result; // Mostrar la imagen
+                    imgPreview.style.display = "block"; // Hacer visible la vista previa
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+
+    <script>
         const contextMenu = document.getElementById("menuOpcionesSeccion");
         const contextAreas = document.querySelectorAll(".enlaceSeccionAdmin");
 
@@ -127,12 +154,10 @@
 
             // Crear un nuevo div con Bootstrap
             const nuevoDiv = document.createElement("div");
-            nuevoDiv.className = "col-md-4"; // Se organizan en 3 columnas por fila
+            nuevoDiv.className = "col-3 variableSeccion"; // Se organizan en 3 columnas por fila
             nuevoDiv.innerHTML = `
-                <div class = "variableSeccion">
-                    <span>Nombre de la variable: ${nombre}</span>
-                    <span>Tipo de variable: ${opcionSeleccionada}</span>
-                </div>
+                <span>Nombre : ${nombre}</span>
+                <span>Tipo de variable: ${opcionSeleccionada}</span>
             `;
 
              
