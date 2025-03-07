@@ -204,3 +204,63 @@ if(crearApuestaForm != null){
         */
     });
 }
+
+if(inputImagenSecciones != null){
+    document.getElementById('inputImagenSecciones').addEventListener('change', function(event) {
+        var file = event.target.files[0]; // Obtener el archivo seleccionado
+        if (file) {
+            var reader = new FileReader(); 
+            reader.onload = function(e) {
+                var imgPreview = document.getElementById('mostrarImagenSeccionesForm');
+                imgPreview.src = e.target.result; // Mostrar la imagen
+                imgPreview.style.display = "block"; // Hacer visible la vista previa
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+}
+
+if(menuOpcionesSeccion != null){
+    const contextMenu = document.getElementById("menuOpcionesSeccion");
+    const contextAreas = document.querySelectorAll(".enlaceSeccionAdmin");
+
+    contextAreas.forEach((contextArea) => {
+    contextArea.addEventListener("contextmenu", function(event) {
+                event.preventDefault(); 
+                contextMenu.style.display = "block";
+                contextMenu.style.left = `${event.pageX}px`;  // Establece la posición en el eje X
+                contextMenu.style.top = `${event.pageY}px`;   // Establece la posición en el eje Y
+    });
+    });
+
+        // Ocultar el menú al hacer clic en cualquier otra parte
+    document.addEventListener("click", function() {
+        contextMenu.style.display = "none"; 
+    });
+}
+
+if(contenedorVariables != null){
+    function agregarDiv() {
+        const contenedor = document.getElementById("contenedorVariables");
+        var nombre = document.getElementById('cantidadModal').value;
+        var select = document.getElementById('tipoApuestaModal');
+        var opcionSeleccionada = select.options[select.selectedIndex].text;
+
+        if (opcionSeleccionada === "Seleccione..." || nombre === "") { //Si los campos están vacíos, no se añade el div
+            return;  
+        }
+
+        // Crear un nuevo div con Bootstrap
+        const nuevoDiv = document.createElement("div");
+        nuevoDiv.className = "col-3 variableSeccion"; // Se organizan en 3 columnas por fila
+        nuevoDiv.innerHTML = `
+            <span>Nombre : ${nombre}</span>
+            <span>Tipo de variable: ${opcionSeleccionada}</span>
+        `;
+
+         
+        contenedor.appendChild(nuevoDiv); // Agrega el div al contenedor
+        document.getElementById('tipoApuestaModal').selectedIndex = 0;
+        document.getElementById('cantidadModal').value = '';
+    }
+}

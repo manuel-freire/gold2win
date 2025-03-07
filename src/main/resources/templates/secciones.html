@@ -16,90 +16,14 @@
         
         <div class="d-flex flex-column w-100 ps-4">
             <nav th:replace="fragments/navSeccionescomprimido.html :: navSeccionescomprimido"></nav>
-            <div class="pe-4 mt-4 seccionesDerecha scrollBarPerso">
-                <div role = "button" id = "botonCrearSeccion" style="min-height: 40px;">
+            <div class="pe-4 mt-5 seccionesDerecha">
+                <div role = "button" id = "botonCrearSeccion" style="min-height: 40px;" onclick="window.location.href='secciones-crearSeccion'">
                     Crear seccion
                 </div>
-
-                <div class = "formularioSeccion mt-4">
-                    <div class = "zonaDatos row">
-                        <div class = "col-6 d-flex flex-column">
-                            <label for="inputNombreSeccion" class="form-label">Nombre de la sección:</label>
-                            <input class="form-control" id="inputNombreSeccion" name="cantidad" >
-                            <label for="inputTipoSeccion" class="form-label mt-5">Nombre del tipo de sección:</label>
-                            <input class="form-control" id="inputTipoSeccion" name="cantidad" >
-                        </div>
-                        
-                        <div class = "col-6 d-flex flex-column align-items-center">
-                            <label for="imagen">Selecciona una imagen:</label>
-                            <input type="file" id="imagen" name="imagen" accept="image/*" class="form-control">
-
-                            <img id="preview" src="" alt="Vista previa" style="display: none; max-width: 200px; margin-top: 10px;">
-                        </div>
-                    </div>
-
-                    <div class = "formularioVariables mt-3">
-                        <div class = "encabezadoVariables mb-3">
-                            <span class = "mt-4"> Variables de la sección</span>
-                            
-                        </div>
-
-                       <div id = "contenedorVariables" class="row g-3 justify-content-center mt-2">
-                            <button id = "botonCrearVariable" style="min-height: 30px; " class = "col-3 btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearVariables"> 
-                                Crear variable
-                            </button>
-                       </div>
-                            
-                    </div>
-                </div>
-            </div>
-            
-           
+            </div>    
         </div>
     </main>
 
-    <div class="modal fade" id="modalCrearVariables" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
-            <div class="modal-content" style="position: relative;">
-                <div id="ocultador-formulario">
-                    <form id="apostarForm">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Nueva variable</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                        </div>
-                    
-                        <div class="modal-body">
-                            
-                            <div class="mb-3">
-                                <label for="cantidadModal" class="form-label">Nombre de la variable:</label>
-                                <input class="form-control" id="cantidadModal" name="cantidad" >
-                            </div>
-        
-                            <div class="mb-3">
-                                <label for="tipoApuestaModal" class="form-label">Tipo de variable:</label>
-                                <select class="form-select" id="tipoApuestaModal" name="tipoApuesta">
-                                    <option value="">Seleccione una</option>
-                                    <option value="1">Valor numérico</option>
-                                    <option value="2">Texto</option>
-                                </select>
-    
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-success" onclick="agregarDiv()" data-bs-dismiss="modal">Añadir variable</button>
-                        </div>
-                    </form>
-                </div>
-                
-
-                <svg id="confirmacionApuesta" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-check-circle-fill text-success invisible" viewBox="0 0 16 16">
-                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-                </svg>
-            </div>
-        </div>
-    </div>
-    
     <div id="menuOpcionesSeccion">
         <a href="#">Editar evento</a>
         <a href="#">Eliminar evento</a>
@@ -108,65 +32,23 @@
     <th:block th:replace="fragments/footer.html :: footer" />
 
     <script>
-        document.getElementById('imagen').addEventListener('change', function(event) {
-            var file = event.target.files[0]; // Obtener el archivo seleccionado
-            if (file) {
-                var reader = new FileReader(); 
-                reader.onload = function(e) {
-                    var imgPreview = document.getElementById('preview');
-                    imgPreview.src = e.target.result; // Mostrar la imagen
-                    imgPreview.style.display = "block"; // Hacer visible la vista previa
-                }
-                reader.readAsDataURL(file);
-            }
-        });
-    </script>
-
-    <script>
         const contextMenu = document.getElementById("menuOpcionesSeccion");
         const contextAreas = document.querySelectorAll(".enlaceSeccionAdmin");
 
         contextAreas.forEach((contextArea) => {
-            contextArea.addEventListener("contextmenu", function(event) {
-                event.preventDefault(); 
-                contextMenu.style.display = "block";
-                contextMenu.style.left = `${event.pageX}px`;  // Establece la posición en el eje X
-                contextMenu.style.top = `${event.pageY}px`;   // Establece la posición en el eje Y
-            });
+        contextArea.addEventListener("contextmenu", function(event) {
+                    event.preventDefault(); 
+                    contextMenu.style.display = "block";
+                    contextMenu.style.left = `${event.pageX}px`;  // Establece la posición en el eje X
+                    contextMenu.style.top = `${event.pageY}px`;   // Establece la posición en el eje Y
+        });
         });
 
-        // Ocultar el menú al hacer clic en cualquier otra parte
+            // Ocultar el menú al hacer clic en cualquier otra parte
         document.addEventListener("click", function() {
             contextMenu.style.display = "none"; 
         });
     </script>
-    
-    <script>
-        function agregarDiv() {
-            const contenedor = document.getElementById("contenedorVariables");
-            var nombre = document.getElementById('cantidadModal').value;
-            var select = document.getElementById('tipoApuestaModal');
-            var opcionSeleccionada = select.options[select.selectedIndex].text;
-
-            if (opcionSeleccionada === "Seleccione..." || nombre === "") { //Si los campos están vacíos, no se añade el div
-                return;  
-            }
-
-            // Crear un nuevo div con Bootstrap
-            const nuevoDiv = document.createElement("div");
-            nuevoDiv.className = "col-3 variableSeccion"; // Se organizan en 3 columnas por fila
-            nuevoDiv.innerHTML = `
-                <span>Nombre : ${nombre}</span>
-                <span>Tipo de variable: ${opcionSeleccionada}</span>
-            `;
-
-             
-            contenedor.appendChild(nuevoDiv); // Agrega el div al contenedor
-            document.getElementById('tipoApuestaModal').selectedIndex = 0;
-            document.getElementById('cantidadModal').value = '';
-        }
-    </script>
-
 </body>
 
 </html>

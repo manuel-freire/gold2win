@@ -60,4 +60,15 @@ public class AdminController {
 
         return "secciones";
     }
+
+    @GetMapping("/secciones-crearSeccion")
+    public String seccionesCrear(Model model){
+        //obtengo las secciones
+        String querySecciones = "SELECT s FROM Seccion s WHERE s.enabled = true ORDER BY s.grupo ASC";
+        List<Seccion> secciones = entityManager.createQuery(querySecciones).getResultList();
+
+        model.addAttribute("secciones", secciones);
+
+        return "secciones-crearSeccion";
+    }
 }
