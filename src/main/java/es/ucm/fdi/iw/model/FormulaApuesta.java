@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
+import es.ucm.fdi.iw.model.Resultado;
 
 @Entity
 @Data
@@ -29,8 +30,10 @@ public class FormulaApuesta {
     private String nombre;
     private double dineroAfabor;
     private double dineroEnContra;
-    private boolean terminada;
-    private boolean resultado;
+
+    @Enumerated(EnumType.STRING)
+    private Resultado resultado; 
+    
     
     @OneToMany(mappedBy = "formulaApuesta")
     private List<Apuesta> apuestas;
