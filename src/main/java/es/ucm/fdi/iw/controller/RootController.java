@@ -144,4 +144,9 @@ public class RootController {
     public String apuestasPendientes(Model model){
         return "misApuestas-pendientes";
     }
+
+    @GetMapping("/admin/usuarios")
+    public String usuarios(Model model){
+        return "usuarios";
+    }
 }
