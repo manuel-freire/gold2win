@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import es.ucm.fdi.iw.LocalData;
+import es.ucm.fdi.iw.model.Apuesta;
 import es.ucm.fdi.iw.model.Evento;
 import es.ucm.fdi.iw.model.Seccion;
 import es.ucm.fdi.iw.model.User;
@@ -132,6 +133,9 @@ public class RootController {
 
     @GetMapping("/misApuestas/todas")
     public String todasMisApuestas(Model model){
+        String queryApuestas = "SELECT a FROM Apuesta a";
+        List<Apuesta> apuestas = entityManager.createQuery(queryApuestas, Apuesta.class).getResultList();
+        model.addAttribute("apuestas", apuestas);
         return "misApuestas-todas";
     }
 
