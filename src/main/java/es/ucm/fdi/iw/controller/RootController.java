@@ -141,11 +141,17 @@ public class RootController {
 
     @GetMapping("/misApuestas/determinadas")
     public String apuestasDeterminadas(Model model){
+        String queryDeterminadas = "SELECT a FROM Apuesta a WHERE a.formulaApuesta.resultado IN ('GANADO', 'PERDIDO')";
+        List<Apuesta> apuestasDeterminadas = entityManager.createQuery(queryDeterminadas, Apuesta.class).getResultList();
+        model.addAttribute("apuestasDeterminadas", apuestasDeterminadas);
         return "misApuestas-determinadas";
     }
 
     @GetMapping("/misApuestas/pendientes")
     public String apuestasPendientes(Model model){
+        String queryPendientes = "SELECT a FROM Apuesta a WHERE a.formulaApuesta.resultado = 'INDETERMINADO'";
+        List<Apuesta> apuestasPendientes = entityManager.createQuery(queryPendientes, Apuesta.class).getResultList();
+        model.addAttribute("apuestasPendientes", apuestasPendientes);
         return "misApuestas-pendientes";
     }
 
