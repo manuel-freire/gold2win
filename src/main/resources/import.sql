@@ -60,5 +60,35 @@ INSERT INTO IWUser (ID, DINERO_DISPONIBLE, DINERO_RETENIDO, EMAIL, ENABLED, FIRS
 (11, 130.55, 22.00, 'ramon@gmail.com', TRUE, 'Ramon', 'apellido1 apellido2', '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'ADMIN,USER', 'Ramon'),
 (12, 130.55, 22.00, 'Jose_Luis@gmail.com', TRUE, 'Jose Luis', 'apellido1 apellido2', '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'USER', 'Jose Luis');
 
+-- INSERT FORMULA_APUESTA
+INSERT INTO FORMULA_APUESTA (ID, DINERO_AFABOR, DINERO_EN_CONTRA, FORMULA, NOMBRE, RESULTADO, CREADOR_ID, EVENTO_ID) VALUES
+(1, 0, 0, 'goles Barsa > goles Madrid', 'Gana Barsa', 'INDETERMINADO', 1, 1),
+(2, 0, 0, 'puntos Lakers > puntos Celtics', 'Victoria Lakers', 'INDETERMINADO', 2, 2),
+(3, 0, 0, 'carreras Yankees > carreras Dodgers', 'Ganan Yankees', 'INDETERMINADO', 3, 3),
+(4, 0, 0, 'goles Kiel > goles Veszprem', 'Gana Kiel', 'INDETERMINADO', 4, 4),
+(5, 0, 0, 'toques Alvarado > toques Smith', 'Victoria Alvarado', 'PERDIDO', 5, 5),
+(6, 0, 0, 'sets Nadal > sets Djokovic', 'Gana Nadal', 'INDETERMINADO', 6, 6),
+(7, 0, 0, 'puntos Wang > puntos Lee', 'Gana Wang', 'INDETERMINADO', 7, 7),
+(8, 0, 0, 'tiempo Froome < tiempo Pogacar', 'Froome gana etapa', 'INDETERMINADO', 8, 8),
+(9, 0, 0, 'golpes Woods > golpes McIlroy', 'Gana Woods', 'INDETERMINADO', 9, 9),
+(10, 0, 0, 'torres destruidas G2 > torres destruidas T1', 'Gana G2', 'INDETERMINADO', 10, 10),
+(11, 0, 0, 'rounds ganados NaVi > rounds ganados Vitality', 'Victoria NaVi', 'INDETERMINADO', 11, 11),
+(12, 0, 0, 'mapas ganados Fnatic > mapas ganados Sentinels', 'Gana Fnatic', 'INDETERMINADO', 12, 12);
+
+-- INSERT APUESTA
+INSERT INTO APUESTA (ID, CANTIDAD, A_FAVOR, APOSTADOR_ID, FORMULA) VALUES
+(1, 50.0, TRUE, 1, 1),
+(2, 30.0, FALSE, 2, 2),
+(3, 75.5, TRUE, 3, 3),
+(4, 20.0, FALSE, 4, 4),
+(5, 100.0, TRUE, 5, 5),
+(6, 45.0, TRUE, 6, 6),
+(7, 60.0, FALSE, 7, 7),
+(8, 25.0, TRUE, 8, 8),
+(9, 90.0, FALSE, 9, 9),
+(10, 15.0, TRUE, 10, 10),
+(11, 120.0, FALSE, 11, 11),
+(12, 35.0, TRUE, 12, 12);
+
 -- start id numbering from a value that is larger than any assigned above
 ALTER SEQUENCE "PUBLIC"."GEN" RESTART WITH 1024;
