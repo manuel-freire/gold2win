@@ -3,7 +3,7 @@
 
 <head>
     <th:block th:replace="fragments/head :: header"/>
-    <title>Secciones-CrearSección</title>
+    <title>editar seccion</title>
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -23,17 +23,18 @@
             <div class = "formularioSeccion mt-2 mt-md-4 scrollBarPerso">
                 <div class = "zonaDatos row">
                     <div class = "col-6">
+                        <input type="hidden" name="id" th:value="${seccionEditable.id}">
                         <label for="inputNombreSeccion" class="form-label">Nombre de la sección:</label>
-                        <input class="form-control" id="inputNombreSeccion" name="cantidad" >
+                        <input class="form-control" id="inputNombreSeccion" name="nombre" th:value="${seccionEditable.nombre}">
                         <label for="inputTipoSeccion" class="form-label mt-5">Nombre del tipo de sección:</label>
-                        <input class="form-control" id="inputTipoSeccion" name="cantidad" >
+                        <input class="form-control" id="inputTipoSeccion" name="tipo" th:value="${seccionEditable.grupo}">
                     </div>
                     
                     <div class = "col-6 d-flex flex-column align-items-center">
                         <label for="inputImagenSecciones">Selecciona una imagen:</label>
                         <input type="file" id="inputImagenSecciones" name="imagen" accept="image/*" class="form-control mt-2">
 
-                        <img id="mostrarImagenSeccionesForm" src="" alt="Vista previa" style="display: none; max-width: 200px; margin-top: 10px;">
+                        <img id="mostrarImagenSeccionesForm" th:src="@{/seccion/{id}/pic(id=${seccionEditable.id})}" alt="Vista previa" style="display: block; max-width: 200px; margin-top: 10px;">
                     </div>
                 </div>
 
@@ -47,12 +48,18 @@
                         <button id = "botonCrearVariable" style="min-height: 30px; max-height: 80px;" class = "col-3 btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearVariables"> 
                             Crear variable
                         </button>
+
+                        <div th:each="variable,i: ${seccionEditable.plantilla}" class="col-3 variableSeccion">
+                            <span th:text="'Nombre: ' + ${variable.nombre}"></span>
+                            <span th:if="${variable.numerico}">Tipo de variable: Valor numérico</span>
+                            <span th:if="${!variable.numerico}">Tipo de variable: Texto</span>                            
+                        </div>
                     </div>
                     
                     <div id = "contConfirmarSeccion">
                         <button style="min-height: 30px;" class="col-3 btn btn-secondary mt-4" onclick="window.location.href='secciones'">Cancelar</button>
                         <button style="min-height: 30px; " class = "col-3 btn btn-success mt-4 ms-5"> 
-                            Confirmar seccion
+                            Confirmar cambios
                         </button>
                     </div>
                 </div>

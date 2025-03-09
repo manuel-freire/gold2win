@@ -4,14 +4,16 @@
 <head>
     <th:block th:replace="fragments/head :: header"/>
     <title>Secciones</title>
-
-
 </head>
 
 <body class="d-flex flex-column h-100">
-    <header th:replace="fragments/nav.html :: nav('deportes')"></header>
+    <header th:replace="fragments/nav.html :: nav('administrar')"></header>
 
-    <main class="d-flex flex-grow-1 overflow-hidden">
+    <div class="ms-4">
+        <div th:replace="fragments/menuAdmin.html :: navAdmin('Secciones')"></div>
+    </div>
+
+    <main class="d-flex flex-grow-1 overflow-hidden ms-4">
         <nav th:replace="fragments/navSeccionesAdmin.html :: navSeccionesAdmin"></nav>
         
         <div class="d-flex flex-column w-100 ps-2 ps-md-1 pe-2 pe-md-1">
@@ -24,6 +26,7 @@
             </div>    
         </div>
     </main>
+    
 
     <div class="modal fade" id="modalEliminarSeccion" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">

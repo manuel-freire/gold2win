@@ -9,7 +9,7 @@
     <nav th:fragment="navSecciones" class="navSecciones d-none d-md-flex flex-column scrollBarPerso pt-2">
             <th:block th:each="seccion,i: ${secciones}">
                 <th:block th:if="${i.first or seccion.grupo != secciones[i.index - 1]?.grupo}">
-                    <div class="d-flex flex-column grupoSecciones"></div>
+                    <div class="d-flex flex-column grupoSecciones">
                         <span class="tituloSeccion text-nowrap" th:text="${seccion.grupo}"></span>
                 </th:block>
                 
