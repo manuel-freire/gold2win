@@ -205,7 +205,8 @@ if(crearApuestaForm != null){
     });
 }
 
-if(inputImagenSecciones != null){
+var inputImagenSeccionesForm = document.getElementById("inputImagenSecciones");
+if(inputImagenSeccionesForm != null){
     document.getElementById('inputImagenSecciones').addEventListener('change', function(event) {
         var file = event.target.files[0]; // Obtener el archivo seleccionado
         if (file) {
@@ -220,7 +221,8 @@ if(inputImagenSecciones != null){
     });
 }
 
-if(menuOpcionesSeccion != null){
+var menuOpcionesSeccionForm = document.getElementById("menuOpcionesSeccion");
+if(menuOpcionesSeccionForm != null){
     const contextMenu = document.getElementById("menuOpcionesSeccion");
     const contextAreas = document.querySelectorAll(".enlaceSeccionAdmin");
 
@@ -239,7 +241,8 @@ if(menuOpcionesSeccion != null){
     });
 }
 
-if(contenedorVariables != null){
+var contenedorVariablesForm = document.getElementById("contenedorVariables");
+if(contenedorVariablesForm != null){
     function agregarDiv() {
         const contenedor = document.getElementById("contenedorVariables");
         var nombre = document.getElementById('cantidadModal').value;

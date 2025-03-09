@@ -3,9 +3,7 @@
 
 <head>
     <th:block th:replace="fragments/head :: header"/>
-    <title>Secciones</title>
-
-
+    <title>Secciones-CrearSección</title>
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -14,12 +12,13 @@
     <main class="d-flex flex-grow-1 overflow-hidden">
         <nav th:replace="fragments/navSeccionesAdmin.html :: navSeccionesAdmin"></nav>
         
-        <div class="d-flex flex-column w-100 ps-4">
-            <nav th:replace="fragments/navSeccionescomprimido.html :: navSeccionescomprimido"></nav>
-            <div class="pe-4 seccionesDerecha scrollBarPerso">
-                <div class = "formularioSeccion mt-4">
+        <div class="d-flex flex-column w-100 ps-2 ps-md-1 pe-2 pe-md-1">
+            <nav th:replace="fragments/navSeccionesAdminComprimido.html :: navSeccionesAdminComprimido"></nav>
+            <div class = "d-flex d-md-none separadorMovilSecciones mb-3 mb-md-0 mt-3 mt-md-0"></div>
+            
+                <div class = "formularioSeccion mt-2 mt-md-4 scrollBarPerso">
                     <div class = "zonaDatos row">
-                        <div class = "col-6 d-flex flex-column">
+                        <div class = "col-6">
                             <label for="inputNombreSeccion" class="form-label">Nombre de la sección:</label>
                             <input class="form-control" id="inputNombreSeccion" name="cantidad" >
                             <label for="inputTipoSeccion" class="form-label mt-5">Nombre del tipo de sección:</label>
@@ -28,7 +27,7 @@
                         
                         <div class = "col-6 d-flex flex-column align-items-center">
                             <label for="inputImagenSecciones">Selecciona una imagen:</label>
-                            <input type="file" id="inputImagenSecciones" name="imagen" accept="image/*" class="form-control">
+                            <input type="file" id="inputImagenSecciones" name="imagen" accept="image/*" class="form-control mt-2">
 
                             <img id="mostrarImagenSeccionesForm" src="" alt="Vista previa" style="display: none; max-width: 200px; margin-top: 10px;">
                         </div>
@@ -54,7 +53,7 @@
                        </div>
                     </div>
                 </div>
-            </div>
+         
             
            
         </div>

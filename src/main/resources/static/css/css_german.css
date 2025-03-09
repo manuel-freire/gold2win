@@ -134,6 +134,15 @@
     color: #C6A1FF;
 }
 
+.navSeccionesAdminComprimido{
+    height: 54px;
+    min-height: 54px;
+    overflow: hidden;
+    width: calc(100vw - 40px);;
+    font-weight: 700;
+    line-height: 17px;
+}
+
 
 /* secciones*/
 
@@ -181,19 +190,22 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+  
 
-    overflow-y: auto;
+    height: 100%;
 }
 
 .formularioSeccion{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: top;
     margin-top: 20px;
-    width: 100%;
+    overflow-y: auto;
+    flex-grow: 1;
+    overflow-x: none;
 }
+
 .zonaDatos {
     width: 100%;
 }
@@ -204,7 +216,7 @@
     display: flex;
     flex-direction: column;
 
-    width: 100%;
+    width: 96%;
 }
 
 #botonCrearVariable {
@@ -239,6 +251,7 @@
 
     display: flex;
     flex-direction: column;
+
     max-height: 80px;
 }
 
@@ -254,5 +267,9 @@
 #contConfirmarSeccion{
     display: flex;
     justify-content: center;
+    border-top: 1px solid var(--bs-border-color);
+}
+
+.separadorMovilSecciones{
     border-top: 1px solid var(--bs-border-color);
 }

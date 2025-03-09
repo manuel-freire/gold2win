@@ -14,9 +14,10 @@
     <main class="d-flex flex-grow-1 overflow-hidden">
         <nav th:replace="fragments/navSeccionesAdmin.html :: navSeccionesAdmin"></nav>
         
-        <div class="d-flex flex-column w-100 ps-4">
-            <nav th:replace="fragments/navSeccionescomprimido.html :: navSeccionescomprimido"></nav>
-            <div class="pe-4 mt-5 seccionesDerecha">
+        <div class="d-flex flex-column w-100 ps-2 ps-md-1 pe-2 pe-md-1">
+            <nav th:replace="fragments/navSeccionesAdminComprimido.html :: navSeccionesAdminComprimido"></nav>
+            <div class = "d-flex d-md-none separadorMovilSecciones mb-4 mb-md-0 mt-4 mt-md-0"></div>
+            <div class="pe-4 mt-2 mt-md-5 seccionesDerecha">
                 <div role = "button" id = "botonCrearSeccion" style="min-height: 40px;" onclick="window.location.href='secciones-crearSeccion'">
                     Crear seccion
                 </div>
@@ -54,24 +55,6 @@
 
     <th:block th:replace="fragments/footer.html :: footer" />
 
-    <script>
-        const contextMenu = document.getElementById("menuOpcionesSeccion");
-        const contextAreas = document.querySelectorAll(".enlaceSeccionAdmin");
-
-        contextAreas.forEach((contextArea) => {
-        contextArea.addEventListener("contextmenu", function(event) {
-                    event.preventDefault(); 
-                    contextMenu.style.display = "block";
-                    contextMenu.style.left = `${event.pageX}px`;  // Establece la posición en el eje X
-                    contextMenu.style.top = `${event.pageY}px`;   // Establece la posición en el eje Y
-        });
-        });
-
-            // Ocultar el menú al hacer clic en cualquier otra parte
-        document.addEventListener("click", function() {
-            contextMenu.style.display = "none"; 
-        });
-    </script>
 </body>
 
 </html>
