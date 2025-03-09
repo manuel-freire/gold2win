@@ -6,23 +6,22 @@
 </head>
 
 <body class="d-flex flex-column h-100">
-    <nav th:fragment="navSecciones" class="navSecciones d-none d-md-flex flex-column scrollBarPerso pt-2">
+    <nav th:fragment="navSeccionesAdmin" class="navSeccionesAdmin d-none d-md-flex flex-column scrollBarPerso pt-2">
             <th:block th:each="seccion,i: ${secciones}">
                 <th:block th:if="${i.first or seccion.grupo != secciones[i.index - 1]?.grupo}">
                     <div class="d-flex flex-column grupoSecciones">
-                        <span class="tituloSeccion text-nowrap" th:text="${seccion.grupo}"></span>
+                        <span class="tituloSeccionAdmin text-nowrap" th:text="${seccion.grupo}"></span>
                 </th:block>
                 
-                <a class="enlaceSeccion nav-link text-nowrap"> 
-                    <img width="20" height="20" th:src="@{/seccion/{id}/pic(id=${seccion.id})}">
-                    <span class="ms-1 spanAjustado " th:text="${seccion.nombre}">texto1</span>
+                <a class="enlaceSeccionAdmin nav-link text-nowrap mt-2" th:href="@{/admin/secciones/{id}/editar(id=${seccion.id})}"> 
+                    <img width="50" height="50" th:src="@{/seccion/{id}/pic(id=${seccion.id})}">
+                    <span class="ms-2 spanAjustadoAdmin font-size: 20px;" th:text="${seccion.nombre}">texto1</span>
                 </a>
 
                 <th:block th:if="${i.last or seccion.grupo != secciones[i.index + 1]?.grupo}">
                     </div>
                 </th:block>
             </th:block>    
-        </div>
     </nav>
 </body>
 
