@@ -50,7 +50,10 @@
                     </div>
                     
                     <div id = "contConfirmarSeccion">
-                        <button style="min-height: 30px;" class="col-3 btn btn-secondary mt-4" onclick="window.location.href='secciones'">Cancelar</button>
+                        <a th:href="@{/admin/secciones}" class = "col-3">
+                            <button style="min-height: 30px;"  class="btn btn-secondary mt-4 w-100">Cancelar</button>
+                        </a>
+                        
                         <button style="min-height: 30px; " class = "col-3 btn btn-success mt-4 ms-5"> 
                             Confirmar seccion
                         </button>
