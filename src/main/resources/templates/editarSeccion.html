@@ -52,12 +52,16 @@
                         <div th:each="variable,i: ${seccionEditable.plantilla}" class="col-3 variableSeccion">
                             <span th:text="'Nombre: ' + ${variable.nombre}"></span>
                             <span th:if="${variable.numerico}">Tipo de variable: Valor numérico</span>
-                            <span th:if="${!variable.numerico}">Tipo de variable: Texto</span>                            
+                            <span th:if="${!variable.numerico}">Tipo de variable: Texto</span>
+                            
                         </div>
                     </div>
                     
                     <div id = "contConfirmarSeccion">
-                        <button style="min-height: 30px;" class="col-3 btn btn-secondary mt-4" onclick="window.location.href='secciones'">Cancelar</button>
+                        <a th:href="@{/admin/secciones}" class = "col-3">
+                            <button style="min-height: 30px;"  class="btn btn-secondary mt-4 w-100">Cancelar</button>
+                        </a>
+                        
                         <button style="min-height: 30px; " class = "col-3 btn btn-success mt-4 ms-5"> 
                             Confirmar cambios
                         </button>
