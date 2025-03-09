@@ -107,7 +107,6 @@ if(botonSiguienteCrearApuesta != null){
     });
 }
 
-
 var apostarForm = document.getElementById("apostarForm");
 
 if(apostarForm != null){
@@ -152,6 +151,24 @@ if(apostarForm != null){
             document.getElementById("cantidadError").textContent = error.message;  // Mostrar el error
         });
         */
+    });
+}
+
+var botonIzSecciones = document.getElementById("btnIzSecciones");
+if(botonIzSecciones != null){
+    botonIzSecciones.addEventListener("click", function(event){
+        var contenedor = document.getElementById("menuSeccionesComprimido");
+        contenedor.scrollLeft -= contenedor.clientWidth/2;
+
+    });
+}
+
+var botonDrsecciones = document.getElementById("btnDrSecciones");
+if(botonDrsecciones != null){
+    botonDrsecciones.addEventListener("click", function(event){
+        var contenedor = document.getElementById("menuSeccionesComprimido");
+        contenedor.scrollLeft += contenedor.clientWidth/2;
+
     });
 }
 
@@ -203,7 +220,6 @@ if(crearApuestaForm != null){
         });
         */
     });
-}
 
 var inputImagenSeccionesForm = document.getElementById("inputImagenSecciones");
 if(inputImagenSeccionesForm != null){
