@@ -13,6 +13,11 @@
                     <div id="mensajeDesplegable" th:text="${apuesta.formulaApuesta.nombre}"></div>
                 </div>
                 <div class="right d-flex align-items-center justify-content-between">
+                    <div id="mensajeDesplegable">
+                        <div th:if="${apuesta.formulaApuesta.resultado.name() == 'GANADO'}"><div th:text="${apuesta.formulaApuesta.evento.fechaCierre}"></div></div>
+                        <div th:if="${apuesta.formulaApuesta.resultado.name() == 'PERDIDO'}"><div th:text="${apuesta.formulaApuesta.evento.fechaCierre}"></div></div>
+                        <div th:if="${apuesta.formulaApuesta.resultado.name() == 'INDETERMINADO'}"><div th:text="${apuesta.formulaApuesta.evento.fechaCierre}"></div></div>
+                    </div>
                     <div class="headRowBettingBoxRightElement">
                         <div th:if="${apuesta.formulaApuesta.resultado.name() == 'GANADO'}" class="bettingBox-winText">Ganada</div>
                         <div th:if="${apuesta.formulaApuesta.resultado.name() == 'PERDIDO'}" class="bettingBox-loseText">Perdida</div>
