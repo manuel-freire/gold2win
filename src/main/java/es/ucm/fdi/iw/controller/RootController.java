@@ -27,9 +27,12 @@ import es.ucm.fdi.iw.LocalData;
 import es.ucm.fdi.iw.model.Apuesta;
 
 import es.ucm.fdi.iw.model.Evento;
+import es.ucm.fdi.iw.model.FormulaApuesta;
 import es.ucm.fdi.iw.model.Seccion;
 import es.ucm.fdi.iw.model.User;
+import es.ucm.fdi.iw.model.Variable;
 import es.ucm.fdi.iw.model.User.Role;
+import es.ucm.fdi.iw.model.VariableSeccion;
 
 import java.io.File;
 
@@ -87,6 +90,25 @@ public class RootController {
             UserController.class.getClassLoader().getResourceAsStream(
                 "static/img/default-pic.jpg")));
     }
+
+    
+    @GetMapping("/evento/{id}/apostar")
+    public String apostar(@PathVariable long id, Model model, HttpSession session){
+        String queryApuestas = "SELECT a FROM FormulaApuesta a WHERE a.evento.id = :id";
+        List<FormulaApuesta> apuestas = entityManager.createQuery(queryApuestas).setParameter("id", id).getResultList();
+
+        String queryVariables = "SELECT v FROM Variable v WHERE v.evento.id = :id";
+        List<Variable> variables = entityManager.createQuery(queryVariables).setParameter("id", id).getResultList();
+
+        Evento eventoSel = entityManager.find(Evento.class, id);
+
+        model.addAttribute("apuestas", apuestas);
+        model.addAttribute("variables", variables);
+        model.addAttribute("eventoSel", eventoSel);
+
+        return "crearApuesta";
+    }
+
 
     @GetMapping("/misApuestas")
     public String misApuestas(Model model){
