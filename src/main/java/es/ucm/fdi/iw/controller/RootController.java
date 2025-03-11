@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import es.ucm.fdi.iw.LocalData;
+import es.ucm.fdi.iw.model.Apuesta;
+
 import es.ucm.fdi.iw.model.Evento;
 import es.ucm.fdi.iw.model.FormulaApuesta;
 import es.ucm.fdi.iw.model.Seccion;
@@ -76,7 +78,7 @@ public class RootController {
 
     @GetMapping("/seccion/{id}/pic")
     public StreamingResponseBody getPic(@PathVariable long id) throws IOException {
-        File f = localData.getFile("user", ""+id+".jpg");
+        File f = localData.getFile("seccion", ""+id+".svg");
         InputStream in = new BufferedInputStream(f.exists() ?
             new FileInputStream(f) : RootController.defaultPic());
         return os -> FileCopyUtils.copy(in, os);
@@ -150,16 +152,30 @@ public class RootController {
 
     @GetMapping("/misApuestas/todas")
     public String todasMisApuestas(Model model){
+        String queryApuestas = "SELECT a FROM Apuesta a";
+        List<Apuesta> apuestas = entityManager.createQuery(queryApuestas, Apuesta.class).getResultList();
+        model.addAttribute("apuestas", apuestas);
         return "misApuestas-todas";
     }
 
     @GetMapping("/misApuestas/determinadas")
     public String apuestasDeterminadas(Model model){
+        String queryDeterminadas = "SELECT a FROM Apuesta a WHERE a.formulaApuesta.resultado IN ('GANADO', 'PERDIDO')";
+        List<Apuesta> apuestasDeterminadas = entityManager.createQuery(queryDeterminadas, Apuesta.class).getResultList();
+        model.addAttribute("apuestasDeterminadas", apuestasDeterminadas);
         return "misApuestas-determinadas";
     }
 
     @GetMapping("/misApuestas/pendientes")
     public String apuestasPendientes(Model model){
+        String queryPendientes = "SELECT a FROM Apuesta a WHERE a.formulaApuesta.resultado = 'INDETERMINADO'";
+        List<Apuesta> apuestasPendientes = entityManager.createQuery(queryPendientes, Apuesta.class).getResultList();
+        model.addAttribute("apuestasPendientes", apuestasPendientes);
         return "misApuestas-pendientes";
+    }
+
+    @GetMapping("/admin/usuarios")
+    public String usuarios(Model model){
+        return "usuarios";
     }
 }

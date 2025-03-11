@@ -13,10 +13,13 @@
         <div th:replace="fragments/menuAdmin.html :: navAdmin('Secciones')"></div>
     </div>
 
+    <div class = "ms-4">
+        <nav th:replace="fragments/navSeccionesAdminComprimido.html :: navSeccionesAdminComprimido"></nav>
+    </div>
+
     <main class="d-flex flex-grow-1 overflow-hidden ms-4">
         <nav th:replace="fragments/navSeccionesAdmin.html :: navSeccionesAdmin"></nav>
         
-        <nav th:replace="fragments/navSeccionesAdminComprimido.html :: navSeccionesAdminComprimido"></nav>
         <div class="d-flex flex-column w-100 ps-2 ps-md-1 pe-2 pe-md-1">
             <div class = "d-flex d-md-none separadorMovilSecciones mb-3 mb-md-0 mt-3 mt-md-0"></div>
             

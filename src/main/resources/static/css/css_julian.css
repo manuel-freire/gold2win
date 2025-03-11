@@ -319,8 +319,8 @@ a.botonOvalado.nav-link:hover{
 .navSeccionescomprimido{
     height: 54px;
     min-height: 54px;
-    overflow: hidden;
-    width: calc(100vw - 40px);;
+    overflow: auto;
+    min-width: 0;
     font-weight: 700;
     line-height: 17px;
 }
@@ -558,4 +558,21 @@ a.botonOvalado.nav-link:hover{
 [data-bs-theme="dark"] .estilo-contenedor-adaptable{
     border: 0px solid rgba(0, 0, 0, 0.1);
     background-color: #313338;
+}
+
+.scroll-bar-oculta {
+    overflow: auto; /* Permite el desplazamiento */
+    scrollbar-width: none; /* Firefox: oculta la barra */
+}
+
+.scroll-bar-oculta::-webkit-scrollbar {
+    display: none; /* Chrome, Safari: oculta la barra */
+}
+
+.resaltaHover:hover{
+    background: rgba(0, 0, 0, 0.1);
+}
+
+[data-bs-theme="dark"] .resaltaHover:hover{
+    background: rgba(255, 255, 255, 0.1);
 }

@@ -36,7 +36,7 @@ print("Checking for data files... ")
 datafiles = glob.glob("iwdata", recursive=True)
 if len(datafiles) > 0:
     print(f"Found {len(datafiles)} data files, compressing... ")
-    subprocess.run(["zip", "-r", "iwdata.zip", "iwdata"], shell=True, check=True)
+    subprocess.run(["tar", "-cvf", "iwdata.zip", "iwdata"], shell=True, check=True)
 else:
     print("No data files found.")
     sys.exit(1)
