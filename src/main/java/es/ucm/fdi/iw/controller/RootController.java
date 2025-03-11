@@ -25,9 +25,11 @@ import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBo
 
 import es.ucm.fdi.iw.LocalData;
 import es.ucm.fdi.iw.model.Evento;
+import es.ucm.fdi.iw.model.FormulaApuesta;
 import es.ucm.fdi.iw.model.Seccion;
 import es.ucm.fdi.iw.model.User;
 import es.ucm.fdi.iw.model.User.Role;
+import es.ucm.fdi.iw.model.VariableSeccion;
 
 import java.io.File;
 
@@ -85,6 +87,22 @@ public class RootController {
             UserController.class.getClassLoader().getResourceAsStream(
                 "static/img/default-pic.jpg")));
     }
+
+    
+    @GetMapping("/evento/{id}/apostar")
+    public String apostar(@PathVariable long id,@RequestParam long seccionId, Model model, HttpSession session){
+        String queryApuestas = "SELECT a FROM FormulaApuesta a WHERE a.evento.id = :id";
+        List<FormulaApuesta> apuestas = entityManager.createQuery(queryApuestas).setParameter("id", id).getResultList();
+
+        String queryVariables = "SELECT v FROM VariableSeccion v WHERE v.seccion.id = :seccionId";
+        List<VariableSeccion> variables = entityManager.createQuery(queryVariables).setParameter("seccionId", seccionId).getResultList();
+
+        model.addAttribute("apuestas", apuestas);
+        model.addAttribute("variables", variables);
+
+        return "crearApuesta";
+    }
+
 
     @GetMapping("/misApuestas")
     public String misApuestas(Model model){
