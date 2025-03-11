@@ -15,7 +15,7 @@
 
     <div class="w-100 px-3 pt-2 d-flex flex-column">
         <div class="d-flex justify-content-between align-items-center border-bottom pb-2">
-            <h5 class="mb-0">Título del Div</h5>
+            <h5 class="mb-0" th:text="${eventoSel.nombre}"></h5>
             <a th:href="@{/}" href="/" class="btn-close" aria-label="Cerrar"></a>
         </div>
 
@@ -113,7 +113,9 @@
                                     <label for="variables" class="form-label mb-0 me-2">Variables:</label>
                                     <div id="lista-Variables-Cr" class="border w-100 scrollBarPerso">
                                         <span class="spanAdaptable">                                            
-                                            <span th:each="variable : ${variables}" th:text="${variable.someProperty}"></span>
+                                            <span th:each="variable, iterStat : ${variables}" 
+                                              th:text="${variable.nombre + (iterStat.last ? '' : ', ')}">
+                                            </span>
                                         </span>
                                     </div>
                                 </div>
