@@ -93,7 +93,7 @@ public class RootController {
 
     
     @GetMapping("/evento/{id}/apostar")
-    public String apostar(@PathVariable long id,@RequestParam long seccionId, Model model, HttpSession session){
+    public String apostar(@PathVariable long id, Model model, HttpSession session){
         String queryApuestas = "SELECT a FROM FormulaApuesta a WHERE a.evento.id = :id";
         List<FormulaApuesta> apuestas = entityManager.createQuery(queryApuestas).setParameter("id", id).getResultList();
 
