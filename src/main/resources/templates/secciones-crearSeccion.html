@@ -23,7 +23,7 @@
         <div class="d-flex flex-column w-100 ps-2 ps-md-1 pe-2 pe-md-1">
             <div class = "d-flex d-md-none separadorMovilSecciones mb-3 mb-md-0 mt-3 mt-md-0"></div>
             
-            <div class = "formularioSeccion mt-2 mt-md-4 scrollBarPerso">
+            <form class = "formularioSeccion mt-2 scrollBarPerso">
                 <div class = "zonaDatos row">
                     <div class = "col-6">
                         <label for="inputNombreSeccion" class="form-label">Nombre de la sección:</label>
@@ -47,7 +47,7 @@
                     </div>
 
                     <div id = "contenedorVariables" class="row g-3 justify-content-center mt-2">
-                        <button id = "botonCrearVariable" style="min-height: 30px; max-height: 80px;" class = "col-3 btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearVariables"> 
+                        <button id = "botonCrearVariable" style="min-height: 30px; max-height: 80px;" class = "col-3 btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearVariables" type = "button"> 
                             Crear variable
                         </button>
                     </div>
@@ -57,12 +57,13 @@
                             <button style="min-height: 30px;"  class="btn btn-secondary mt-4 w-100">Cancelar</button>
                         </a>
                         
-                        <button style="min-height: 30px; " class = "col-3 btn btn-success mt-4 ms-5"> 
+                        <button style="min-height: 30px; " onclick="guardarSeccion(event)" class = "col-3 btn btn-success mt-4 ms-5"> 
                             Confirmar seccion
                         </button>
+                        <div id = "mensaje">hola</div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </main>
     
@@ -119,7 +120,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-danger" data-bs-dismiss="modal">Eliminar sección</button>
+                            <button class="btn btn-danger botonEliminarSeccionP" data-bs-dismiss="modal">Eliminar sección</button>
                         </div>
                     </form>
                 </div>
@@ -134,6 +135,55 @@
 
     <th:block th:replace="fragments/footer.html :: footer" />
 
+    <script>
+        async function getCsrfToken() {
+            const response = await fetch("/csrf", { credentials: "include" });
+            const data = await response.json();
+            return data.token;
+        }
+
+        async function guardarSeccion() {
+            event.preventDefault(); 
+            const nombreS = document.getElementById("inputNombreSeccion").value;
+            const tipoS = document.getElementById("inputTipoSeccion").value;
+            const imagenS = document.getElementById("inputImagenSecciones").files[0] 
+                ? document.getElementById("inputImagenSecciones").files[0].name 
+                : null;
+
+            const divs = document.querySelectorAll("#contenedorVariables .variableSeccion");
+            const variables = [];
+
+            divs.forEach(div => {
+                const nombreV = div.querySelector(".nombreVariableSpan").innerText;
+                const tipoV = div.querySelector(".tipoVariableSpan").innerText;
+                variables.push({ nombreV, tipoV });
+            });
+
+            const jsonData = JSON.stringify({
+                seccionN: { nombre: nombreS, tipo: tipoS },
+                imagen: imagenS,
+                arrayVariables: variables
+            });
+
+            const csrfToken = await getCsrfToken(); // Obtener el token CSRF antes de la solicitud
+
+            fetch("/admin/guardarSeccion", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": csrfToken  // Enviar el token en la cabecera
+                },
+                body: jsonData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Respuesta recibida:", data);
+                document.getElementById("mensaje").innerText = data.nombre;
+            })
+            .catch(error => console.error("Error:", error));
+        }
+    </script>
+        
 </body>
 
 </html>

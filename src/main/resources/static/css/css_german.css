@@ -273,3 +273,7 @@
 .separadorMovilSecciones{
     border-top: 1px solid var(--bs-border-color);
 }
+
+#divEtiquetasVariables{
+    white-space: nowrap;
+}

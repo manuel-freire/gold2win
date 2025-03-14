@@ -258,6 +258,27 @@ if(menuOpcionesSeccionForm != null){
     });
 }
 
+/*document.getElementById('botonEliminarSeccionP').addEventListener('click', function() {
+    // Recupera el ID de la sección que se guardó en el atributo 'data-id' del botón
+        const seccionId = botonEliminar.getAttribute('data-id');  // Accede a la constante desde cualquier lugar
+
+        // Llama a la función para eliminar la sección pasando el ID
+        eliminarSeccion(seccionId);
+});
+
+function eliminarSeccion(seccionId) {
+        // Llamada al backend para eliminar la sección usando el ID
+    fetch(`/eliminarSeccion/${seccionId}`, {
+         method: 'DELETE',
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Sección eliminada:', data);
+            // Actualiza la interfaz si es necesario
+    })
+    .catch(error => console.error('Error al eliminar la sección:', error));
+}*/
+
 var contenedorVariablesForm = document.getElementById("contenedorVariables");
 if(contenedorVariablesForm != null){
     function agregarDiv() {
@@ -266,7 +287,7 @@ if(contenedorVariablesForm != null){
         var select = document.getElementById('tipoApuestaModal');
         var opcionSeleccionada = select.options[select.selectedIndex].text;
     
-        if (opcionSeleccionada === "Seleccione..." || nombre === "") { //Si los campos están vacíos, no se añade el div
+        if (opcionSeleccionada === "Seleccione una" || nombre === "") { //Si los campos están vacíos, no se añade el div
             return;  
         }
     
@@ -274,12 +295,19 @@ if(contenedorVariablesForm != null){
         const nuevoDiv = document.createElement("div");
         nuevoDiv.className = "col-3 variableSeccion"; // Se organizan en 3 columnas por fila
         nuevoDiv.innerHTML = `
-            <span>Nombre : ${nombre}</span>
-            <span>Tipo de variable: ${opcionSeleccionada}</span>
+            <div id = "divEtiquetasVariables">
+                <span>Nombre :</span>
+                <span class = "nombreVariableSpan"> ${nombre}</span>
+            </div>
+            <div id = "divEtiquetasVariables">
+                <span>Tipo de variable :</span>
+                <span class = "tipoVariableSpan">${opcionSeleccionada}</span>
+            </div>
         `;
     
         contenedor.appendChild(nuevoDiv); // Agrega el div al contenedor
         document.getElementById('tipoApuestaModal').selectedIndex = 0;
         document.getElementById('cantidadModal').value = '';
     };
+
 }
