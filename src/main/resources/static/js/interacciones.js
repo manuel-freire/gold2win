@@ -239,6 +239,7 @@ if(inputImagenSeccionesForm != null){
 }
 
 var menuOpcionesSeccionForm = document.getElementById("menuOpcionesSeccion");
+let seccionSeleccionadaId = null; 
 if(menuOpcionesSeccionForm != null){
     const contextMenu = document.getElementById("menuOpcionesSeccion");
     const contextAreas = document.querySelectorAll(".enlaceSeccionAdmin");
@@ -246,6 +247,10 @@ if(menuOpcionesSeccionForm != null){
     contextAreas.forEach((contextArea) => {
     contextArea.addEventListener("contextmenu", function(event) {
                 event.preventDefault(); 
+
+                seccionSeleccionadaId = this.getAttribute("data-id"); 
+                console.log("Sección seleccionada:", seccionSeleccionadaId);
+
                 contextMenu.style.display = "block";
                 contextMenu.style.left = `${event.pageX}px`;  // Establece la posición en el eje X
                 contextMenu.style.top = `${event.pageY}px`;   // Establece la posición en el eje Y
@@ -257,27 +262,6 @@ if(menuOpcionesSeccionForm != null){
         contextMenu.style.display = "none"; 
     });
 }
-
-/*document.getElementById('botonEliminarSeccionP').addEventListener('click', function() {
-    // Recupera el ID de la sección que se guardó en el atributo 'data-id' del botón
-        const seccionId = botonEliminar.getAttribute('data-id');  // Accede a la constante desde cualquier lugar
-
-        // Llama a la función para eliminar la sección pasando el ID
-        eliminarSeccion(seccionId);
-});
-
-function eliminarSeccion(seccionId) {
-        // Llamada al backend para eliminar la sección usando el ID
-    fetch(`/eliminarSeccion/${seccionId}`, {
-         method: 'DELETE',
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Sección eliminada:', data);
-            // Actualiza la interfaz si es necesario
-    })
-    .catch(error => console.error('Error al eliminar la sección:', error));
-}*/
 
 var contenedorVariablesForm = document.getElementById("contenedorVariables");
 if(contenedorVariablesForm != null){
@@ -296,11 +280,11 @@ if(contenedorVariablesForm != null){
         nuevoDiv.className = "col-3 variableSeccion"; // Se organizan en 3 columnas por fila
         nuevoDiv.innerHTML = `
             <div id = "divEtiquetasVariables">
-                <span>Nombre :</span>
+                <span>Nombre:</span>
                 <span class = "nombreVariableSpan"> ${nombre}</span>
             </div>
             <div id = "divEtiquetasVariables">
-                <span>Tipo de variable :</span>
+                <span>Tipo de variable:</span>
                 <span class = "tipoVariableSpan">${opcionSeleccionada}</span>
             </div>
         `;
@@ -310,4 +294,68 @@ if(contenedorVariablesForm != null){
         document.getElementById('cantidadModal').value = '';
     };
 
+async function getCsrfToken() {
+    const response = await fetch("/csrf", { credentials: "include" });
+    const data = await response.json();
+    return data.token;
+}
+
+window.eliminarSeccion = eliminarSeccion;
+window.guardarSeccion = guardarSeccion;
+    
+    async function eliminarSeccion() {
+        const csrfToken = await getCsrfToken(); // Obtener el token CSRF antes de la solicitud
+
+        fetch(`/admin/eliminarSeccion/${seccionSeleccionadaId}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": csrfToken 
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Sección eliminada:", data.mensaje);
+        })
+        .catch(error => console.error("Error al eliminar la sección:", error));
+    }
+    
+    async function guardarSeccion() {
+        const nombreS = document.getElementById("inputNombreSeccion").value;
+        const tipoS = document.getElementById("inputTipoSeccion").value;
+        const imagenS = document.getElementById("inputImagenSecciones").files[0] 
+            ? document.getElementById("inputImagenSecciones").files[0].name 
+            : null;
+
+        const divs = document.querySelectorAll("#contenedorVariables .variableSeccion");
+        const variables = [];
+
+        divs.forEach(div => {
+            const nombreV = div.querySelector(".nombreVariableSpan").innerText;
+            const tipoV = div.querySelector(".tipoVariableSpan").innerText;
+            variables.push({ nombreV, tipoV });
+        });
+
+        const jsonData = JSON.stringify({
+            seccionN: { nombre: nombreS, tipo: tipoS },
+            imagen: imagenS,
+            arrayVariables: variables
+        });
+
+        const csrfToken = await getCsrfToken(); // Obtener el token CSRF antes de la solicitud
+
+        fetch("/admin/guardarSeccion", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": csrfToken  // Enviar el token en la cabecera
+            },
+            body: jsonData
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Respuesta recibida:", data.mensaje);
+        })
+        .catch(error => console.error("Error:", error));
+    }
 }

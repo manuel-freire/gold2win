@@ -275,5 +275,6 @@
 }
 
 #divEtiquetasVariables{
-    white-space: nowrap;
+    word-wrap: break-word;
+    overflow: hidden;
 }

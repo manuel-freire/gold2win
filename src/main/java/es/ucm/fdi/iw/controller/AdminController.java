@@ -27,6 +27,7 @@ import javax.servlet.http.HttpSession;
 
 import es.ucm.fdi.iw.model.Seccion;
 import es.ucm.fdi.iw.model.User;
+import es.ucm.fdi.iw.model.Variable;
 import es.ucm.fdi.iw.model.VariableSeccion;
 
 import es.ucm.fdi.iw.services.SeccionService;
@@ -105,19 +106,16 @@ public class AdminController {
     @ResponseBody
     @PostMapping("/guardarSeccion")
     public ResponseEntity<JsonNode> guardarUsuario(@RequestBody JsonNode json) {
-       // Lógica para guardar el usuario en la base de datos (ejemplo simulado)
-        System.out.println("Guardando sección: " + json.toString());
-
         // Crear una respuesta JSON con el mensaje
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode response = objectMapper.createObjectNode();
-        response.put("mensaje", "Usuario guardado correctamente");
+        response.put("mensaje", "Seccion guardada correctamente");
 
 
-        String nombre = json.get("seccionN").get("nombre").asText();  // Obtiene el valor de "nombre" como String
-        String grupo = json.get("seccionN").get("tipo").asText();      // Obtiene el valor de "tipo" como String
+        String nombre = json.get("seccionN").get("nombre").asText(); 
+        String grupo = json.get("seccionN").get("tipo").asText();   
 
-        // Crear un objeto Seccion y llenar sus campos usando setters
+
         Seccion nuevaSeccion = new Seccion();
         nuevaSeccion.setNombre(nombre);
         nuevaSeccion.setGrupo(grupo);
@@ -125,12 +123,11 @@ public class AdminController {
         Seccion seccionCreada = seccionService.guardarSeccion(nuevaSeccion);
 
         JsonNode itemsNode = json.get("arrayVariables");
-
-        String tipoV = "";
         if (itemsNode != null && itemsNode.isArray()) {
             for (JsonNode item : itemsNode) {
+
                 String nombreV = item.get("nombreV").asText();
-                tipoV = item.get("tipoV").asText();
+                String tipoV = item.get("tipoV").asText();
 
                 VariableSeccion nuevaVariable = new VariableSeccion();
                 nuevaVariable.setNombre(nombreV);
@@ -139,19 +136,24 @@ public class AdminController {
                 seccionService.guardarVariableSeccion(nuevaVariable);
             }
         }
-
-        response.put("nombre", tipoV);
         return ResponseEntity.ok(response);
     }
 
+    @ResponseBody
     @DeleteMapping("/eliminarSeccion/{id}")
-    public ResponseEntity<String> eliminarSeccion(@PathVariable Long id) {
-        try {
-            // Llama al servicio para eliminar la sección
-            seccionService.eliminarSeccion(id);
-            return ResponseEntity.ok("Sección eliminada correctamente.");
-        } catch (Exception e) {
-            return ResponseEntity.status(500).body("Error al eliminar la sección: " + e.getMessage());
-        }
+    public ResponseEntity<JsonNode> eliminarSeccion(@PathVariable Long id) {
+        /*String queryVariables = "SELECT v FROM VariableSeccion v WHERE v.seccion.id = :id";
+        List<VariableSeccion> variables = entityManager.createQuery(queryVariables).setParameter("id", id).getResultList();
+
+        for (VariableSeccion variable : variables) {    //Se eliminan todas las variables relacionadas con la seccion
+            seccionService.eliminarVariableSeccion(variable);
+        }*/
+
+        seccionService.eliminarSeccion(id);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode response = objectMapper.createObjectNode();
+        response.put("mensaje", "Seccion eliminada correctamente");
+        return ResponseEntity.ok(response);
     }
 }

@@ -27,7 +27,9 @@ public class SeccionService {
 
         // Si la entidad existe, la elimina
         if (seccion != null) {
-            entityManager.remove(seccion);
+            //entityManager.remove(seccion);
+            seccion.setEnabled(false);
+            entityManager.merge(seccion);
         }
     }
 
@@ -35,5 +37,12 @@ public class SeccionService {
     public VariableSeccion guardarVariableSeccion(VariableSeccion seccionV) {
         entityManager.persist(seccionV); // Guardar en la base de datos
         return seccionV;
+    }
+
+    @Transactional
+    public void eliminarVariableSeccion(VariableSeccion seccionV) {
+        if (seccionV != null) {
+            entityManager.remove(seccionV);
+        }
     }
 }
