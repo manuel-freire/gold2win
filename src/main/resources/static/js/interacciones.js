@@ -328,7 +328,8 @@ async function guardarSeccion() {
         ? document.getElementById("inputImagenSecciones").files[0].name 
         : null;
 
-    const divs = document.querySelectorAll("#contenedorVariables .variableSeccion");
+    if(nombreS != "" && tipoS != "" && imagenS != null){
+        const divs = document.querySelectorAll("#contenedorVariables .variableSeccion");
     const variables = [];
 
     divs.forEach(div => {
@@ -358,4 +359,5 @@ async function guardarSeccion() {
         console.log("Respuesta recibida:", data.mensaje);
     })
     .catch(error => console.error("Error:", error));
+    }
 }    
