@@ -27,14 +27,14 @@
                 <div class = "zonaDatos row">
                     <div class = "col-6">
                         <label for="inputNombreSeccion" class="form-label">Nombre de la sección:</label>
-                        <input class="form-control" id="inputNombreSeccion" name="cantidad" >
+                        <input class="form-control" id="inputNombreSeccion" name="nombreSeccion" required>
                         <label for="inputTipoSeccion" class="form-label mt-5">Nombre del tipo de sección:</label>
-                        <input class="form-control" id="inputTipoSeccion" name="cantidad" >
+                        <input class="form-control" id="inputTipoSeccion" name="tipoSeccion" required>
                     </div>
                     
                     <div class = "col-6 d-flex flex-column align-items-center">
                         <label for="inputImagenSecciones">Selecciona una imagen:</label>
-                        <input type="file" id="inputImagenSecciones" name="imagen" accept="image/*" class="form-control mt-2">
+                        <input type="file" id="inputImagenSecciones" name="imagen" accept="image/*" class="form-control mt-2" required>
 
                         <img id="mostrarImagenSeccionesForm" src="" alt="Vista previa" style="display: none; max-width: 200px; margin-top: 10px;">
                     </div>
@@ -80,13 +80,13 @@
                         <div class="modal-body">
                             
                             <div class="mb-3">
-                                <label for="cantidadModal" class="form-label">Nombre de la variable:</label>
-                                <input class="form-control" id="cantidadModal" name="nombreVar" >
+                                <label for="inputnombreVarNueva" class="form-label">Nombre de la variable:</label>
+                                <input class="form-control" id="inputnombreVarNueva" name="nombreVar" >
                             </div>
         
                             <div class="mb-3">
-                                <label for="tipoApuestaModal" class="form-label">Tipo de variable:</label>
-                                <select class="form-select" id="tipoApuestaModal" name="tipoVar">
+                                <label for="selectTipoVarNueva" class="form-label">Tipo de variable:</label>
+                                <select class="form-select" id="selectTipoVarNueva" name="tipoVar">
                                     <option value="">Seleccione una</option>
                                     <option value="1">Valor numérico</option>
                                     <option value="2">Texto</option>
@@ -132,8 +132,7 @@
         <a href="#" data-bs-toggle="modal" data-bs-target="#modalEliminarSeccion">Eliminar evento</a>
     </div>
 
-    <th:block th:replace="fragments/footer.html :: footer" />
-        
+    <th:block th:replace="fragments/footer.html :: footer" />   
 </body>
 
 </html>

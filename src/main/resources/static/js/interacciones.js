@@ -267,8 +267,8 @@ var contenedorVariablesForm = document.getElementById("contenedorVariables");
 if(contenedorVariablesForm != null){
     function agregarDiv() {
         const contenedor = document.getElementById("contenedorVariables");
-        var nombre = document.getElementById('cantidadModal').value;
-        var select = document.getElementById('tipoApuestaModal');
+        var nombre = document.getElementById('inputnombreVarNueva').value;
+        var select = document.getElementById('selectTipoVarNueva');
         var opcionSeleccionada = select.options[select.selectedIndex].text;
     
         if (opcionSeleccionada === "Seleccione una" || nombre === "") { //Si los campos están vacíos, no se añade el div
@@ -290,9 +290,10 @@ if(contenedorVariablesForm != null){
         `;
     
         contenedor.appendChild(nuevoDiv); // Agrega el div al contenedor
-        document.getElementById('tipoApuestaModal').selectedIndex = 0;
-        document.getElementById('cantidadModal').value = '';
+        document.getElementById('selectTipoVarNueva').selectedIndex = 0;
+        document.getElementById('inputnombreVarNueva').value = '';
     };
+}
 
 async function getCsrfToken() {
     const response = await fetch("/csrf", { credentials: "include" });
@@ -303,59 +304,58 @@ async function getCsrfToken() {
 window.eliminarSeccion = eliminarSeccion;
 window.guardarSeccion = guardarSeccion;
     
-    async function eliminarSeccion() {
-        const csrfToken = await getCsrfToken(); // Obtener el token CSRF antes de la solicitud
+async function eliminarSeccion() {
+    const csrfToken = await getCsrfToken(); // Obtener el token CSRF antes de la solicitud
 
-        fetch(`/admin/eliminarSeccion/${seccionSeleccionadaId}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": csrfToken 
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log("Sección eliminada:", data.mensaje);
-        })
-        .catch(error => console.error("Error al eliminar la sección:", error));
-    }
+    fetch(`/admin/eliminarSeccion/${seccionSeleccionadaId}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": csrfToken 
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Sección eliminada:", data.mensaje);
+    })
+    .catch(error => console.error("Error al eliminar la sección:", error));
+}    
     
-    async function guardarSeccion() {
-        const nombreS = document.getElementById("inputNombreSeccion").value;
-        const tipoS = document.getElementById("inputTipoSeccion").value;
-        const imagenS = document.getElementById("inputImagenSecciones").files[0] 
-            ? document.getElementById("inputImagenSecciones").files[0].name 
-            : null;
+async function guardarSeccion() {
+    const nombreS = document.getElementById("inputNombreSeccion").value;
+    const tipoS = document.getElementById("inputTipoSeccion").value;
+    const imagenS = document.getElementById("inputImagenSecciones").files[0] 
+        ? document.getElementById("inputImagenSecciones").files[0].name 
+        : null;
 
-        const divs = document.querySelectorAll("#contenedorVariables .variableSeccion");
-        const variables = [];
+    const divs = document.querySelectorAll("#contenedorVariables .variableSeccion");
+    const variables = [];
 
-        divs.forEach(div => {
-            const nombreV = div.querySelector(".nombreVariableSpan").innerText;
-            const tipoV = div.querySelector(".tipoVariableSpan").innerText;
-            variables.push({ nombreV, tipoV });
-        });
+    divs.forEach(div => {
+        const nombreV = div.querySelector(".nombreVariableSpan").innerText;
+        const tipoV = div.querySelector(".tipoVariableSpan").innerText;
+        variables.push({ nombreV, tipoV });
+    });
 
-        const jsonData = JSON.stringify({
-            seccionN: { nombre: nombreS, tipo: tipoS },
-            imagen: imagenS,
-            arrayVariables: variables
-        });
+    const jsonData = JSON.stringify({
+        seccionN: { nombre: nombreS, tipo: tipoS },
+        imagen: imagenS,
+        arrayVariables: variables
+    });
 
-        const csrfToken = await getCsrfToken(); // Obtener el token CSRF antes de la solicitud
+    const csrfToken = await getCsrfToken(); // Obtener el token CSRF antes de la solicitud
 
-        fetch("/admin/guardarSeccion", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": csrfToken  // Enviar el token en la cabecera
-            },
-            body: jsonData
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log("Respuesta recibida:", data.mensaje);
-        })
-        .catch(error => console.error("Error:", error));
-    }
-}
+    fetch("/admin/guardarSeccion", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": csrfToken  // Enviar el token en la cabecera
+        },
+        body: jsonData
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Respuesta recibida:", data.mensaje);
+    })
+    .catch(error => console.error("Error:", error));
+}    
