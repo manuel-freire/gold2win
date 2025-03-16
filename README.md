@@ -20,6 +20,29 @@ Por otro lado una vez la apuesta hecha no sabemos si incluir una cancelación ta
 5. Administrador: Esta vista aún no la hemos hecho ya que el administrador tiene un montón de opciones que aun no tenemos muy claro cuales va a tener y cuales no además que la mayoría de ellas pueden ser reutilizadas de otras pantallas mas secundarias. (La hacemos esta semana)
 6. Determinar Apuesta: A esta vista se puede acceder de momento de manera provisional através de la ventana de administración y es la que permite a un administrador indicar que resultado se ha dado en el evento. Para ello la disposicion de tablas es similar a la vista de crear apuesta. Por defecto todos los campos se establecen a que no han sucedido y el administrador tiene que ir seleccionado los campos que si que han sucedido y que por tanto la gente que ha apostado a ellos tiene que cobrar.
 
+## Tareas pendientes
+- Reestructurar menu para movil cuando no esta logueado
+- Mantener el modo oscuro de una pagina a otra con cookies
+- Menus de secciones de index y admin/secciones funcional
+- Ver mas en index, crear apuesta, historico
+- Cambios pedidos en crear apuesta
+- Hacer funcional crerar apuesta y crear formula
+- Reestructuracion de controladores
+- Adaptar historico para moviles/modo claro.
+- Th para admin/ usuario, admin/reportes
+- Crear la pagina de ver usuarios de admin
+- Crear la pagina de ver reportes de admin
+- Hacer funcional crear secciones (a lo mejor rework estetico)
+- Añadir con th y funcional crear evento y vista de eventos para admin
+- Rework estetico de login/registe 
+- Hacer register funcional
+- Rework estetico de usuario
+- Segunda iteración en cartera (no siempre iniciar sesion para pagar) (cambios BD)
+- Cambiar README según se adapten cosas
+- Segunda iteración a la BD para arreglar errores y cambiar el diagrama
+- Crear historico de ingresos/retiradas (requiere cambios en la BD)
+
+
 ## recursos utilizados
 - https://www.web-leb.com/es/code/609 (Barra busqueda todas las secciones. Se ha modificado un poco)
 - Chat gpt: Sobretodo para entender como funciona bootstrap, html y css. Para detectar donde están los erres mas rapido y para fragmentos de codigo basicos.

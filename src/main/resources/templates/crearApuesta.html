@@ -15,7 +15,7 @@
 
     <div class="w-100 px-3 pt-2 d-flex flex-column">
         <div class="d-flex justify-content-between align-items-center border-bottom pb-2">
-            <h5 class="mb-0">Título del Div</h5>
+            <h5 class="mb-0" th:text="${eventoSel.nombre}"></h5>
             <a th:href="@{/}" href="/" class="btn-close" aria-label="Cerrar"></a>
         </div>
 
@@ -51,217 +51,32 @@
         
 
         <div class="h-100 w-100 d-flex flex-wrap justify-content-evenly" style="margin-top: 10px;">
-            <div class="d-flex flex-column contenedor-apuesta" >
-                <h5 class="pb-2 border-bottom">Nombre apuesta</h5>
-                <div id="descripcion-contendor-apuesta">
-                    <div class="d-flex align-items-start mb-2">
-                        <span class="titulo-campo-apuesta me-2">Formula:</span>
-                        <div class="border w-100 scrollBarPerso contenedor-info">
-                            <span class="spanAdaptable" style="white-space: nowrap;">GolesMadrid > golesGetafe+3qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq</span>
+            
+            <th:block th:each="apuesta,i: ${apuestas}">
+                <div class="d-flex flex-column contenedor-apuesta" >
+                    <h5 class="pb-2 border-bottom" th:text="${apuesta.nombre}"></h5>
+                    <div id="descripcion-contendor-apuesta">
+                        <div class="d-flex align-items-start mb-2">
+                            <span class="titulo-campo-apuesta me-2">Formula:</span>
+                            <div class="border w-100 scrollBarPerso contenedor-info">
+                                <span class="spanAdaptable" style="white-space: nowrap;" th:text="${apuesta.formula}"></span>
+                            </div>
+                        </div>
+                        <div >
+                            <span class="titulo-campo-apuesta">Cuota favorable:</span>
+                            <span class="text-success" th:text="${apuesta.dineroAfabor}"></span>
+                        </div>
+                        <div >
+                            <span class="titulo-campo-apuesta">Cuota desfavorable:</span>
+                            <span class="text-success" th:text="${apuesta.dineroEnContra}"></span>
                         </div>
                     </div>
-                    <div >
-                        <span class="titulo-campo-apuesta ">Cuota favorable:</span>
-                        <span class="text-success">0,0</span>
-                    </div>
-                    <div >
-                        <span class="titulo-campo-apuesta">Cuota desfavorable:</span>
-                        <span class="text-success">0,0</span>
-                    </div>
+                    
+                    <button type="button" class="btn btn-success mx-auto mt-3" data-bs-toggle="modal" data-bs-target="#modalApostar">
+                        apostar
+                    </button>
                 </div>
-                
-                <button type="button" class="btn btn-success mx-auto mt-3" data-bs-toggle="modal" data-bs-target="#modalApostar">
-                    apostar
-                </button>
-            </div>
-            <div class="d-flex flex-column contenedor-apuesta" >
-                <h5 class="pb-2 border-bottom">Nombre apuesta</h5>
-                <div id="descripcion-contendor-apuesta">
-                    <div class="d-flex align-items-start mb-2">
-                        <span class="titulo-campo-apuesta me-2">Formula:</span>
-                        <div class="border w-100 scrollBarPerso contenedor-info">
-                            <span class="spanAdaptable" style="white-space: nowrap;">GolesMadrid > golesGetafe+3qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq</span>
-                        </div>
-                    </div>
-                    <div >
-                        <span class="titulo-campo-apuesta ">Cuota favorable:</span>
-                        <span class="text-success">0,0</span>
-                    </div>
-                    <div >
-                        <span class="titulo-campo-apuesta">Cuota desfavorable:</span>
-                        <span class="text-success">0,0</span>
-                    </div>
-                </div>
-                
-                <button type="button" class="btn btn-success mx-auto mt-3" data-bs-toggle="modal" data-bs-target="#modalApostar">
-                    apostar
-                </button>
-            </div>
-            <div class="d-flex flex-column contenedor-apuesta" >
-                <h5 class="pb-2 border-bottom">Nombre apuesta</h5>
-                <div id="descripcion-contendor-apuesta">
-                    <div class="d-flex align-items-start mb-2">
-                        <span class="titulo-campo-apuesta me-2">Formula:</span>
-                        <div class="border w-100 scrollBarPerso contenedor-info">
-                            <span class="spanAdaptable" style="white-space: nowrap;">GolesMadrid > golesGetafe+3qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq</span>
-                        </div>
-                    </div>
-                    <div >
-                        <span class="titulo-campo-apuesta ">Cuota favorable:</span>
-                        <span class="text-success">0,0</span>
-                    </div>
-                    <div >
-                        <span class="titulo-campo-apuesta">Cuota desfavorable:</span>
-                        <span class="text-success">0,0</span>
-                    </div>
-                </div>
-                
-                <button type="button" class="btn btn-success mx-auto mt-3" data-bs-toggle="modal" data-bs-target="#modalApostar">
-                    apostar
-                </button>
-            </div>
-            <div class="d-flex flex-column contenedor-apuesta" >
-                <h5 class="pb-2 border-bottom">Nombre apuesta</h5>
-                <div id="descripcion-contendor-apuesta">
-                    <div class="d-flex align-items-start mb-2">
-                        <span class="titulo-campo-apuesta me-2">Formula:</span>
-                        <div class="border w-100 scrollBarPerso contenedor-info">
-                            <span class="spanAdaptable" style="white-space: nowrap;">GolesMadrid > golesGetafe+3qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq</span>
-                        </div>
-                    </div>
-                    <div >
-                        <span class="titulo-campo-apuesta ">Cuota favorable:</span>
-                        <span class="text-success">0,0</span>
-                    </div>
-                    <div >
-                        <span class="titulo-campo-apuesta">Cuota desfavorable:</span>
-                        <span class="text-success">0,0</span>
-                    </div>
-                </div>
-                
-                <button type="button" class="btn btn-success mx-auto mt-3" data-bs-toggle="modal" data-bs-target="#modalApostar">
-                    apostar
-                </button>
-            </div>
-            <div class="d-flex flex-column contenedor-apuesta" >
-                <h5 class="pb-2 border-bottom">Nombre apuesta</h5>
-                <div id="descripcion-contendor-apuesta">
-                    <div class="d-flex align-items-start mb-2">
-                        <span class="titulo-campo-apuesta me-2">Formula:</span>
-                        <div class="border w-100 scrollBarPerso contenedor-info">
-                            <span class="spanAdaptable" style="white-space: nowrap;">GolesMadrid > golesGetafe+3qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq</span>
-                        </div>
-                    </div>
-                    <div >
-                        <span class="titulo-campo-apuesta ">Cuota favorable:</span>
-                        <span class="text-success">0,0</span>
-                    </div>
-                    <div >
-                        <span class="titulo-campo-apuesta">Cuota desfavorable:</span>
-                        <span class="text-success">0,0</span>
-                    </div>
-                </div>
-                
-                <button type="button" class="btn btn-success mx-auto mt-3" data-bs-toggle="modal" data-bs-target="#modalApostar">
-                    apostar
-                </button>
-            </div>
-
-            <div class="d-flex flex-column contenedor-apuesta" >
-                <h5 class="pb-2 border-bottom">Nombre apuesta</h5>
-                <div id="descripcion-contendor-apuesta">
-                    <div class="d-flex align-items-start mb-2">
-                        <span class="titulo-campo-apuesta me-2">Formula:</span>
-                        <div class="border w-100 scrollBarPerso contenedor-info">
-                            <span class="spanAdaptable">GolesMadrid > golesGetafe+3</span>
-                        </div>
-                    </div>
-                    <div >
-                        <span class="titulo-campo-apuesta ">Cuota favorable:</span>
-                        <span class="text-success">0,0</span>
-                    </div>
-                    <div >
-                        <span class="titulo-campo-apuesta">Cuota desfavorable:</span>
-                        <span class="text-success">0,0</span>
-                    </div>
-                </div>
-                
-                <button type="button" class="btn btn-success mx-auto mt-3" data-bs-toggle="modal" data-bs-target="#modalApostar">
-                    apostar
-                </button>
-            </div>
-
-            <div class="d-flex flex-column contenedor-apuesta" >
-                <h5 class="pb-2 border-bottom">Nombre apuesta</h5>
-                <div id="descripcion-contendor-apuesta">
-                    <div class="d-flex align-items-start mb-2">
-                        <span class="titulo-campo-apuesta me-2">Formula:</span>
-                        <div class="border w-100 scrollBarPerso contenedor-info">
-                            <span class="spanAdaptable">GolesMadrid > golesGetafe+3</span>
-                        </div>
-                    </div>
-                    <div >
-                        <span class="titulo-campo-apuesta ">Cuota favorable:</span>
-                        <span class="text-success">0,0</span>
-                    </div>
-                    <div >
-                        <span class="titulo-campo-apuesta">Cuota desfavorable:</span>
-                        <span class="text-success">0,0</span>
-                    </div>
-                </div>
-                
-                <button type="button" class="btn btn-success mx-auto mt-3" data-bs-toggle="modal" data-bs-target="#modalApostar">
-                    apostar
-                </button>
-            </div>
-
-            <div class="d-flex flex-column contenedor-apuesta" >
-                <h5 class="pb-2 border-bottom">Nombre apuesta</h5>
-                <div id="descripcion-contendor-apuesta">
-                    <div class="d-flex align-items-start mb-2">
-                        <span class="titulo-campo-apuesta me-2">Formula:</span>
-                        <div class="border w-100 scrollBarPerso contenedor-info">
-                            <span class="spanAdaptable">GolesMadrid > golesGetafe+3</span>
-                        </div>
-                    </div>
-                    <div >
-                        <span class="titulo-campo-apuesta ">Cuota favorable:</span>
-                        <span class="text-success">0,0</span>
-                    </div>
-                    <div >
-                        <span class="titulo-campo-apuesta">Cuota desfavorable:</span>
-                        <span class="text-success">0,0</span>
-                    </div>
-                </div>
-                
-                <button type="button" class="btn btn-success mx-auto mt-3" data-bs-toggle="modal" data-bs-target="#modalApostar">
-                    apostar
-                </button>
-            </div>
-
-            <div class="d-flex flex-column contenedor-apuesta" >
-                <h5 class="pb-2 border-bottom">Nombre apuesta</h5>
-                <div id="descripcion-contendor-apuesta">
-                    <div class="d-flex align-items-start mb-2">
-                        <span class="titulo-campo-apuesta me-2">Formula:</span>
-                        <div class="border w-100 scrollBarPerso contenedor-info">
-                            <span class="spanAdaptable">GolesMadrid > golesGetafe+3</span>
-                        </div>
-                    </div>
-                    <div >
-                        <span class="titulo-campo-apuesta ">Cuota favorable:</span>
-                        <span class="text-success">0,0</span>
-                    </div>
-                    <div >
-                        <span class="titulo-campo-apuesta">Cuota desfavorable:</span>
-                        <span class="text-success">0,0</span>
-                    </div>
-                </div>
-                
-                <button type="button" class="btn btn-success mx-auto mt-3" data-bs-toggle="modal" data-bs-target="#modalApostar">
-                    apostar
-                </button>
-            </div>
+            </th:block>      
         </div>
     </div>
 
@@ -297,7 +112,11 @@
                                 <div class="d-flex align-items-start mt-4">
                                     <label for="variables" class="form-label mb-0 me-2">Variables:</label>
                                     <div id="lista-Variables-Cr" class="border w-100 scrollBarPerso">
-                                        <span class="spanAdaptable">GolesMadrid, GolesBarsa, FaltasMadrid, FaltasBarsa, cornersMadrid, cornersBarsa,   </span>
+                                        <span class="spanAdaptable">                                            
+                                            <span th:each="variable, iterStat : ${variables}" 
+                                              th:text="${variable.nombre + (iterStat.last ? '' : ', ')}">
+                                            </span>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
