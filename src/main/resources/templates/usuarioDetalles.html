@@ -16,40 +16,58 @@
             <h4>Nombre completo: Carlos Jiménez</h4>
             <h4>Correo electrónico: carlitoskam@gmail.com</h4>
             <h4>Saldo: 124,43€</h4>
-
         </div>
 
-        <div class="table-responsive my-4">
-            <table class="table table-striped table-bordered table-hover m-0">
-                <thead class="thead-dark bg-dark text-white">
-                    <tr>
-                        <th>Chats</th>
-                        <th>Reportes hechos</th>
-                        <th>Reportes recibidos</th>
-                        <th>Mensajes enviados</th>
-                        <th>Mensajes recibidos</th>
-                        <th>Apuestas realizadas</th>
-                        <th>Fórmulas creadas</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>5</td>
-                        <td>2</td>
-                        <td>1</td>
-                        <td>50</td>
-                        <td>45</td>
-                        <td>10</td>
-                        <td>3</td>
-                    </tr>
-                </tbody>
-            </table>
+        <hr>
+
+        <div>
+            <h5>Chats:</h5>
+            <ul class="list-group">
+                <li class="list-group-item">Chat #1: Tema de discusión sobre fútbol</li>
+                <li class="list-group-item">Chat #2: Tema de discusión sobre apuestas deportivas</li>
+                <li class="list-group-item">Chat #3: Tema de discusión sobre videojuegos</li>
+            </ul>
         </div>
+
+        <div class="mt-4">
+            <h5>Reportes hechos:</h5>
+            <ul class="list-group">
+                <li class="list-group-item">Reporte #1: Reporte sobre contenido inapropiado en chat</li>
+                <li class="list-group-item">Reporte #2: Reporte sobre acoso verbal en chat</li>
+            </ul>
+        </div>
+
+        <div class="mt-4">
+            <h5>Reportes recibidos:</h5>
+            <ul class="list-group">
+                <li class="list-group-item">Reporte #1: Reporte sobre spam en chat</li>
+                <li class="list-group-item">Reporte #2: Reporte sobre uso de lenguaje ofensivo</li>
+            </ul>
+        </div>
+
+        <div class="mt-4">
+            <h5>Apuestas realizadas:</h5>
+            <ul class="list-group">
+                <li class="list-group-item">Apuesta #1: Gana Real Madrid en penaltis frente a Barcelona</li>
+                <li class="list-group-item">Apuesta #2: Victoria de Manchester City en el próximo partido de Champions League</li>
+                <li class="list-group-item">Apuesta #3: Gana equipo A con un margen de 2 goles frente a equipo B</li>
+            </ul>
+        </div>
+
+        <div class="mt-4">
+            <h5>Fórmulas creadas:</h5>
+            <ul class="list-group">
+                <li class="list-group-item">Fórmula #1: GolesMadrid - 1 > GolesGetafe (Gana el Madrid por al menos 2 goles)</li>
+                <li class="list-group-item">Fórmula #2: (GolesLiverpool - GolesChelsea) > 0 (Liverpool gana el partido con al menos 1 gol de diferencia)</li>
+                <li class="list-group-item">Fórmula #3: (GolesBarcelona - 1) > GolesValencia (Barcelona gana por más de 1 gol frente a Valencia)</li>
+            </ul>
+        </div>
+
+        <hr>
 
         <div class="d-flex justify-content-between mt-3">
             <button class="btn btn-secondary" onclick="window.history.back()">Volver</button>
             <a th:href="@{/admin/usuarios/transacciones}" class="btn btn-primary">Histórico de transacciones</a>
-            <!-- Botón para abrir el modal -->
             <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#banModal">Banear usuario</button>
         </div>
     </div>
@@ -63,7 +81,6 @@
                 </div>
                 <div class="modal-body">
                     <p>Escribe el motivo para banear a este usuario y confirma tu acción.</p>
-                    
                     <textarea id="banReason" class="form-control mb-3" rows="3" placeholder="Escribe el motivo aquí..."></textarea>
                     <p><strong>¿Realmente quieres banear a este usuario?</strong></p>
                     <input type="text" id="banConfirmText" class="form-control mb-3" placeholder="Escribe BANEAR para confirmar">
