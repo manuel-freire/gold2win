@@ -597,3 +597,8 @@ a.botonOvalado.nav-link:hover{
 [data-bs-theme="dark"] .resaltaHover:hover{
     background: rgba(255, 255, 255, 0.1);
 }
+
+.botonVerMas{
+    max-width: 250px;
+    border-radius: 20px;
+}

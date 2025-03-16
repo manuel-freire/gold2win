@@ -6,7 +6,7 @@
 </head>
 
 <body class="d-flex flex-column h-100">
-    <nav th:fragment="navSeccionescomprimido" class="d-flex d-md-none pt-2" style="width: calc(100vw - 40px);" >
+    <nav th:fragment="navSeccionescomprimido(secciones,seleccionado)" class="d-flex d-md-none pt-2" style="width: calc(100vw - 40px);" >
 
         <div id="btnIzSecciones" role="button"  class="h-100 d-flex align-items-center resaltaHover" style="min-width:30; max-width:30">
             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-chevron-compact-left" viewBox="0 0 16 16">
@@ -15,7 +15,7 @@
         </div>
         <div id="menuSeccionesComprimido" class="navSeccionescomprimido d-flex flex-grow-1 scroll-bar-oculta" style="scroll-behavior: smooth;">
             <th:block th:each="seccion,i: ${secciones}">
-                <a class="nav-link d-flex flex-column m-0 justify-content-center align-items-center resaltaHover" href="#" style="padding: 0px 12px;">
+                <a class="nav-link d-flex flex-column m-0 justify-content-center align-items-center resaltaHover" th:href="@{/seccion/{id}(id=${seccion.id})}" href="@{/}" th:classappend="${seccion.id == seleccionado ? 'active' : ''}" style="padding: 0px 12px;">
                     <img width="25" height="25" th:src="@{/seccion/{id}/pic(id=${seccion.id})}">
                     <span class="text-nowrap" style="font-size: 11px;" th:text="${seccion.nombre}">texto</span>
                 </a>
