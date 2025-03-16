@@ -28,7 +28,7 @@ public class FormulaApuesta {
     
     private String formula;
     private String nombre;
-    private double dineroAfabor;
+    private double dineroAfavor;
     private double dineroEnContra;
 
     @Enumerated(EnumType.STRING)
@@ -37,4 +37,14 @@ public class FormulaApuesta {
     
     @OneToMany(mappedBy = "formulaApuesta")
     private List<Apuesta> apuestas;
+
+    @Transient
+    public double calcularCuota(boolean aFavor) {
+        if (aFavor) {
+            return dineroEnContra > 0 ? (((dineroAfavor + dineroEnContra) / dineroAfavor)) : 1.0;
+        } else {
+            return dineroAfavor > 0 ? (((dineroEnContra + dineroAfavor) / dineroEnContra)) : 1.0;
+        }
+    }
+
 }

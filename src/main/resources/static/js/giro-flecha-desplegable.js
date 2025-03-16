@@ -1,3 +1,112 @@
+function calcularCuota() {
+    console.log("Calculando cuotas...");
+    
+    const apuestas = document.querySelectorAll(".bettingBox");
+    const gruposApuestas = {};
+
+    // Recopilar apuestas por fórmula
+    apuestas.forEach((apuesta) => {
+        const formula = apuesta.getAttribute("data-formula");
+        const cantidad = parseFloat(apuesta.getAttribute("data-cantidad")) || 0;
+        const aFavor = apuesta.getAttribute("data-a-favor") === "true";
+
+        if (!gruposApuestas[formula]) {
+            gruposApuestas[formula] = { cantidadAFavor: 0, cantidadEnContra: 0, elementos: [] };
+        }
+
+        if (aFavor) {
+            gruposApuestas[formula].cantidadAFavor += cantidad;
+        } else {
+            gruposApuestas[formula].cantidadEnContra += cantidad;
+        }
+
+        gruposApuestas[formula].elementos.push(apuesta);
+    });
+
+    // Calcular cuotas para cada grupo de apuestas
+    Object.values(gruposApuestas).forEach(({ cantidadAFavor, cantidadEnContra, elementos }) => {
+        let cuotaAFavor = 1.0;
+        let cuotaEnContra = 1.0;
+
+        if (cantidadAFavor > 0 && cantidadEnContra > 0) {
+            cuotaAFavor = (cantidadEnContra + cantidadAFavor) / cantidadAFavor;
+            cuotaEnContra = (cantidadEnContra + cantidadAFavor) / cantidadEnContra;
+        }
+
+        // Actualizar todas las apuestas que comparten la misma fórmula
+        elementos.forEach((apuesta) => {
+            const cuotaElemento = apuesta.querySelector(".cuota-apuesta");
+            if (!cuotaElemento) return;
+            const esAFavor = cuotaElemento.getAttribute("data-afavor") === "true";
+
+            cuotaElemento.textContent = esAFavor
+                ? cuotaAFavor.toFixed(1) 
+                : cuotaEnContra.toFixed(1);
+        });
+    }); 
+}
+
+// Ejecutar al cargar la página y actualizar cada 30 segundos
+document.addEventListener("DOMContentLoaded", () => {
+    calcularCuota();
+    setInterval(calcularCuota, 30000); // Se actualiza cada 30 segundos
+});
+
+function actualizarTiempoRestante1() {
+    console.log("entrando a actualizar tiempo restante");
+    const elementosTiempoRestante = document.querySelectorAll(".tiempo-restante-apuesta");
+    elementosTiempoRestante.forEach((elemento) => {
+        console.log("entra al foreach");
+        const fechaEventoStr = elemento.getAttribute("data-fecha-evento-apuesta");  
+        if (!fechaEventoStr) return;
+
+        // Convertir la cadena a una fecha en JavaScript
+        const fechaEvento = new Date(fechaEventoStr.replace(" ", "T")); // Reemplaza el espacio con 'T' para compatibilidad
+
+        // Obtener la fecha actual
+        const ahora = new Date();
+
+        // Calcular la diferencia en milisegundos
+        const diferencia = fechaEvento - ahora;
+
+        if (diferencia <= 0) {
+            /*elemento.textContent = "Evento iniciado";
+            return;*/
+            // Convertir la diferencia en días, horas y minutos
+            const dias = -Math.floor(diferencia / (1000 * 60 * 60 * 24));
+            const horas = -Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = -Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+            // Mostrar la salida en el formato adecuado
+            if (dias > 0) {
+                elemento.textContent = `${dias} días`;
+            } else {
+                elemento.textContent = `${horas}h ${minutos}m`;
+            }
+        }
+
+        else{
+            // Convertir la diferencia en días, horas y minutos
+            const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+            // Mostrar la salida en el formato adecuado
+            if (dias > 0) {
+                elemento.textContent = `${dias} días`;
+            } else {
+                elemento.textContent = `${horas}h ${minutos}m`;
+            }
+        }
+        
+        
+    });
+}
+
+var tiempoRestanteAux = document.querySelectorAll(".tiempo-restante-apuesta");
+if(tiempoRestanteAux.length != 0){
+    actualizarTiempoRestante1();
+    setInterval(actualizarTiempoRestante1, 60000); // Actualizar cada minuto
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     console.log("El DOM ha cargado. Script inicializado.");
 
@@ -21,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // Evento cuando el desplegable se abre
             collapseElement.addEventListener("shown.bs.collapse", function () {
             arrowIconPath.setAttribute("d", arrowUpPath); // Flecha hacia arriba
-            messageElement.style.display = "none"; // Oculta el mensaje
+            messageElement.style.display = "block"; // Oculta el mensaje
             console.log("Flecha cambiada a 'hacia arriba'. Desplegable abierto.");
             });
 
