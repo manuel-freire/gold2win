@@ -323,6 +323,7 @@ a.botonOvalado.nav-link:hover{
     min-width: 0;
     font-weight: 700;
     line-height: 17px;
+    user-select: none; 
 }
 
 .tituloSeccion{
@@ -334,7 +335,27 @@ a.botonOvalado.nav-link:hover{
 .enlaceSeccion{
     font-size: 13px;
     margin: 5px 0 0 7px;
+    user-select: none; /* Evita la selección */
 }
+
+.enlaceSeccion.active span{
+    color: #FFD700;
+    text-decoration: underline;
+}
+
+.navSeccionescomprimido .active{
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.navSeccionescomprimido .active span{
+    color: #FFD700;
+    text-decoration: underline;
+}
+
+[data-bs-theme="dark"] .navSeccionescomprimido .active{
+    background: rgba(255, 255, 255, 0.1);
+}
+
 
 .spanAjustado{
     box-sizing: border-box;

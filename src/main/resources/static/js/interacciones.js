@@ -220,6 +220,7 @@ if(crearApuestaForm != null){
         });
         */
     });
+}
 
 var inputImagenSeccionesForm = document.getElementById("inputImagenSecciones");
 if(inputImagenSeccionesForm != null){
