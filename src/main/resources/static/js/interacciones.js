@@ -19,7 +19,7 @@ function actualizarTiempoRestante() {
             elemento.textContent = "Evento iniciado";
             return;
         }
-
+        
         // Convertir la diferencia en días, horas y minutos
         const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
         const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));

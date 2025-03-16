@@ -1,94 +1,126 @@
-/* usa este fichero para personalizar tus vistas */
+/* Personalización de vistas */
 
-.bettingBox{
+.bettingBox {
     background-color: #f0f0f048; /* Color de fondo */
-    /*border: 2px solid #000000; /* Borde */
+    /* border: 2px solid #000000; /* Borde */
     border-radius: 10px; /* Bordes redondeados */
-    /*padding: 5px; /* Espaciado interno */
     font-family: Arial, sans-serif; /* Fuente */
-    margin: 50px 200px 0px 200px;
+    max-width: 95vw; /* Se adapta a la pantalla */
+    padding: 2vh 2vw; /* Padding dinámico */
+    margin: 50px auto 0 auto; /* Centrado con márgenes dinámicos */
 }
-/*width: 800; /* Ancho de la caja */
-/*height: 10px; /* Alto de la caja */
-.headRowBettingBox{
-    padding: 10px 15px 10px 15px; /* Espaciado interno */
+
+/* Cabecera de la caja */
+.headRowBettingBox {
     margin: 0px;
     border-top: none;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     display: flex; /* Activa flexbox */
+    flex-wrap: wrap; /* Si no cabe, baja de línea */
     justify-content: space-between; /* Alinea elementos a los extremos */
     align-items: center; /* Centra los elementos verticalmente */
+    gap: 1vw;
 }
 
-.headRowBettingBoxLeftElement{
-    color:#41a838;
+.headRowBettingBoxLeftElement {
+    color: #41a838;
     font-weight: bold;
     font-size: large;
 }
 
-.headRowBettingBoxRightElement{
-    padding: 5px;
+.headRowBettingBoxRightElement {
     background-color: #f0f0f048;
     font-weight: normal;
     font-size: medium;
 }
 
-.infoRowBettingBox{
-    padding: 10px 15px 10px 15px; /* Espaciado interno */
+/* Información dentro de la caja */
+.infoRowBettingBox {
+    padding: 10px 15px;
     margin: 0px;
     border-top: 1px solid #000000;
 }
 
-.footerRowBettingBox{
-    padding: 10px 15px 5px 15px; /* Espaciado interno */
+/* Pie de la caja */
+.footerRowBettingBox {
     margin: 0px;
-    border-top: 1px solid #000000;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     display: flex; /* Activa flexbox */
+    flex-wrap: wrap; /* Si no cabe, baja de línea */
     justify-content: space-between; /* Alinea elementos a los extremos */
     align-items: center; /* Centra los elementos verticalmente */
+    gap: 1vw;
 }
 
-.footerRowBettingBoxRightElement{
-    padding: 5px;
+.footerRowBettingBoxRightElement {
     background-color: #f0f0f048;
     font-weight: normal;
     font-size: medium;
 }
 
-.btn-custom:hover{
+/* Botón personalizado */
+.btn-custom {
+    padding: 1vh 1vw;
+    font-size: min(4vw, 16px); /* Tamaño adaptable */
+}
+
+.btn-custom:hover {
     color: #f0f0f048 !important;
     border-color: none;
     outline: none;
     box-shadow: none;
 }
 
-.btn-custom:active{
-    color: none; /* Color personalizado (naranja) */
+.btn-custom:active, 
+.btn-custom:focus {
+    color: inherit;
     border-color: none;
     outline: none;
     box-shadow: none;
 }
 
-.btn-custom:focus{
-    color: none; /* Color personalizado (naranja) */
-    border-color: none;
-    outline: none;
-    box-shadow: none;
-}
-
+/* Mensaje desplegable */
 #mensajeDesplegable {
     display: block;
     padding: 0px 0px 0px 10px;
     font-size: small;
+    white-space: normal;
+    word-break: break-word;
 }
 
-.bettingBox-winText {
-    color:#41a838;
+/* Ajustes de diseño responsivo */
+.caja-etiquetas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5vw;
 }
 
-.bettingBox-loseText {
-    color: #a83838;
+.left, .right {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5vw;
+    align-items: center;
 }
+
+.textoColapsable {
+    white-space: normal;
+    word-break: break-word;
+    max-width: 90%; /* Evita desbordamientos */
+}
+
+/* Media queries para pantallas más pequeñas */
+@media (max-width: 425px) {
+    .headRowBettingBox, 
+    .footerRowBettingBox {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .bettingBox {
+        max-width: 100vw;
+        padding: 3vh 4vw;
+    }
+}
+
