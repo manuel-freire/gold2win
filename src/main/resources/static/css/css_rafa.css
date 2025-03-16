@@ -84,3 +84,11 @@
     padding: 0px 0px 0px 10px;
     font-size: small;
 }
+
+.bettingBox-winText {
+    color:#41a838;
+}
+
+.bettingBox-loseText {
+    color: #a83838;
+}

@@ -28,7 +28,8 @@ INSERT INTO EVENTO (ID, CANCELADO, FECHA_CIERRE, FECHA_CREACION, NOMBRE, SECCION
 (9, false, '2025-05-20 13:00:00', '2025-03-10 11:15:00', 'Masters de Golf en Augusta', 9),
 (10, false, '2025-05-20 17:30:00', '2025-03-11 15:45:00', 'Worlds - League of Legends', 10),
 (11, false, '2025-06-08 19:00:00', '2025-03-12 10:50:00', 'Major de Counter Strike', 11),
-(12, false, '2025-06-08 20:00:00', '2025-03-13 14:25:00', 'Final de Valorant Champions', 12);
+(12, false, '2025-06-08 20:00:00', '2025-03-13 14:25:00', 'Final de Valorant Champions', 12),
+(13, false, '2025-03-11 10:30:00', '2024-06-08 20:00:00', 'LEC: MDK vs FNC', 12);
 
 -- inserta etiquetas
 INSERT INTO EVENTO_ETIQUETAS (EVENTO_ID, ETIQUETAS) VALUES
@@ -71,6 +72,8 @@ INSERT INTO FORMULA_APUESTA (ID, DINERO_AFABOR, DINERO_EN_CONTRA, FORMULA, NOMBR
 (7, 0, 0, 'puntos Wang > puntos Lee', 'Gana Wang', 'INDETERMINADO', 7, 7),
 (8, 0, 0, 'tiempo Froome < tiempo Pogacar', 'Froome gana etapa', 'INDETERMINADO', 8, 8),
 (9, 0, 0, 'golpes Woods > golpes McIlroy', 'Gana Woods', 'INDETERMINADO', 9, 9),
+(13, 0, 0, 'hoyos Woods > hoyos McIlroy', 'Gana Woods', 'INDETERMINADO', 9, 9),
+(14, 0, 0, 'promedio birdies Woods < promedio birdies McIlroy', 'Gana McIlroy', 'INDETERMINADO', 9, 9),
 (10, 0, 0, 'torres destruidas G2 > torres destruidas T1', 'Gana G2', 'INDETERMINADO', 10, 10),
 (11, 0, 0, 'rounds ganados NaVi > rounds ganados Vitality', 'Victoria NaVi', 'INDETERMINADO', 11, 11),
 (12, 0, 0, 'mapas ganados Fnatic > mapas ganados Sentinels', 'Gana Fnatic', 'INDETERMINADO', 12, 12);
@@ -89,6 +92,25 @@ INSERT INTO APUESTA (ID, CANTIDAD, A_FAVOR, APOSTADOR_ID, FORMULA) VALUES
 (10, 15.0, TRUE, 10, 10),
 (11, 120.0, FALSE, 11, 11),
 (12, 35.0, TRUE, 12, 12);
+
+-- INSERT VARIABLESECCION
+INSERT INTO VARIABLE (ID, NOMBRE, NUMERICO, RESOLUCION, ID_EVENTO) VALUES
+(1, 'goles', TRUE, NULL, 1),
+(2, 'puntos', TRUE, NULL, 2),
+(3, 'carreras', TRUE, NULL, 3),
+(4, 'goles', TRUE, NULL, 4),
+(5, 'toques', TRUE, NULL, 5),
+(6, 'sets', TRUE, NULL, 6),
+(7, 'puntos', TRUE, NULL, 7),
+(8, 'tiempo', TRUE, NULL, 8),
+(9, 'golpes', TRUE, NULL, 9),
+(13, 'hoyos', TRUE, NULL, 9),
+(14, 'promedio birdies', TRUE, NULL, 9),
+(10, 'torres destruidas', TRUE, NULL, 10),
+(11, 'rounds ganados', TRUE, NULL, 11),
+(12, 'mapas ganados', TRUE, NULL, 12);
+
+
 
 -- start id numbering from a value that is larger than any assigned above
 ALTER SEQUENCE "PUBLIC"."GEN" RESTART WITH 1024;

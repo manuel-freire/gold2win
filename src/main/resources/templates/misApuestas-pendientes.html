@@ -25,9 +25,10 @@
         <div class="container">
             <div th:replace="fragments/menuApuestas.html :: navMisApuestas('pendientes')"></div>
 
-            <div th:replace="fragments/betting-box.html :: betting-box"></div>
+            <div th:each="apuesta : ${apuestasPendientes}">
+                <div th:replace="fragments/betting-box.html :: betting-box(${apuesta})"></div>
+            </div>
             
-              
         </div>
     </main>
 

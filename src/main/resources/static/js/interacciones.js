@@ -264,11 +264,11 @@ if(contenedorVariablesForm != null){
         var nombre = document.getElementById('cantidadModal').value;
         var select = document.getElementById('tipoApuestaModal');
         var opcionSeleccionada = select.options[select.selectedIndex].text;
-
+    
         if (opcionSeleccionada === "Seleccione..." || nombre === "") { //Si los campos están vacíos, no se añade el div
             return;  
         }
-
+    
         // Crear un nuevo div con Bootstrap
         const nuevoDiv = document.createElement("div");
         nuevoDiv.className = "col-3 variableSeccion"; // Se organizan en 3 columnas por fila
@@ -276,10 +276,9 @@ if(contenedorVariablesForm != null){
             <span>Nombre : ${nombre}</span>
             <span>Tipo de variable: ${opcionSeleccionada}</span>
         `;
-
-         
+    
         contenedor.appendChild(nuevoDiv); // Agrega el div al contenedor
         document.getElementById('tipoApuestaModal').selectedIndex = 0;
         document.getElementById('cantidadModal').value = '';
-    }
+    };
 }
