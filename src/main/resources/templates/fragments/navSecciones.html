@@ -6,14 +6,14 @@
 </head>
 
 <body class="d-flex flex-column h-100">
-    <nav th:fragment="navSecciones" class="navSecciones d-none d-md-flex flex-column scrollBarPerso pt-2">
+    <nav th:fragment="navSecciones(secciones,seleccionado)" class="navSecciones d-none d-md-flex flex-column scrollBarPerso pt-2">
             <th:block th:each="seccion,i: ${secciones}">
                 <th:block th:if="${i.first or seccion.grupo != secciones[i.index - 1]?.grupo}">
                     <div class="d-flex flex-column grupoSecciones">
                         <span class="tituloSeccion text-nowrap" th:text="${seccion.grupo}"></span>
                 </th:block>
                 
-                <a class="enlaceSeccion nav-link text-nowrap"> 
+                <a class="enlaceSeccion nav-link text-nowrap" th:href="@{/seccion/{id}(id=${seccion.id})}" href="@{/}" th:classappend="${seccion.id == seleccionado ? 'active' : ''}"> 
                     <img width="20" height="20" th:src="@{/seccion/{id}/pic(id=${seccion.id})}">
                     <span class="ms-1 spanAjustado " th:text="${seccion.nombre}">texto1</span>
                 </a>
