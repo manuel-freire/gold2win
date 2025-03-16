@@ -7,91 +7,121 @@
 </head>
 
 <body class="d-flex flex-column h-100">
-
-    <div class="px-4 mt-4">
-        <h2>Detalles de Usuario</h2>
-        
-        <div class="mt-4 p-3 border rounded">
-            <h4>ID: 1</h4>
-            <h4>Nombre completo: Carlos Jiménez</h4>
-            <h4>Correo electrónico: carlitoskam@gmail.com</h4>
-            <h4>Saldo: 124,43€</h4>
-        </div>
-
-        <hr>
-
-        <div>
-            <h5>Chats:</h5>
-            <ul class="list-group">
-                <li class="list-group-item">Chat #1: Tema de discusión sobre fútbol</li>
-                <li class="list-group-item">Chat #2: Tema de discusión sobre apuestas deportivas</li>
-                <li class="list-group-item">Chat #3: Tema de discusión sobre videojuegos</li>
-            </ul>
-        </div>
-
-        <div class="mt-4">
-            <h5>Reportes hechos:</h5>
-            <ul class="list-group">
-                <li class="list-group-item">Reporte #1: Reporte sobre contenido inapropiado en chat</li>
-                <li class="list-group-item">Reporte #2: Reporte sobre acoso verbal en chat</li>
-            </ul>
-        </div>
-
-        <div class="mt-4">
-            <h5>Reportes recibidos:</h5>
-            <ul class="list-group">
-                <li class="list-group-item">Reporte #1: Reporte sobre spam en chat</li>
-                <li class="list-group-item">Reporte #2: Reporte sobre uso de lenguaje ofensivo</li>
-            </ul>
-        </div>
-
-        <div class="mt-4">
-            <h5>Apuestas realizadas:</h5>
-            <ul class="list-group">
-                <li class="list-group-item">Apuesta #1: Gana Real Madrid en penaltis frente a Barcelona</li>
-                <li class="list-group-item">Apuesta #2: Victoria de Manchester City en el próximo partido de Champions League</li>
-                <li class="list-group-item">Apuesta #3: Gana equipo A con un margen de 2 goles frente a equipo B</li>
-            </ul>
-        </div>
-
-        <div class="mt-4">
-            <h5>Fórmulas creadas:</h5>
-            <ul class="list-group">
-                <li class="list-group-item">Fórmula #1: GolesMadrid - 1 > GolesGetafe (Gana el Madrid por al menos 2 goles)</li>
-                <li class="list-group-item">Fórmula #2: (GolesLiverpool - GolesChelsea) > 0 (Liverpool gana el partido con al menos 1 gol de diferencia)</li>
-                <li class="list-group-item">Fórmula #3: (GolesBarcelona - 1) > GolesValencia (Barcelona gana por más de 1 gol frente a Valencia)</li>
-            </ul>
-        </div>
-
-        <hr>
-
-        <div class="d-flex justify-content-between mt-3">
-            <button class="btn btn-secondary" onclick="window.history.back()">Volver</button>
-            <a th:href="@{/admin/usuarios/transacciones}" class="btn btn-primary">Histórico de transacciones</a>
-            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#banModal">Banear usuario</button>
-        </div>
-    </div>
-
-    <div class="modal fade" id="banModal" tabindex="-1" aria-labelledby="banModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="banModalLabel">¿Confirmar Baneo?</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Escribe el motivo para banear a este usuario y confirma tu acción.</p>
-                    <textarea id="banReason" class="form-control mb-3" rows="3" placeholder="Escribe el motivo aquí..."></textarea>
-                    <p><strong>¿Realmente quieres banear a este usuario?</strong></p>
-                    <input type="text" id="banConfirmText" class="form-control mb-3" placeholder="Escribe BANEAR para confirmar">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Confirmar ban</button>
-                </div>
+    <div class="container mt-4">
+        <!-- Sección de Información del Usuario -->
+        <div class="d-flex align-items-start border p-3 rounded">
+            <!-- Imagen del Usuario -->
+            <div class="me-3">
+                <img src="https://via.placeholder.com/100" class="rounded" alt="Foto del usuario">
+            </div>
+            <!-- Información del Usuario -->
+            <div>
+                <h5>ID: 1</h5>
+                <h5>Nombre: Carlos Jiménez</h5>
+                <h5>Correo: carlitoskam@gmail.com</h5>
+                <h5>Saldo: 124,43€</h5>
             </div>
         </div>
+
+        <!-- Menú de Opciones -->
+        <ul class="nav nav-tabs mt-4" id="menuTabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="#" onclick="showTable('chats')">Chats</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="showTable('mensajes')">Mensajes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="showTable('reportes')">Reportes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="showTable('apuestas')">Apuestas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="showTable('formulas')">Fórmulas</a>
+            </li>
+        </ul>
+
+        <!-- Tablas de Datos -->
+        <div class="table-responsive mt-2">
+            <table id="chats" class="table table-bordered">
+                <thead class="table-dark">
+                    <tr><th>ID</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>Tema de discusión sobre fútbol</td></tr>
+                    <tr><td>2</td><td>Tema de discusión sobre apuestas deportivas</td></tr>
+                    <tr><td>3</td><td>Tema de discusión sobre videojuegos</td></tr>
+                </tbody>
+            </table>
+
+            <table id="mensajes" class="table table-bordered d-none">
+                <thead class="table-dark">
+                    <tr><th>ID</th><th>Mensaje</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>Hola, ¿cómo estás?</td></tr>
+                    <tr><td>2</td><td>Nos vemos mañana</td></tr>
+                </tbody>
+            </table>
+
+            <table id="reportes" class="table table-bordered d-none">
+                <thead class="table-dark">
+                    <tr><th>ID</th><th>Motivo</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>Reporte sobre contenido inapropiado</td></tr>
+                    <tr><td>2</td><td>Reporte sobre lenguaje ofensivo</td></tr>
+                </tbody>
+            </table>
+
+            <table id="apuestas" class="table table-bordered d-none">
+                <thead class="table-dark">
+                    <tr><th>ID</th><th>Apuesta</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>Gana Real Madrid en penaltis</td></tr>
+                    <tr><td>2</td><td>Victoria de Manchester City</td></tr>
+                </tbody>
+            </table>
+
+            <table id="formulas" class="table table-bordered d-none">
+                <thead class="table-dark">
+                    <tr><th>ID</th><th>Fórmula</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>(GolesMadrid - 1) > GolesGetafe</td></tr>
+                    <tr><td>2</td><td>(GolesLiverpool - GolesChelsea) > 0</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Botón de Volver -->
+        <div class="mt-3">
+            <button class="btn btn-secondary" onclick="window.history.back()">Volver</button>
+        </div>
     </div>
+
+    <!-- Script para alternar tablas -->
+    <script>
+        function showTable(tablaId) {
+            // Ocultar todas las tablas
+            document.querySelectorAll('.table-responsive table').forEach(tabla => {
+                tabla.classList.add('d-none');
+            });
+
+            // Mostrar la tabla seleccionada
+            document.getElementById(tablaId).classList.remove('d-none');
+
+            // Actualizar la pestaña activa
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Marcar la pestaña activa
+            event.target.classList.add('active');
+        }
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
