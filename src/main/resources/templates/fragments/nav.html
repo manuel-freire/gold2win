@@ -20,7 +20,7 @@
                     <ul class="navbar-nav mx-auto">
                         <th:block th:if="true">
                             <li class="nav-item mx-3" th:classappend="${active == 'deportes'} ? 'active'">
-                                <a class="nav-link" th:href="${active == 'deportes'} ? '#' : @{/}">Todos los eventos</a>
+                                <a class="nav-link" th:href="@{/}">Todos los eventos</a>
                             </li>
                             <li class="nav-item mx-3 " th:if="${session?.u?.hasRole('USER')}" th:classappend="${active == 'apuestas'} ? 'active'">
                                 <a class="nav-link"  th:href="${active == 'apuestas'} ? '#' : @{/misApuestas/todas}">Mis apuestas</a>
@@ -177,7 +177,7 @@
                     <div class="offcanvas-body">
                       <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" th:classappend="${active == 'deportes'} ? 'active'" th:href="${active == 'deportes'} ? '#' : @{/}">Todos los eventos</a>
+                            <a class="nav-link" th:classappend="${active == 'deportes'} ? 'active'" th:href="@{/}">Todos los eventos</a>
                         </li>
                         <li class="nav-item" th:if="${session?.u?.hasRole('USER')}" >
                             <a class="nav-link" th:classappend="${active == 'apuestas'} ? 'active'" th:href="${active == 'apuestas'} ? '#' : @{/misApuestas/todas}">Mis apuestas</a>

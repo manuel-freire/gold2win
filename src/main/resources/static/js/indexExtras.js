@@ -1,45 +1,121 @@
-var offset = 0;
-const botonVerMas = document.getElementById("verMasEventos");
-const appRoot = document.getElementById('root').value;
-    
-botonVerMas.addEventListener("click", function() {
-    botonVerMas.disabled = true;
-    var seccionId = document.getElementById("seccionId").value; // seccionId almacenado
-    var fechaInicio = document.getElementById("fechaCreacion").value; // fechaInicio almacenada
+const appRoot = document.getElementById('root').value; // th:href="@{/}"
+const seccionId = document.getElementById("seccionId").value; // Id de la sección de la que se quieren los elementos
+var fechaInicio = document.getElementById("fechaCreacion").value; // fecha en la que se almacena el primer evento
+const botonVerMas = document.getElementById("verMasEventos"); //el boton que esta abajo del contenedor de eventos (todo debe ser insertado antes)
+var offset = 10; // numElementos cargados
+var buscado = null; // indica la ultima busqueda realizada (para sobre la busqueda ver mas)
+let fechaAnterior = new Date(0); // fecha del ultimo evento cargado (para separar por dias)
 
-    go('/seccion/cargarMas' + '?seccionId=' + seccionId + '&fechaInicio=' + fechaInicio + '&offset=' + offset, 'GET')
-        .then(response => {
-            let fechaAnterior = new Date(botonVerMas.previousElementSibling.getAttribute("data-fecha-evento").replace(" ", "T"));
+fechaUltimoEvento(); //carga fecha anterior
 
-            response.forEach(evento => {
-                let fechaActual = new Date(evento.fechaCierre);
-                if (fechaAnterior.getFullYear() != fechaActual.getFullYear() ||
-                    fechaAnterior.getMonth() != fechaActual.getMonth() ||
-                    fechaAnterior.getDate() != fechaActual.getDate()) {
-                        let dia = fechaActual.getDate(); 
-                        let mes = fechaActual.getMonth() + 1; // Mes (añadimos 1 para corregir el índice)
-                        let año = fechaActual.getFullYear();  
 
-                        introducirSeparadorTemporal(`${dia}/${mes}/${año}`);
-                    }
-                fechaAnterior = fechaActual;
-                introducirEvento(evento);
+//FUNCIONES PARA LA BARRA BUSCADORA
+var cargando = false
+
+document.getElementById("queryEventos").addEventListener("keypress", function(event) {
+    if (event.key === "Enter" && !cargando) {
+        var busqueda = document.getElementById("queryEventos").value;
+        cargando = true;
+
+        if (busqueda == "") { //si no hay nada escrito se cargan los eventos por defecto
+            console.log("busqueda vacia");
+            if(buscado != null){
+                console.log("busqueda vacia2");
+                fechaInicio = new Date().toISOString();
+                buscado = null;
+                vaciarContenedorEventos();
+                offset = 0;
+
+                cargarEventos(offset, fechaInicio, seccionId).then(() => {
+                    cargando = false;
+                }).catch((error) => {
+                    cargando = false;
+                    console.log(error);
+                });
+            }
+            else{
+                cargando = false;
+            }
+        }
+        else{
+            offset = 0;
+            echaInicio = new Date().toISOString();
+            fechaAnterior = new Date(0);
+            buscado = busqueda;
+            vaciarContenedorEventos();
+
+            cargarEventos(offset, fechaInicio, seccionId).then(() => {
+                cargando = false;
+            }).catch((error) => {
+                cargando = false;
+                console.log(error);
             });
-
-            actualizarTiempoRestante();
-
-            if(response.length < 10)
-                botonVerMas.style.display = "none";
-            else
-                botonVerMas.disabled = false;
-
-            offset += 10;
-            console.log(response);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+        }
+    }
 });
+
+function vaciarContenedorEventos(){
+    contenedor = document.getElementById("contendorEventos");
+
+    while (contenedor.firstChild.id != "verMasEventos") {
+        contenedor.removeChild(contenedor.firstChild);
+    }
+}
+
+// FUNCIONES PARA EL BOTON VER MAS 
+botonVerMas.addEventListener("click", function() {
+    if(!cargando){
+        cargando = true;
+        cargarEventos(offset, fechaInicio, seccionId).then(() => {
+            cargando = false;
+        }).catch((error) => {
+            cargando = false;
+            console.log(error);
+        });
+    }
+});
+
+async function cargarEventos(_offset,_fechaInicio,_seccionId){ //la funcion se ejecuta de manera asincrona
+    botonVerMas.disabled = true; 
+
+    try{
+        var response;
+
+        if(buscado == null)
+            response = await go(appRoot + 'seccion/cargarMas' + '?seccionId=' + seccionId + '&fechaInicio=' + fechaInicio + '&offset=' + offset, 'GET');
+        else 
+            response = await go(appRoot + 'seccion/buscar' + '?seccionId=' + seccionId + '&fechaInicio=' + fechaInicio +'&busqueda=' + buscado + '&offset=' + offset, 'GET');
+
+        response.forEach(evento => {
+            let fechaActual = new Date(evento.fechaCierre);
+            if (fechaAnterior.getFullYear() != fechaActual.getFullYear() ||
+                fechaAnterior.getMonth() != fechaActual.getMonth() ||
+                fechaAnterior.getDate() != fechaActual.getDate()) {
+                    let dia = fechaActual.getDate(); 
+                    let mes = fechaActual.getMonth() + 1; // Mes (añadimos 1 para corregir el índice)
+                    let año = fechaActual.getFullYear();  
+
+                    introducirSeparadorTemporal(`${dia}/${mes}/${año}`);
+                }
+            fechaAnterior = fechaActual;
+            introducirEvento(evento);
+        });
+
+        actualizarTiempoRestante();
+
+        if(response.length < 10)
+            botonVerMas.style.display = "none";
+        else{
+            botonVerMas.disabled = false;
+            botonVerMas.style.display = "block";
+        }
+
+        offset += 10;
+        console.log(response)
+    } catch(error){
+        console.error('Error:', error);
+    }
+}
 
 function introducirSeparadorTemporal(stringFecha){
     let contenedor = document.getElementById("contendorEventos");
@@ -127,4 +203,15 @@ function introducirEvento(evento){
 
     contenedor.insertBefore(eventoMovil, botonVerMas);
     contenedor.insertBefore(eventoOrdenador, botonVerMas);
+}
+
+function fechaUltimoEvento(){
+    let ultimoEvento = botonVerMas.previousElementSibling;
+
+    if(ultimoEvento != null){
+        fechaAnterior = new Date(ultimoEvento.getAttribute("data-fecha-evento").replace(" ", "T"));
+    }
+    else{
+        fechaAnterior = new Date(0); //si no hay eventos se pone una fecha que no pueda coincidir con ninguna otra
+    }
 }

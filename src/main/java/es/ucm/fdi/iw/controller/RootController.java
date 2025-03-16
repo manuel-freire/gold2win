@@ -100,6 +100,41 @@ public class RootController {
         return "index";
     }
 
+    @GetMapping(path = "/seccion/buscar", produces = "application/json")
+    @Transactional
+    @ResponseBody
+    public List<Evento.Transfer> buscarEventos(
+            @RequestParam long seccionId,
+            @RequestParam String busqueda,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fechaInicio, //necesito indicar el formato en que viene la fecha
+            @RequestParam int offset) {
+
+        List<String> etiquetas = List.of(busqueda.split(" ")).stream().filter(palabra -> palabra.startsWith("[") && palabra.endsWith("]")).collect(Collectors.toList());
+        String nombre = List.of(busqueda.split(" ")).stream().filter(palabra -> !(palabra.startsWith("[") && palabra.endsWith("]"))) .collect(Collectors.joining(" "));
+
+        String queryEventos = "SELECT e FROM Evento e WHERE e.fechaCierre > :inicio AND e.fechaCreacion < :inicio AND (LOWER(e.nombre) LIKE LOWER(:nombre)) ORDER BY e.fechaCierre ASC"; //por defecto se cogen todas las secciones
+        Seccion seccion = entityManager.find(Seccion.class, seccionId);
+        TypedQuery<Evento> query;
+
+        if (seccion != null && seccion.isEnabled()) {
+            queryEventos = "SELECT e FROM Evento e WHERE e.fechaCierre > :inicio AND e.fechaCreacion < :inicio AND e.seccion.id = :seccionId AND " + "(LOWER(e.nombre) LIKE LOWER(:nombre)) ORDER BY e.fechaCierre ASC"; //si existe la sección se cogen los eventos de esa sección
+            query = entityManager.createQuery(queryEventos, Evento.class);
+            query.setParameter("seccionId", seccionId);
+        }
+        else{
+            query = entityManager.createQuery(queryEventos, Evento.class);
+        }
+
+        query.setParameter("nombre", "%" + nombre + "%");
+        query.setParameter("inicio", fechaInicio);
+        query.setMaxResults(10);
+        query.setFirstResult(offset);
+
+        List<Evento> eventos = query.getResultList();
+
+        return eventos.stream().map(Evento::toTransfer).collect(Collectors.toList());
+    }
+
     @GetMapping(path = "/seccion/cargarMas", produces = "application/json")
     @Transactional
     @ResponseBody
