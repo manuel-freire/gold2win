@@ -24,13 +24,14 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
+import es.ucm.fdi.iw.model.Evento;
 import es.ucm.fdi.iw.model.Seccion;
 import es.ucm.fdi.iw.model.User;
 import es.ucm.fdi.iw.model.Variable;
 import es.ucm.fdi.iw.model.VariableSeccion;
 
-import es.ucm.fdi.iw.services.SeccionService;
 /**
  *  Site administration.
  *
@@ -44,9 +45,6 @@ public class AdminController {
 	private EntityManager entityManager;
     
 	private static final Logger log = LogManager.getLogger(AdminController.class);
-
-    @Autowired
-    private SeccionService seccionService;
 
 	@GetMapping("/")
     public String index(Model model) {
@@ -103,24 +101,29 @@ public class AdminController {
         return "secciones-crearSeccion";
     }
 
+    @Transactional
     @ResponseBody
     @PostMapping("/guardarSeccion")
-    public ResponseEntity<JsonNode> guardarUsuario(@RequestBody JsonNode json) {
+    public ResponseEntity<JsonNode> guardarSeccion(@RequestBody JsonNode json) {
         // Crear una respuesta JSON con el mensaje
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode response = objectMapper.createObjectNode();
         response.put("mensaje", "Seccion guardada correctamente");
 
+        JsonNode seccionNode = json.get("seccionN");
+        if (seccionNode == null || !seccionNode.has("nombre") || !seccionNode.has("tipo")) {
+            return ResponseEntity.badRequest().body(objectMapper.createObjectNode().put("error", "Datos de seccionN incompletos"));
+        }
 
-        String nombre = json.get("seccionN").get("nombre").asText(); 
-        String grupo = json.get("seccionN").get("tipo").asText();   
-
+        String nombre = seccionNode.get("nombre").asText();
+        String grupo = seccionNode.get("tipo").asText();
 
         Seccion nuevaSeccion = new Seccion();
         nuevaSeccion.setNombre(nombre);
         nuevaSeccion.setGrupo(grupo);
         nuevaSeccion.setEnabled(true);
-        Seccion seccionCreada = seccionService.guardarSeccion(nuevaSeccion);
+        entityManager.persist(nuevaSeccion);
+        entityManager.flush();  //para asegurar que exista la sección cuando se añadan variables
 
         JsonNode itemsNode = json.get("arrayVariables");
         if (itemsNode != null && itemsNode.isArray()) {
@@ -132,28 +135,35 @@ public class AdminController {
                 VariableSeccion nuevaVariable = new VariableSeccion();
                 nuevaVariable.setNombre(nombreV);
                 nuevaVariable.setNumerico(tipoV.equals("Valor numérico"));
-                nuevaVariable.setSeccion(seccionCreada);
-                seccionService.guardarVariableSeccion(nuevaVariable);
+                nuevaVariable.setSeccion(nuevaSeccion);
+                entityManager.persist(nuevaVariable);
             }
         }
         return ResponseEntity.ok(response);
     }
 
+    @Transactional
     @ResponseBody
     @DeleteMapping("/eliminarSeccion/{id}")
     public ResponseEntity<JsonNode> eliminarSeccion(@PathVariable Long id) {
-        /*String queryVariables = "SELECT v FROM VariableSeccion v WHERE v.seccion.id = :id";
-        List<VariableSeccion> variables = entityManager.createQuery(queryVariables).setParameter("id", id).getResultList();
+        Seccion seccion = entityManager.find(Seccion.class, id);
 
-        for (VariableSeccion variable : variables) {    //Se eliminan todas las variables relacionadas con la seccion
-            seccionService.eliminarVariableSeccion(variable);
-        }*/
-
-        seccionService.eliminarSeccion(id);
+        if (seccion != null) {
+            seccion.setEnabled(false);
+            entityManager.merge(seccion);
+        }
 
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode response = objectMapper.createObjectNode();
         response.put("mensaje", "Seccion eliminada correctamente");
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/obtenerEventos")
+    @ResponseBody
+    public ResponseEntity<List<Seccion>> obtenerEventos() {
+        String querySecciones = "SELECT s FROM Seccion s WHERE s.enabled = true ORDER BY s.grupo ASC";
+        List<Seccion> secciones = entityManager.createQuery(querySecciones).getResultList();
+        return ResponseEntity.ok(secciones);
     }
 }

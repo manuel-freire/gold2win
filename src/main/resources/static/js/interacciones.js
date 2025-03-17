@@ -295,33 +295,20 @@ if(contenedorVariablesForm != null){
     };
 }
 
-async function getCsrfToken() {
-    const response = await fetch("/csrf", { credentials: "include" });
-    const data = await response.json();
-    return data.token;
-}
-
 window.eliminarSeccion = eliminarSeccion;
 window.guardarSeccion = guardarSeccion;
     
-async function eliminarSeccion() {
-    const csrfToken = await getCsrfToken(); // Obtener el token CSRF antes de la solicitud
-
-    fetch(`/admin/eliminarSeccion/${seccionSeleccionadaId}`, {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json",
-            "X-CSRF-TOKEN": csrfToken 
-        }
-    })
-    .then(response => response.json())
+function eliminarSeccion() {
+    //event.preventDefault();
+    go(`/admin/eliminarSeccion/${seccionSeleccionadaId}`, "DELETE")
     .then(data => {
         console.log("Sección eliminada:", data.mensaje);
     })
     .catch(error => console.error("Error al eliminar la sección:", error));
 }    
     
-async function guardarSeccion() {
+function guardarSeccion() {
+    //event.preventDefault();
     const nombreS = document.getElementById("inputNombreSeccion").value;
     const tipoS = document.getElementById("inputTipoSeccion").value;
     const imagenS = document.getElementById("inputImagenSecciones").files[0] 
@@ -338,26 +325,75 @@ async function guardarSeccion() {
         variables.push({ nombreV, tipoV });
     });
 
-    const jsonData = JSON.stringify({
+    const jsonData = {
         seccionN: { nombre: nombreS, tipo: tipoS },
         imagen: imagenS,
         arrayVariables: variables
-    });
+    };
 
-    const csrfToken = await getCsrfToken(); // Obtener el token CSRF antes de la solicitud
-
-    fetch("/admin/guardarSeccion", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "X-CSRF-TOKEN": csrfToken  // Enviar el token en la cabecera
-        },
-        body: jsonData
-    })
-    .then(response => response.json())
+    go(`/admin/guardarSeccion`, "POST", jsonData)
     .then(data => {
-        console.log("Respuesta recibida:", data.mensaje);
+        console.log("Respuesta recibida:", data.mensaje); 
     })
-    .catch(error => console.error("Error:", error));
+    .catch(error => console.error("Error go:", error));
     }
 }    
+
+function actualizarBarraEventos() {
+    fetch('/admin/obtenerEventos') // 🔄 Endpoint que obtiene los eventos actualizados
+        .then(response => response.json())
+        .then(eventos => {
+            const navSecciones = document.getElementById("navSeccionesAdmin");
+            navSecciones.innerHTML = ""; // Limpia la barra antes de actualizar
+
+            eventos.forEach(evento => {
+                const navSeccionesAdmin = document.querySelector('.navSeccionesAdmin');
+            navSeccionesAdmin.innerHTML = ''; // Limpiar el contenedor antes de actualizar
+
+            // Iterar a través de las secciones y agregar el HTML de cada una
+            secciones.forEach((seccion, i) => {
+                const grupoSeccionesDiv = document.createElement('div');
+                grupoSeccionesDiv.classList.add('d-flex', 'flex-column', 'grupoSecciones');
+
+                // Si es la primera de su grupo o el grupo cambia, agregar el título del grupo
+                if (i === 0 || seccion.grupo !== secciones[i - 1]?.grupo) {
+                    const tituloSeccionAdmin = document.createElement('span');
+                    tituloSeccionAdmin.classList.add('tituloSeccionAdmin', 'text-nowrap');
+                    tituloSeccionAdmin.textContent = seccion.grupo;
+                    grupoSeccionesDiv.appendChild(tituloSeccionAdmin);
+                }
+
+                // Crear el enlace de la sección
+                const enlaceSeccionAdmin = document.createElement('a');
+                enlaceSeccionAdmin.classList.add('enlaceSeccionAdmin', 'nav-link', 'text-nowrap', 'mt-2');
+                enlaceSeccionAdmin.setAttribute('href', `/admin/secciones/${seccion.id}/editar`);
+                enlaceSeccionAdmin.setAttribute('data-id', seccion.id);
+
+                // Agregar la imagen
+                const imagenSeccion = document.createElement('img');
+                imagenSeccion.setAttribute('width', '50');
+                imagenSeccion.setAttribute('height', '50');
+                imagenSeccion.setAttribute('src', `/seccion/${seccion.id}/pic`);
+
+                // Agregar el nombre de la sección
+                const spanNombreSeccion = document.createElement('span');
+                spanNombreSeccion.classList.add('ms-2', 'spanAjustadoAdmin', 'font-size: 20px;');
+                spanNombreSeccion.textContent = seccion.nombre;
+
+                // Añadir la imagen y el nombre al enlace
+                enlaceSeccionAdmin.appendChild(imagenSeccion);
+                enlaceSeccionAdmin.appendChild(spanNombreSeccion);
+
+                // Agregar el enlace al contenedor del grupo
+                grupoSeccionesDiv.appendChild(enlaceSeccionAdmin);
+
+                // Si es la última de su grupo o el grupo cambia, cerrar el div del grupo
+                if (i === secciones.length - 1 || seccion.grupo !== secciones[i + 1]?.grupo) {
+                    navSeccionesAdmin.appendChild(grupoSeccionesDiv);
+                }
+            });
+        })
+        .catch(error => console.error("Error al actualizar barra de eventos:", error));
+    });
+}
+
