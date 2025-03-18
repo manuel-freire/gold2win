@@ -397,3 +397,11 @@ function actualizarBarraEventos() {
     });
 }
 
+var variableSeccionesForm = document.getElementById("variableSeccionForm");
+
+if(variableSeccionesForm != null){
+    document.getElementById("variableSeccionForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+    });
+}
+
