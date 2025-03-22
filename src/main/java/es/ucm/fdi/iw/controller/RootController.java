@@ -212,25 +212,6 @@ public class RootController {
                 "static/img/default-pic.jpg")));
     }
 
-    
-    @GetMapping("/evento/{id}/apostar")
-    public String apostar(@PathVariable long id, Model model, HttpSession session){
-        String queryApuestas = "SELECT a FROM FormulaApuesta a WHERE a.evento.id = :id";
-        List<FormulaApuesta> apuestas = entityManager.createQuery(queryApuestas).setParameter("id", id).getResultList();
-
-        String queryVariables = "SELECT v FROM Variable v WHERE v.evento.id = :id";
-        List<Variable> variables = entityManager.createQuery(queryVariables).setParameter("id", id).getResultList();
-
-        Evento eventoSel = entityManager.find(Evento.class, id);
-
-        model.addAttribute("apuestas", apuestas);
-        model.addAttribute("variables", variables);
-        model.addAttribute("eventoSel", eventoSel);
-
-        return "crearApuesta";
-    }
-
-
     @GetMapping("/misApuestas")
     public String misApuestas(Model model){
         return "misApuestas";

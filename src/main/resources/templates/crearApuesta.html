@@ -4,9 +4,6 @@
 <head>
     <th:block th:replace="fragments/head :: header"/>
     <title>CREAR APUESTA</title>
-
-    <link rel="stylesheet" href="css_german.css"> <!-- Ruta del archivo CSS -->
-    
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -19,6 +16,7 @@
             <a th:href="@{/}" href="/" class="btn-close" aria-label="Cerrar"></a>
         </div>
 
+        
         <div class="d-flex justify-content-between align-items-center mt-4">
             <div class="barraBuscador " style>
                 <svg viewBox="0 0 24 24" aria-hidden="true" class="iconoBuscador">
@@ -33,7 +31,7 @@
                 id="queryApuestas"
                 class="inputBuscador"
                 type="search"
-                placeholder="Search..."
+                placeholder="Busca por nombre..."
                 name="searchbar"
                 />
             </div>
@@ -41,42 +39,19 @@
             <button type="button" class="btn btn-primary d-none d-sm-block" data-bs-toggle="modal" data-bs-target="#modalCrearApuesta" style="margin-left:10px; min-width:185px;">
                 crea tu propia apuesta
             </button>
-            <button type="button" class="btn btn-primary d-sm-none" data-bs-toggle="modal" data-bs-target="#modalCrearApuesta" style="margin-left:10px;">
+            <button type="button" class="btn btn-primary d-block d-sm-none" data-bs-toggle="modal" data-bs-target="#modalCrearApuesta" style="margin-left:10px;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
                 </svg>
             </button>
         </div>
-        
 
-        <div class="h-100 w-100 d-flex flex-wrap justify-content-evenly" style="margin-top: 10px;">
-            
-            <th:block th:each="apuesta,i: ${apuestas}">
-                <div class="d-flex flex-column contenedor-apuesta" >
-                    <h5 class="pb-2 border-bottom" th:text="${apuesta.nombre}"></h5>
-                    <div id="descripcion-contendor-apuesta">
-                        <div class="d-flex align-items-start mb-2">
-                            <span class="titulo-campo-apuesta me-2">Formula:</span>
-                            <div class="border w-100 scrollBarPerso contenedor-info">
-                                <span class="spanAdaptable" style="white-space: nowrap;" th:text="${apuesta.formula}"></span>
-                            </div>
-                        </div>
-                        <div >
-                            <span class="titulo-campo-apuesta">Cuota favorable:</span>
-                            <span class="text-success" th:text="${apuesta.dineroAfabor}"></span>
-                        </div>
-                        <div >
-                            <span class="titulo-campo-apuesta">Cuota desfavorable:</span>
-                            <span class="text-success" th:text="${apuesta.dineroEnContra}"></span>
-                        </div>
-                    </div>
-                    
-                    <button type="button" class="btn btn-success mx-auto mt-3" data-bs-toggle="modal" data-bs-target="#modalApostar">
-                        apostar
-                    </button>
-                </div>
-            </th:block>      
+        <div id = "contendorFormulas" class="h-100 w-100 d-flex flex-wrap justify-content-evenly" style="margin-top: 10px;">
+        </div>
+
+        <div class="width-100 d-flex justify-content-center mt-3">
+            <button class="btn btn-outline-primary mt-3 botonVerMas" id="verMasEventos" style="display: none;">ver mas</button>
         </div>
     </div>
 
@@ -152,50 +127,8 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modalApostar" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
-            <div class="modal-content" style="position: relative;">
-                <div id="ocultador-formulario">
-                    <form id="apostarForm">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Nombre apuesta</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                        </div>
-                    
-                        <div class="modal-body">
-                            <!-- Campo para cantidad de dinero -->
-                            <div class="mb-3">
-                                <label for="cantidadModal" class="form-label">Cantidad a apostar:</label>
-                                <input type="number" class="form-control" id="cantidadModal" name="cantidad" min="1" required>
-                                <span id="cantidadError" class="text-danger"></span>
-                            </div>
-        
-                            <!-- Selección de apuesta -->
-                            <div class="mb-3">
-                                <label for="tipoApuestaModal" class="form-label">Tipo de apuesta:</label>
-                                <select class="form-select" id="tipoApuestaModal" name="tipoApuesta" required>
-                                    <option value="favor">A favor</option>
-                                    <option value="contra">En contra</option>
-                                </select>
-    
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-success">Aceptar</button>
-                        </div>
-                    </form>
-                </div>
-                
-
-                <svg id="confirmacionApuesta" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-check-circle-fill text-success invisible" viewBox="0 0 16 16">
-                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-                </svg>
-            </div>
-        </div>
-    </div>
-
     <th:block th:replace="fragments/footer.html :: footer" />
+    <script th:src="@{/js/crearApuesta.js}" src="js/crearApuesta.js"></script>
 </body>
 
 </html>
