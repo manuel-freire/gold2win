@@ -234,3 +234,11 @@ INSERT INTO VARIABLE_SECCION (ID, NOMBRE, NUMERICO, SECCION_ID) VALUES (1, 'gole
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292)
 	at es.ucm.fdi.iw.IwApplication.main(IwApplication.java:10)
+2025-03-16 16:22:39 jdbc[33]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "SELECT * FROM EVENTO ORDERED [*]BY FECHA_CIERRE"
+Syntax error in SQL statement "SELECT * FROM EVENTO ORDERED [*]BY FECHA_CIERRE"; SQL statement:
+SELECT * FROM EVENTO ORDERED BY FECHA_CIERRE [42000-214]
+2025-03-16 16:22:49 jdbc[33]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "SELECT * FROM EVENTO ORDER_BY [*]FECHA_CIERRE"
+Syntax error in SQL statement "SELECT * FROM EVENTO ORDER_BY [*]FECHA_CIERRE"; SQL statement:
+SELECT * FROM EVENTO ORDER_BY FECHA_CIERRE [42000-214]
