@@ -1,10 +1,13 @@
 package es.ucm.fdi.iw.model;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
 import javax.persistence.*;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import es.ucm.fdi.iw.model.Resultado;
 
@@ -12,7 +15,7 @@ import es.ucm.fdi.iw.model.Resultado;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class FormulaApuesta {
+public class FormulaApuesta implements Transferable<FormulaApuesta.Transfer> {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gen")
     @SequenceGenerator(name = "gen", sequenceName = "gen")
@@ -27,6 +30,7 @@ public class FormulaApuesta {
     private User creador;
     
     private String formula;
+    private LocalDateTime fechaCreacion;
     private String nombre;
     private double dineroAfavor;
     private double dineroEnContra;
@@ -45,6 +49,27 @@ public class FormulaApuesta {
         } else {
             return dineroAfavor > 0 ? (((dineroEnContra + dineroAfavor) / dineroEnContra)) : 1.0;
         }
+    }
+
+    @Transient
+    public static boolean formulaValida(String formula, Evento evento) {
+        //Aqui habria que verificar que no se usan variables que no existan y otras cosas que se quieran añadir
+        return !formula.equals("");
+    }
+
+    //COSAS PARA MANDAR DATOS CON AJAX A JS
+    @Getter
+    @AllArgsConstructor
+    public static class Transfer {
+        private long id;
+		private String nombre;
+        private String formula;
+        private double cuotaFaborable;
+        private double cuotaDesfavorable;
+    }
+
+    public FormulaApuesta.Transfer toTransfer(){
+        return new FormulaApuesta.Transfer(id, nombre, formula, calcularCuota(true), calcularCuota(false));
     }
 
 }
