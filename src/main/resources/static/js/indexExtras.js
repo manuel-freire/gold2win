@@ -8,7 +8,6 @@ let fechaAnterior = new Date(0); // fecha del ultimo evento cargado (para separa
 
 fechaUltimoEvento(); //carga fecha anterior
 
-
 //FUNCIONES PARA LA BARRA BUSCADORA
 var cargando = false
 

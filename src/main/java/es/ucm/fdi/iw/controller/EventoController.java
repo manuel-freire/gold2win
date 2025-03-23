@@ -25,11 +25,18 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+
 import es.ucm.fdi.iw.AppConfig;
 import es.ucm.fdi.iw.LocalData;
 import es.ucm.fdi.iw.model.Apuesta;
@@ -61,6 +68,55 @@ public class EventoController {
 
 	private static final Logger log = LogManager.getLogger(RootController.class);
 
+
+    @PostMapping("/apostar")
+    @Transactional
+    @ResponseBody
+    public String procesarApuesta(
+            @RequestBody JsonNode o, HttpSession session) throws JsonProcessingException {
+
+        long idFormula = o.get("idFormula").asLong();
+        boolean decision = o.get("decision").asBoolean();
+        float cantidad = o.get("cantidad").floatValue();
+
+        FormulaApuesta formula = entityManager.find(FormulaApuesta.class, idFormula);
+        long userId = ((User)session.getAttribute("u")).getId();		
+		User u = entityManager.find(User.class, userId);
+
+        //Comprobamos que los datos sean validos
+        if(formula == null)
+            return "Id invalido";
+
+        if(cantidad < 0)
+            return "Cantidad no válida";
+        
+        if(cantidad <= u.getDineroDisponible())
+            return "saldo insuficiente";
+
+        //Una vez las verificaciones hechas procedemos a crear la apuesta
+        Apuesta nuevaApuesta = new Apuesta();
+        nuevaApuesta.setCantidad(cantidad);
+        nuevaApuesta.setAFavor(decision);
+        nuevaApuesta.setApostador(u);
+        nuevaApuesta.setFormulaApuesta(formula);
+
+        u.setDineroRetenido(u.getDineroRetenido() + cantidad);
+        u.setDineroDisponible(u.getDineroDisponible() - cantidad);
+
+        if (decision) 
+            formula.setDineroAfavor(formula.getDineroAfavor() + cantidad);
+        else 
+            formula.setDineroEnContra(formula.getDineroEnContra() + cantidad);
+
+        entityManager.persist(u);
+        entityManager.persist(formula);
+        entityManager.persist(nuevaApuesta);
+
+        entityManager.flush();
+        session.setAttribute("u", u);
+
+        return "OK";
+    }
 
     @GetMapping(path = "/{id}/apostar/buscar", produces = "application/json")
     @Transactional
