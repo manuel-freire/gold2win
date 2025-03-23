@@ -4,7 +4,9 @@ import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -43,6 +45,7 @@ import es.ucm.fdi.iw.model.Apuesta;
 
 import es.ucm.fdi.iw.model.Evento;
 import es.ucm.fdi.iw.model.FormulaApuesta;
+import es.ucm.fdi.iw.model.Resultado;
 import es.ucm.fdi.iw.model.Seccion;
 import es.ucm.fdi.iw.model.User;
 import es.ucm.fdi.iw.model.Variable;
@@ -90,7 +93,7 @@ public class EventoController {
         if(cantidad < 0)
             return "Cantidad no válida";
         
-        if(cantidad <= u.getDineroDisponible())
+        if(cantidad > u.getDineroDisponible())
             return "saldo insuficiente";
 
         //Una vez las verificaciones hechas procedemos a crear la apuesta
@@ -110,6 +113,72 @@ public class EventoController {
 
         entityManager.persist(u);
         entityManager.persist(formula);
+        entityManager.persist(nuevaApuesta);
+
+        entityManager.flush();
+        session.setAttribute("u", u);
+
+        return "OK";
+    }
+
+    @PostMapping("/{id}/crearFormula")
+    @Transactional
+    @ResponseBody
+    public String crearFormula(
+            @PathVariable long id,
+            @RequestBody JsonNode o, HttpSession session) throws JsonProcessingException {
+
+        String titulo = o.get("titulo").asText();
+        String formula = o.get("formula").asText();
+        Double cantidad = o.get("cantidad").asDouble();
+        boolean tipoApuesta = o.get("tipoApuesta").asBoolean();
+        
+        Evento evento = entityManager.find(Evento.class, id);
+        long userId = ((User)session.getAttribute("u")).getId();
+        User u = entityManager.find(User.class, userId);
+
+        //Comprobamos que los datos sean validos
+        if(evento == null)
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evento no encontrado");
+
+        if(cantidad < 0)
+            return "ERROR-CANTIDAD";
+        
+        if(cantidad > u.getDineroDisponible())
+            return "ERROR-CANTIDAD";
+
+        if(titulo.equals(""))
+            return "ERROR-TITULO";
+        
+        if(!FormulaApuesta.formulaValida(formula, evento))
+            return "ERROR-FORMULA";
+
+        FormulaApuesta nuevaFormula = new FormulaApuesta();
+        nuevaFormula.setEvento(evento);
+        nuevaFormula.setCreador(u);
+        nuevaFormula.setFormula(formula);
+        nuevaFormula.setNombre(titulo);
+        if (tipoApuesta) {
+            nuevaFormula.setDineroAfavor(cantidad);
+            nuevaFormula.setDineroEnContra(0);
+        } else {
+            nuevaFormula.setDineroAfavor(0);
+            nuevaFormula.setDineroEnContra(cantidad);
+        }
+        nuevaFormula.setFechaCreacion(LocalDateTime.ofInstant(Instant.now(), ZoneOffset.UTC));
+        nuevaFormula.setResultado(Resultado.INDETERMINADO);
+
+        Apuesta nuevaApuesta = new Apuesta();
+        nuevaApuesta.setCantidad(cantidad);
+        nuevaApuesta.setAFavor(tipoApuesta);
+        nuevaApuesta.setApostador(u);
+        nuevaApuesta.setFormulaApuesta(nuevaFormula);
+
+        u.setDineroRetenido(u.getDineroRetenido() + cantidad);
+        u.setDineroDisponible(u.getDineroDisponible() - cantidad);
+
+        entityManager.persist(u);
+        entityManager.persist(nuevaFormula);
         entityManager.persist(nuevaApuesta);
 
         entityManager.flush();

@@ -40,10 +40,10 @@
                 />
             </div>
 
-            <button type="button" class="btn btn-primary d-none d-sm-block" data-bs-toggle="modal" data-bs-target="#modalCrearApuesta" style="margin-left:10px; min-width:185px;">
+            <button type="button" class="btn btn-primary d-none d-sm-block" id="boton-crear-formula" data-bs-toggle="modal" data-bs-target="#modalCrearApuesta" style="margin-left:10px; min-width:185px;">
                 crea tu propia apuesta
             </button>
-            <button type="button" class="btn btn-primary d-block d-sm-none" data-bs-toggle="modal" data-bs-target="#modalCrearApuesta" style="margin-left:10px;">
+            <button type="button" class="btn btn-primary d-block d-sm-none" id="boton-crear-formula-reducido" data-bs-toggle="modal" data-bs-target="#modalCrearApuesta" style="margin-left:10px;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
@@ -102,16 +102,16 @@
 
                             <div class="vision-creatuApuesta-2 desaparece">
                                 <div class="mb-3">
-                                    <label for="cantidadModal2" class="form-label">Cantidad a apostar:</label>
-                                    <input type="number" class="form-control" id="cantidadModal2" name="cantidad" min="1" required>
+                                    <label for="cantidadModal" class="form-label">Cantidad a apostar:</label>
+                                    <input type="number" class="form-control" id="cantidadModal" name="cantidad" min="1" required>
                                     <span id="cantidadError" class="text-danger"></span>
                                 </div>
             
                                 <div class="mb-3">
-                                    <label for="tipoApuestaModal2" class="form-label">Tipo de apuesta:</label>
-                                    <select class="form-select" id="tipoApuestaModal2" name="tipoApuesta" required>
-                                        <option value="favor">A favor</option>
-                                        <option value="contra">En contra</option>
+                                    <label for="tipoApuestaModal" class="form-label">Tipo de apuesta:</label>
+                                    <select class="form-select" id="tipoApuestaModal" name="tipoApuesta" required>
+                                        <option value="favorable">A favor</option>
+                                        <option value="contraria">En contra</option>
                                     </select>
                                 </div>
                             </div>

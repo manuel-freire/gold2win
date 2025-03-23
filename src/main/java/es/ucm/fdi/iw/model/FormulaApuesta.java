@@ -51,6 +51,12 @@ public class FormulaApuesta implements Transferable<FormulaApuesta.Transfer> {
         }
     }
 
+    @Transient
+    public static boolean formulaValida(String formula, Evento evento) {
+        //Aqui habria que verificar que no se usan variables que no existan y otras cosas que se quieran añadir
+        return !formula.equals("");
+    }
+
     //COSAS PARA MANDAR DATOS CON AJAX A JS
     @Getter
     @AllArgsConstructor

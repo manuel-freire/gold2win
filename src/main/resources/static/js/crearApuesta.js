@@ -3,10 +3,9 @@ const currentPath = window.location.pathname;
 const botonVerMas = document.getElementById("verMasEventos");
 var offset = 0; // numElementos cargados
 var buscado = null; // indica la ultima busqueda realizada (para sobre la busqueda ver mas)
-let fechaInicio = new Date(0); // fecha en que se trajeron eventos por primera vez (para evitar que las cosas se descuadren)
+let fechaInicio = new Date().toISOString(); // fecha en que se trajeron eventos por primera vez (para evitar que las cosas se descuadren)
 var cargando = true;
 
-fechaInicio = new Date().toISOString();
 cargarFormulas().then(() => {
     cargando = false;});
 
@@ -147,6 +146,33 @@ function anadirFormula(formula){
 
 
 /*  CODIGO PARA EL MODAL Y LAS APUESTAS  */
+
+//cuando abres el model siempre está en la primera pestaña
+document.getElementById("boton-crear-formula").addEventListener("click", () => { 
+    mostrarModal();
+
+});
+
+document.getElementById("boton-crear-formula-reducido").addEventListener("click", () => { 
+    mostrarModal();
+});
+
+function mostrarModal(){
+    console.log("entra");
+    var elementos1 = document.querySelectorAll('.vision-creatuApuesta-1');
+    var elementos2 = document.querySelectorAll('.vision-creatuApuesta-2');
+
+    elementos1.forEach(function(elemento) {
+        elemento.classList.remove('desaparece');
+    });
+
+    elementos2.forEach(function(elemento) {
+        elemento.classList.add('desaparece');
+    });
+
+    document.getElementById("botonRetrocederCrearApuesta").classList.add('invisible');
+}
+
 document.getElementById("botonSiguienteCrearApuesta").addEventListener("click", () => {
     console.log("entra");
     var elementos1 = document.querySelectorAll('.vision-creatuApuesta-1');
@@ -186,48 +212,47 @@ document.getElementById("botonRetrocederCrearApuesta").addEventListener("click",
 
 document.getElementById("crearApuestaForm").addEventListener("submit", function(event) {
     event.preventDefault();
+    if( !enviandoFormulario ){
+        enviandoFormulario = true;
+        const ruta = window.location.pathname.replace("apostar", "crearFormula");
+        const titulo = document.getElementById("tituloModal").value;
+        const formula = document.getElementById("formulaModal").value;
+        const cantidad = parseFloat(document.getElementById("cantidadModal").value);
+        const tipoApuesta = document.getElementById("tipoApuestaModal").value == "favorable";
 
-    const titulo = document.getElementById("tituloModal").value;
-    const formula = document.getElementById("formulaModal").value;
-    const cantidad = document.getElementById("cantidadModal2").value;
-    const tipoApuesta = document.getElementById("tipoApuestaModal2").value;
+        goTexto(ruta, 'POST', {titulo,formula,cantidad,tipoApuesta}).then((response) => {
+            if(response == "OK"){
+                document.getElementById("ocultador-formulario2").classList.add("invisible");
+                let check = document.getElementById("confirmacionApuesta2");
+                check.classList.remove("invisible");
+                check.style.animation = "fadeIn 0.5s ease-in-out";
 
-    document.getElementById("ocultador-formulario2").classList.add("invisible");
-    let check = document.getElementById("confirmacionApuesta2");
-    check.classList.remove("invisible");
-    check.style.animation = "fadeIn 0.5s ease-in-out";
+                setTimeout(() => {
+                    location.reload();
+                }, 1000);
+            }
+            else{
+                if(response == "ERROR-TITULO"){
+                    document.getElementById("tituloModal").classList.add("border", "border-danger");
+                    mostrarModal();
+                }
+                else if(response == "ERROR-FORMULA"){
+                    document.getElementById("formulaModal").classList.add("border", "border-danger");
+                    mostrarModal();
+                }
+                else if(response == "ERROR-CANTIDAD")
+                    document.getElementById("cantidadModal").classList.add("border", "border-danger");
+                else if(response == "ERROR-TIPO")
+                    document.getElementById("tipoApuestaModal").classList.add("border", "border-danger");
+                else
+                    console.log(response);
 
-    setTimeout(() => {
-        location.reload();  // Recarga la página
-    }, 1000);
-    /*
-    fetch("/apostar", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({cantidad, tipoApuesta})
-    })
-    .then(response => {
-        if (!response.ok) {
-            return response.json().then(error => { throw new Error(error.error); });
-        }
-        return response.json();
-    })
-    .then(data => {
-        // Si la apuesta es exitosa, mostrar el ícono de éxito
-        alert(data.mensaje);
-        var modal = bootstrap.Modal.getInstance(document.getElementById('miModal'));
-        modal.hide(); // Cierra el modal manualmente
-        document.getElementById("cantidad").classList.remove("is-invalid");
-        document.getElementById("cantidad").classList.add("is-valid");  // Marca como válida
-    })
-    .catch(error => {
-        // Si hay un error (ej. saldo insuficiente), marcar el campo en rojo
-        document.getElementById("cantidad").classList.add("is-invalid");
-        document.getElementById("cantidadError").textContent = error.message;  // Mostrar el error
+                enviandoFormulario = false;
+            }
+        }).catch((error) => {
+            enviandoFormulario = false;
         });
-        */
+    }
 });
 
 var enviandoFormulario = false; // Para evitar que si clicas varias veces en el mismo botón apuestes varias veces
@@ -262,6 +287,7 @@ function enviarFormulario(esFavorable,id) {
             else{
                 console.log(response);
                 input.classList.add("border", "border-danger"); 
+                enviandoFormulario = false;
             }
         }).catch((error) => {
             console.log(error);
