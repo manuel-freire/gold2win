@@ -278,3 +278,7 @@
     word-wrap: break-word;
     overflow: hidden;
 }
+
+.invalid-feedback {
+    display: block !important;  /* Esto forzaría la visualización, aunque no es lo más recomendable */
+  }

@@ -28,7 +28,8 @@
                     <div class = "col-6">
                         <label for="inputNombreSeccion" class="form-label">Nombre de la sección:</label>
                         <input class="form-control" id="inputNombreSeccion" name="nombreSeccion" required>
-                        <label for="inputTipoSeccion" class="form-label mt-5">Nombre del tipo de sección:</label>
+                        <div id="mensajeError" class="mensaje-error" style="display: none;">Este nombre ya está en uso.</div>
+                        <label for="inputTipoSeccion" class="form-label mt-4">Nombre del tipo de sección:</label>
                         <input class="form-control" id="inputTipoSeccion" name="tipoSeccion" required>
                     </div>
                     
@@ -57,7 +58,7 @@
                             <button style="min-height: 30px;"  class="btn btn-secondary mt-4 w-100" type = "button">Cancelar</button>
                         </a>
                         
-                        <button style="min-height: 30px; " onclick="guardarSeccion()" class = "col-3 btn btn-success mt-4 ms-5"> 
+                        <button style="min-height: 30px; " onclick="guardarSeccion(event)" class = "col-3 btn btn-success mt-4 ms-5"> 
                             Confirmar seccion
                         </button>
                     </div>

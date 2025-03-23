@@ -267,7 +267,7 @@ var contenedorVariablesForm = document.getElementById("contenedorVariables");
 if(contenedorVariablesForm != null){
     function agregarDiv() {
         const contenedor = document.getElementById("contenedorVariables");
-        var nombre = document.getElementById('inputnombreVarNueva').value;
+        var nombre = document.getElementById('inputnombreVarNueva').value.trim();
         var select = document.getElementById('selectTipoVarNueva');
         var opcionSeleccionada = select.options[select.selectedIndex].text;
     
@@ -306,38 +306,81 @@ function eliminarSeccion() {
     })
     .catch(error => console.error("Error al eliminar la sección:", error));
 }    
-    
-function guardarSeccion() {
-    //event.preventDefault();
-    const nombreS = document.getElementById("inputNombreSeccion").value;
-    const tipoS = document.getElementById("inputTipoSeccion").value;
-    const imagenS = document.getElementById("inputImagenSecciones").files[0] 
-        ? document.getElementById("inputImagenSecciones").files[0].name 
-        : null;
 
-    if(nombreS != "" && tipoS != "" && imagenS != null){
-        const divs = document.querySelectorAll("#contenedorVariables .variableSeccion");
-    const variables = [];
-
-    divs.forEach(div => {
-        const nombreV = div.querySelector(".nombreVariableSpan").innerText;
-        const tipoV = div.querySelector(".tipoVariableSpan").innerText;
-        variables.push({ nombreV, tipoV });
+function toBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
     });
+}
 
-    const jsonData = {
-        seccionN: { nombre: nombreS, tipo: tipoS },
-        imagen: imagenS,
-        arrayVariables: variables
-    };
+async function guardarSeccion(event) {
+    event.preventDefault();
+    const isNombreValido = await verificarNombreSeccion();
+    if(isNombreValido){
+        const nombreS = document.getElementById("inputNombreSeccion").value.trim(); //el trim elimina espacios en blanco innecesarios
+        const tipoS = document.getElementById("inputTipoSeccion").value.trim();
+        const file = document.getElementById("inputImagenSecciones").files[0] || null;
 
-    go(`/admin/guardarSeccion`, "POST", jsonData)
-    .then(data => {
-        console.log("Respuesta recibida:", data.mensaje); 
-    })
-    .catch(error => console.error("Error go:", error));
+        let base64Image = await toBase64(file);
+
+        if(nombreS != "" && tipoS != "" && file != null){
+            const divs = document.querySelectorAll("#contenedorVariables .variableSeccion");
+            const variables = [];
+
+            divs.forEach(div => {
+                const nombreV = div.querySelector(".nombreVariableSpan").innerText;
+                const tipoV = div.querySelector(".tipoVariableSpan").innerText;
+                variables.push({ nombreV, tipoV });
+            });
+
+            const jsonData = {
+                seccionN: { nombre: nombreS, tipo: tipoS },
+                imageData: { // Aquí se incluye la imagen
+                    image: base64Image,
+                    filename: file.name
+                },
+                arrayVariables: variables
+            };
+
+            go(`/admin/guardarSeccion`, "POST", jsonData)
+            .then(data => {
+                console.log("Respuesta recibida:", data.mensaje); 
+            })
+            .catch(error => console.error("Error go:", error));
+        }
+    }
+    else{
+        event.preventDefault();
     }
 }    
+
+async function verificarNombreSeccion(){
+    const nombreS = document.getElementById("inputNombreSeccion").value.trim();
+    if (nombreS === "") return; 
+  
+    try {
+        const response = await fetch(`/admin/verificarSeccion?nombre=${encodeURIComponent(nombreS)}`);
+        const data = await response.json();
+    
+        if (data.existe) {
+          document.getElementById("inputNombreSeccion").classList.add("is-invalid");
+          document.getElementById("mensajeError").classList.add("invalid-feedback");
+          console.log("false");
+          return false; // Devolvemos false si el nombre existe.
+        } else {
+          document.getElementById("inputNombreSeccion").classList.remove("is-invalid");
+          document.getElementById("mensajeError").classList.remove("invalid-feedback");
+          console.log("true");
+          return true; // Devolvemos true si el nombre no existe.
+        }
+      } catch (error) {
+        console.error("Error al verificar el nombre:", error);
+        return false; // Devuelve false en caso de error.
+      }
+}
 
 function actualizarBarraEventos() {
     fetch('/admin/obtenerEventos') // 🔄 Endpoint que obtiene los eventos actualizados
