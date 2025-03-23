@@ -1,0 +1,47 @@
+<!DOCTYPE html >
+<html class="h-100" xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
+
+<head>  
+    <th:block th:replace="fragments/head :: header"/>
+    <title>Eventos</title>
+</head>
+
+<body>
+    <header th:replace="fragments/nav.html :: nav('administrar')"></header>
+
+    <div class="ms-4">
+        <div th:replace="fragments/menuAdmin.html :: navAdmin('Eventos')"></div>
+    </div>
+
+    <table id="myTable" class="display">
+        <thead>
+            <tr>
+                <th>Nombre </th>
+                <th>Fecha de Creación </th>
+                <th>Fecha de Cierre </th>
+                <th> </th>
+                <th> </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="evento : ${eventos}">
+                <td th:text="${evento.nombre}"></td>
+                <td th:text="${evento.fechaCreacion}"></td>
+                <td th:text="${evento.fechaCierre}"></td>
+                <td>
+                    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#determinarEventoModal">
+                        Determinar
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#cancelarEventoModal">
+                        Cancelar
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+</body>
