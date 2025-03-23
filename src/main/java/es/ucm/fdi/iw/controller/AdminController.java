@@ -15,6 +15,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpSession;
 
+import es.ucm.fdi.iw.model.Evento;
 import es.ucm.fdi.iw.model.Seccion;
 import es.ucm.fdi.iw.model.User;
 
@@ -85,5 +86,15 @@ public class AdminController {
         model.addAttribute("secciones", secciones);
 
         return "secciones-crearSeccion";
+    }
+
+    @GetMapping("/eventos")
+    public String eventos(Model model){
+        String queryEventos = "SELECT e FROM Evento e WHERE e.cancelado = false";
+        List<Evento> eventos = entityManager.createQuery(queryEventos, Evento.class).getResultList();
+
+        model.addAttribute("eventos", eventos);
+
+        return "eventos";
     }
 }
