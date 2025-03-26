@@ -24,19 +24,19 @@
         <div class="d-flex flex-column w-100 ps-2 ps-md-1 pe-2 pe-md-1">
             <div class = "d-flex d-md-none separadorMovilSecciones mb-3 mb-md-0 mt-3 mt-md-0"></div>
             
-            <div class = "formularioSeccion mt-2 mt-md-4 scrollBarPerso">
+            <form id = "formularioSeccion" class = "mt-2 mt-md-4 scrollBarPerso">
                 <div class = "zonaDatos row">
                     <div class = "col-6">
                         <input type="hidden" name="id" th:value="${seccionEditable.id}">
                         <label for="inputNombreSeccion" class="form-label">Nombre de la sección:</label>
-                        <input class="form-control" id="inputNombreSeccion" name="nombre" th:value="${seccionEditable.nombre}">
+                        <input class="form-control" id="inputNombreSeccion" name="nombreSeccion" th:value="${seccionEditable.nombre}" readonly>
                         <label for="inputTipoSeccion" class="form-label mt-5">Nombre del tipo de sección:</label>
-                        <input class="form-control" id="inputTipoSeccion" name="tipo" th:value="${seccionEditable.grupo}">
+                        <input class="form-control" id="inputTipoSeccion" name="tipoSeccion" th:value="${seccionEditable.grupo}" required>
                     </div>
                     
                     <div class = "col-6 d-flex flex-column align-items-center">
                         <label for="inputImagenSecciones">Selecciona una imagen:</label>
-                        <input type="file" id="inputImagenSecciones" name="imagen" accept="image/*" class="form-control mt-2">
+                        <input type="file" id="inputImagenSecciones" name="imagen" accept="image/*" class="form-control mt-2" required>
 
                         <img id="mostrarImagenSeccionesForm" th:src="@{/seccion/{id}/pic(id=${seccionEditable.id})}" alt="Vista previa" style="display: block; max-width: 200px; margin-top: 10px;">
                     </div>
@@ -66,12 +66,12 @@
                             <button style="min-height: 30px;"  class="btn btn-secondary mt-4 w-100">Cancelar</button>
                         </a>
                         
-                        <button style="min-height: 30px; " class = "col-3 btn btn-success mt-4 ms-5"> 
+                        <button style="min-height: 30px; " onclick="editarSeccion(event)" class = "col-3 btn btn-success mt-4 ms-5"> 
                             Confirmar cambios
                         </button>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </main>
     
@@ -80,7 +80,7 @@
         <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
             <div class="modal-content" style="position: relative;">
                 <div id="ocultador-formulario">
-                    <form id="apostarForm">
+                    <form id="variableSeccionForm">
                         <div class="modal-header">
                             <h5 class="modal-title">Nueva variable</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
@@ -89,13 +89,13 @@
                         <div class="modal-body">
                             
                             <div class="mb-3">
-                                <label for="cantidadModal" class="form-label">Nombre de la variable:</label>
-                                <input class="form-control" id="cantidadModal" name="nombreVar" >
+                                <label for="inputnombreVarNueva" class="form-label">Nombre de la variable:</label>
+                                <input class="form-control" id="inputnombreVarNueva" name="nombreVar" >
                             </div>
         
                             <div class="mb-3">
-                                <label for="tipoApuestaModal" class="form-label">Tipo de variable:</label>
-                                <select class="form-select" id="tipoApuestaModal" name="tipoVar">
+                                <label for="selectTipoVarNueva" class="form-label">Tipo de variable:</label>
+                                <select class="form-select" id="selectTipoVarNueva" name="tipoVar">
                                     <option value="">Seleccione una</option>
                                     <option value="1">Valor numérico</option>
                                     <option value="2">Texto</option>
@@ -117,7 +117,7 @@
         <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
             <div class="modal-content" style="position: relative;">
                 <div id="ocultador-formulario">
-                    <form id="apostarForm">
+                    <form id="eliminarSeccionForm">
                         <div class="modal-header">
                             <h5 class="modal-title">Eliminar sección</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
@@ -128,13 +128,14 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-danger" data-bs-dismiss="modal">Eliminar sección</button>
+                            <button class="btn btn-danger botonEliminarSeccionP" onclick="eliminarSeccion()" data-bs-dismiss="modal">Eliminar sección</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
 
     <div id="menuOpcionesSeccion">
         <a href="#">Editar evento</a>

@@ -163,7 +163,7 @@ public class AdminController {
             String filename = imageDataNode.get("filename").asText();
             
             MultipartFile photo = convertirBase64AMultipartFile(base64Image, filename);
-            setPic(photo, nuevaSeccion.getId());
+            setPic(photo, nuevaSeccion.getNombre());
         }
         return ResponseEntity.ok(response);
     }
@@ -185,13 +185,60 @@ public class AdminController {
         return ResponseEntity.ok(response);
     }
 
+    @Transactional
     @ResponseBody
-    public String setPic(@RequestParam("photo") MultipartFile photo, @PathVariable long id) throws IOException {
+    @PostMapping("/editarSeccion")
+    public ResponseEntity<JsonNode> editarSeccion(@RequestBody JsonNode json) throws IOException{
+        // Crear una respuesta JSON con el mensaje
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode response = objectMapper.createObjectNode();
+        response.put("mensaje", "Seccion guardada correctamente");
 
-        User target = entityManager.find(User.class, id);
-				
-		log.info("Updating photo for user {}", id);
-		File f = localData.getFileAux("", "imagen"+id+".jpg");
+        JsonNode seccionNode = json.get("seccionN");
+        if (seccionNode == null || !seccionNode.has("nombre") || !seccionNode.has("tipo")) {
+            return ResponseEntity.badRequest().body(objectMapper.createObjectNode().put("error", "Datos de seccionN incompletos"));
+        }
+
+        String nombre = seccionNode.get("nombre").asText();
+        String grupo = seccionNode.get("tipo").asText();
+
+        Seccion seccion = entityManager.find(Seccion.class, nombre);
+        seccion.setGrupo(grupo);
+        entityManager.merge(seccion);
+
+
+        //Seguramente rente borrar todas las variables y volver a crearlas ya que es dificil saber si se han modificado
+        JsonNode itemsNode = json.get("arrayVariables");
+        if (itemsNode != null && itemsNode.isArray()) {
+            for (JsonNode item : itemsNode) {
+
+                String nombreV = item.get("nombreV").asText();
+                String tipoV = item.get("tipoV").asText();
+
+                
+                VariableSeccion nuevaVariable = new VariableSeccion();
+                nuevaVariable.setNombre(nombreV);
+                nuevaVariable.setNumerico(tipoV.equals("Valor numérico"));
+                nuevaVariable.setSeccion(seccion);
+                entityManager.persist(nuevaVariable);
+            }
+        }
+
+        JsonNode imageDataNode = json.get("imageData");
+        if (imageDataNode != null && imageDataNode.has("image")) {
+            String base64Image = imageDataNode.get("image").asText();
+            String filename = imageDataNode.get("filename").asText();
+            
+            MultipartFile photo = convertirBase64AMultipartFile(base64Image, filename);
+            setPic(photo, seccion.getNombre());
+        }
+        return ResponseEntity.ok(response);
+    }
+
+    @ResponseBody
+    public String setPic(@RequestParam("photo") MultipartFile photo, @PathVariable String nombre) throws IOException {
+		log.info("Updating photo for user {}", nombre);
+		File f = localData.getFileAux("", "imagen"+nombre+".jpg");
 		if (photo.isEmpty()) {
 			log.info("failed to upload photo: emtpy file?");
 		} else {
@@ -199,9 +246,9 @@ public class AdminController {
 					new BufferedOutputStream(new FileOutputStream(f))) {
 				byte[] bytes = photo.getBytes();
 				stream.write(bytes);
-                log.info("Uploaded photo for {} into {}!", id, f.getAbsolutePath());
+                log.info("Uploaded photo for {} into {}!", nombre, f.getAbsolutePath());
 			} catch (Exception e) {
-				log.warn("Error uploading " + id + " ", e);
+				log.warn("Error uploading " + nombre + " ", e);
 			}
 		}
 		return "{\"status\":\"photo uploaded correctly\"}";

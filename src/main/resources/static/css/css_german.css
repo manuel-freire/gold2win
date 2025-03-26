@@ -195,7 +195,7 @@
     height: 100%;
 }
 
-.formularioSeccion{
+#formularioSeccion{
     display: flex;
     flex-direction: column;
     align-items: center;
