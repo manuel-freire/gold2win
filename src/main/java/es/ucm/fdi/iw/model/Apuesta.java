@@ -26,4 +26,5 @@ public class Apuesta {
     @ManyToOne
     @JoinColumn(name = "formula")
     private FormulaApuesta formulaApuesta;
+    
 }

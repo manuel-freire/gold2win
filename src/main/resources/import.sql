@@ -59,24 +59,58 @@ INSERT INTO IWUser (ID, DINERO_DISPONIBLE, DINERO_RETENIDO, EMAIL, ENABLED, FIRS
 (9, 500.0, 100.0, 'diego.sanchez@example.com', TRUE, 'Diego', 'Sánchez Pérez', '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'ADMIN,USER', 'dsanchez'),
 (10, 60.0, 0.0, 'lucia.ramirez@example.com', TRUE, 'Lucía', 'Ramírez Torres', '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'USER', 'lramirez'),
 (11, 130.55, 22.00, 'ramon@gmail.com', TRUE, 'Ramon', 'apellido1 apellido2', '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'ADMIN,USER', 'Ramon'),
-(12, 130.55, 22.00, 'Jose_Luis@gmail.com', TRUE, 'Jose Luis', 'apellido1 apellido2', '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'USER', 'Jose Luis');
+(12, 130.55, 22.00, 'Jose_Luis@gmail.com', TRUE, 'Jose Luis', 'apellido1 apellido2', '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'USER', 'Jose Luis'),
+(13, 400.0, 15.0, 'elena.fernandez@example.com', TRUE, 'Elena', 'Fernández Díaz', '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'USER', 'efernandez'),
+(14, 580.0, 40.0, 'pedro.alvarez@example.com', TRUE, 'Pedro', 'Álvarez Ruiz', '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'USER', 'palvarez'),
+(15, 250.0, 0.0, 'isabel.perez@example.com', TRUE, 'Isabel', 'Pérez López', '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'ADMIN', 'iperez');
 
--- INSERT FORMULA_APUESTA
-INSERT INTO FORMULA_APUESTA (ID, DINERO_AFABOR, DINERO_EN_CONTRA, FORMULA, NOMBRE, RESULTADO, CREADOR_ID, EVENTO_ID) VALUES
-(1, 0, 0, 'goles Barsa > goles Madrid', 'Gana Barsa', 'INDETERMINADO', 1, 1),
-(2, 0, 0, 'puntos Lakers > puntos Celtics', 'Victoria Lakers', 'INDETERMINADO', 2, 2),
-(3, 0, 0, 'carreras Yankees > carreras Dodgers', 'Ganan Yankees', 'INDETERMINADO', 3, 3),
-(4, 0, 0, 'goles Kiel > goles Veszprem', 'Gana Kiel', 'INDETERMINADO', 4, 4),
-(5, 0, 0, 'toques Alvarado > toques Smith', 'Victoria Alvarado', 'PERDIDO', 5, 5),
-(6, 0, 0, 'sets Nadal > sets Djokovic', 'Gana Nadal', 'INDETERMINADO', 6, 6),
-(7, 0, 0, 'puntos Wang > puntos Lee', 'Gana Wang', 'INDETERMINADO', 7, 7),
-(8, 0, 0, 'tiempo Froome < tiempo Pogacar', 'Froome gana etapa', 'INDETERMINADO', 8, 8),
-(9, 0, 0, 'golpes Woods > golpes McIlroy', 'Gana Woods', 'INDETERMINADO', 9, 9),
-(13, 0, 0, 'hoyos Woods > hoyos McIlroy', 'Gana Woods', 'INDETERMINADO', 9, 9),
-(14, 0, 0, 'promedio birdies Woods < promedio birdies McIlroy', 'Gana McIlroy', 'INDETERMINADO', 9, 9),
-(10, 0, 0, 'torres destruidas G2 > torres destruidas T1', 'Gana G2', 'INDETERMINADO', 10, 10),
-(11, 0, 0, 'rounds ganados NaVi > rounds ganados Vitality', 'Victoria NaVi', 'INDETERMINADO', 11, 11),
-(12, 0, 0, 'mapas ganados Fnatic > mapas ganados Sentinels', 'Gana Fnatic', 'INDETERMINADO', 12, 12);
+-- INSERT FORMULA_APUESTA con FECHA_CREACION
+INSERT INTO FORMULA_APUESTA (ID, DINERO_AFAVOR, DINERO_EN_CONTRA, FORMULA, NOMBRE, RESULTADO, CREADOR_ID, EVENTO_ID, FECHA_CREACION) VALUES
+(1, 0, 0, 'goles Barsa > goles Madrid', 'Gana Barsa', 'INDETERMINADO', 1, 1, '2025-03-22 14:53:00'),
+(2, 0, 0, 'puntos Lakers > puntos Celtics', 'Victoria Lakers', 'INDETERMINADO', 2, 2, '2025-03-22 14:53:00'),
+(3, 0, 0, 'carreras Yankees > carreras Dodgers', 'Ganan Yankees', 'INDETERMINADO', 3, 3, '2025-03-22 14:53:00'),
+(4, 0, 0, 'goles Kiel > goles Veszprem', 'Gana Kiel', 'INDETERMINADO', 4, 4, '2025-03-22 14:53:00'),
+(5, 0, 0, 'toques Alvarado > toques Smith', 'Victoria Alvarado', 'PERDIDO', 5, 5, '2025-03-22 14:53:00'),
+(6, 0, 0, 'sets Nadal > sets Djokovic', 'Gana Nadal', 'INDETERMINADO', 6, 6, '2025-03-22 14:53:00'),
+(7, 0, 0, 'puntos Wang > puntos Lee', 'Gana Wang', 'INDETERMINADO', 7, 7, '2025-03-22 14:53:00'),
+(8, 0, 0, 'tiempo Froome < tiempo Pogacar', 'Froome gana etapa', 'INDETERMINADO', 8, 8, '2025-03-22 14:53:00'),
+(9, 0, 0, 'golpes Woods > golpes McIlroy', 'Gana Woods', 'INDETERMINADO', 9, 9, '2025-03-22 14:53:00'),
+(10, 0, 0, 'torres destruidas G2 > torres destruidas T1', 'Gana G2', 'INDETERMINADO', 10, 10, '2025-03-22 14:53:00'),
+(11, 0, 0, 'rounds ganados NaVi > rounds ganados Vitality', 'Victoria NaVi', 'INDETERMINADO', 11, 11, '2025-03-22 14:53:00'),
+(12, 50, 750, 'mapas ganados Fnatic > mapas ganados Sentinels', 'Gana Fnatic', 'GANADO', 12, 12, '2025-03-22 14:53:00'),
+(13, 0, 0, 'hoyos Woods > hoyos McIlroy', 'Gana Woods', 'INDETERMINADO', 9, 9, '2025-03-22 14:53:00'),
+(14, 0, 0, 'promedio birdies Woods < promedio birdies McIlroy', 'Gana McIlroy', 'INDETERMINADO', 9, 9, '2025-03-22 14:53:00');
+
+
+-- INSERT de 25 fórmulas de apuesta adicionales para el evento con ID 1
+INSERT INTO FORMULA_APUESTA 
+    (ID, DINERO_AFAVOR, DINERO_EN_CONTRA, FORMULA, NOMBRE, RESULTADO, CREADOR_ID, EVENTO_ID, FECHA_CREACION)
+VALUES
+    (15, 0, 0, 'goles EquipoA > goles EquipoB - 15', 'Apuesta 15', 'INDETERMINADO', 1, 1, '2025-03-22 14:53:00'),
+    (16, 0, 0, 'goles EquipoA > goles EquipoB - 16', 'Apuesta 16', 'INDETERMINADO', 1, 1, '2025-03-22 14:53:00'),
+    (17, 0, 0, 'goles EquipoA > goles EquipoB - 17', 'Apuesta 17', 'INDETERMINADO', 1, 1, '2025-03-22 14:53:00'),
+    (18, 0, 0, 'goles EquipoA > goles EquipoB - 18', 'Apuesta 18', 'INDETERMINADO', 1, 1, '2025-03-22 14:53:00'),
+    (19, 0, 0, 'goles EquipoA > goles EquipoB - 19', 'Apuesta 19', 'INDETERMINADO', 1, 1, '2025-03-22 14:53:00'),
+    (20, 0, 0, 'goles EquipoA > goles EquipoB - 20', 'Apuesta 20', 'INDETERMINADO', 1, 1, '2025-03-22 14:53:00'),
+    (21, 0, 0, 'goles EquipoA > goles EquipoB - 21', 'Apuesta 21', 'INDETERMINADO', 1, 1, '2025-03-22 14:53:00'),
+    (22, 0, 0, 'goles EquipoA > goles EquipoB - 22', 'Apuesta 22', 'INDETERMINADO', 1, 1, '2025-03-22 14:53:00'),
+    (23, 0, 0, 'goles EquipoA > goles EquipoB - 23', 'Apuesta 23', 'INDETERMINADO', 1, 1, '2025-03-22 14:53:00'),
+    (24, 0, 0, 'goles EquipoA > goles EquipoB - 24', 'Apuesta 24', 'INDETERMINADO', 1, 1, '2025-03-22 14:53:00'),
+    (25, 0, 0, 'goles EquipoA > goles EquipoB - 25', 'Apuesta 25', 'INDETERMINADO', 1, 1, '2025-03-22 14:53:00'),
+    (26, 0, 0, 'goles EquipoA > goles EquipoB - 26', 'Apuesta 26', 'INDETERMINADO', 1, 1, '2025-03-22 14:53:00'),
+    (27, 0, 0, 'goles EquipoA > goles EquipoB - 27', 'Apuesta 27', 'INDETERMINADO', 1, 1, '2025-03-22 14:53:00'),
+    (28, 0, 0, 'goles EquipoA > goles EquipoB - 28', 'Apuesta 28', 'INDETERMINADO', 1, 1, '2025-03-22 14:53:00'),
+    (29, 0, 0, 'goles EquipoA > goles EquipoB - 29', 'Apuesta 29', 'INDETERMINADO', 1, 1, '2025-03-22 14:53:00'),
+    (30, 0, 0, 'goles EquipoA > goles EquipoB - 30', 'Apuesta 30', 'INDETERMINADO', 1, 1, '2025-03-22 14:53:00'),
+    (31, 0, 0, 'goles EquipoA > goles EquipoB - 31', 'Apuesta 31', 'INDETERMINADO', 1, 1, '2025-03-22 14:53:00'),
+    (32, 0, 0, 'goles EquipoA > goles EquipoB - 32', 'Apuesta 32', 'INDETERMINADO', 1, 1, '2025-03-22 14:53:00'),
+    (33, 0, 0, 'goles EquipoA > goles EquipoB - 33', 'Apuesta 33', 'INDETERMINADO', 1, 1, '2025-03-22 14:53:00'),
+    (34, 0, 0, 'goles EquipoA > goles EquipoB - 34', 'Apuesta 34', 'INDETERMINADO', 1, 1, '2025-03-22 14:53:00'),
+    (35, 0, 0, 'goles EquipoA > goles EquipoB - 35', 'Apuesta 35', 'INDETERMINADO', 1, 1, '2025-03-22 14:53:00'),
+    (36, 0, 0, 'goles EquipoA > goles EquipoB - 36', 'Apuesta 36', 'INDETERMINADO', 1, 1, '2025-03-22 14:53:00'),
+    (37, 0, 0, 'goles EquipoA > goles EquipoB - 37', 'Apuesta 37', 'INDETERMINADO', 1, 1, '2025-03-22 14:53:00'),
+    (38, 0, 0, 'goles EquipoA > goles EquipoB - 38', 'Apuesta 38', 'INDETERMINADO', 1, 1, '2025-03-22 14:53:00'),
+    (39, 0, 0, 'goles EquipoA > goles EquipoB - 39', 'Apuesta 39', 'INDETERMINADO', 1, 1, '2025-03-22 14:53:00');
 
 -- INSERT APUESTA
 INSERT INTO APUESTA (ID, CANTIDAD, A_FAVOR, APOSTADOR_ID, FORMULA) VALUES

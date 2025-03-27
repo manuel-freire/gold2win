@@ -19,7 +19,7 @@ function actualizarTiempoRestante() {
             elemento.textContent = "Evento iniciado";
             return;
         }
-
+        
         // Convertir la diferencia en días, horas y minutos
         const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
         const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -81,79 +81,6 @@ document.querySelectorAll(".colsCuotasVerificadasInc").forEach(cell => {
     });
 });
 
-var botonSiguienteCrearApuesta = document.getElementById("botonSiguienteCrearApuesta");
-
-if(botonSiguienteCrearApuesta != null){
-    document.getElementById("botonSiguienteCrearApuesta").addEventListener("click", () => {
-        console.log("entra");
-        var elementos1 = document.querySelectorAll('.vision-creatuApuesta-1');
-        var elementos2 = document.querySelectorAll('.vision-creatuApuesta-2');
-    
-        var titulo = document.getElementById('tituloModal');
-        var formula = document.getElementById('formulaModal');
-    
-        if(titulo.checkValidity() && formula.checkValidity()){
-            elementos1.forEach(function(elemento) {
-                elemento.classList.add('desaparece');
-            });
-    
-            elementos2.forEach(function(elemento) {
-                elemento.classList.remove('desaparece');
-            });
-    
-           document.getElementById("botonRetrocederCrearApuesta").classList.remove('invisible');
-        }
-    
-    });
-}
-
-var apostarForm = document.getElementById("apostarForm");
-
-if(apostarForm != null){
-    document.getElementById("apostarForm").addEventListener("submit", function(event) {
-        event.preventDefault();
-        let cantidad = document.getElementById("cantidad").value;
-        let tipoApuesta = document.getElementById("tipoApuesta").value;
-
-        document.getElementById("ocultador-formulario").classList.add("invisible");
-        let check = document.getElementById("confirmacionApuesta");
-        check.classList.remove("invisible");
-        check.style.animation = "fadeIn 0.5s ease-in-out";
-
-        setTimeout(() => {
-            location.reload(); 
-        }, 1000);
-        /*
-        fetch("/apostar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({cantidad, tipoApuesta})
-        })
-        .then(response => {
-            if (!response.ok) {
-                return response.json().then(error => { throw new Error(error.error); });
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Si la apuesta es exitosa, mostrar el ícono de éxito
-            alert(data.mensaje);
-            var modal = bootstrap.Modal.getInstance(document.getElementById('miModal'));
-            modal.hide(); // Cierra el modal manualmente
-            document.getElementById("cantidad").classList.remove("is-invalid");
-            document.getElementById("cantidad").classList.add("is-valid");  // Marca como válida
-        })
-        .catch(error => {
-            // Si hay un error (ej. saldo insuficiente), marcar el campo en rojo
-            document.getElementById("cantidad").classList.add("is-invalid");
-            document.getElementById("cantidadError").textContent = error.message;  // Mostrar el error
-        });
-        */
-    });
-}
-
 var botonIzSecciones = document.getElementById("btnIzSecciones");
 if(botonIzSecciones != null){
     botonIzSecciones.addEventListener("click", function(event){
@@ -169,56 +96,6 @@ if(botonDrsecciones != null){
         var contenedor = document.getElementById("menuSeccionesComprimido");
         contenedor.scrollLeft += contenedor.clientWidth/2;
 
-    });
-}
-
-
-var crearApuestaForm = document.getElementById("crearApuestaForm");
-if(crearApuestaForm != null){
-    document.getElementById("crearApuestaForm").addEventListener("submit", function(event) {
-        event.preventDefault();
-    
-        const titulo = document.getElementById("tituloModal").value;
-        const formula = document.getElementById("formulaModal").value;
-        const cantidad = document.getElementById("cantidadModal2").value;
-        const tipoApuesta = document.getElementById("tipoApuestaModal2").value;
-    
-        document.getElementById("ocultador-formulario2").classList.add("invisible");
-        let check = document.getElementById("confirmacionApuesta2");
-        check.classList.remove("invisible");
-        check.style.animation = "fadeIn 0.5s ease-in-out";
-    
-        setTimeout(() => {
-            location.reload();  // Recarga la página
-        }, 1000);
-        /*
-        fetch("/apostar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({cantidad, tipoApuesta})
-        })
-        .then(response => {
-            if (!response.ok) {
-                return response.json().then(error => { throw new Error(error.error); });
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Si la apuesta es exitosa, mostrar el ícono de éxito
-            alert(data.mensaje);
-            var modal = bootstrap.Modal.getInstance(document.getElementById('miModal'));
-            modal.hide(); // Cierra el modal manualmente
-            document.getElementById("cantidad").classList.remove("is-invalid");
-            document.getElementById("cantidad").classList.add("is-valid");  // Marca como válida
-        })
-        .catch(error => {
-            // Si hay un error (ej. saldo insuficiente), marcar el campo en rojo
-            document.getElementById("cantidad").classList.add("is-invalid");
-            document.getElementById("cantidadError").textContent = error.message;  // Mostrar el error
-        });
-        */
     });
 }
 
