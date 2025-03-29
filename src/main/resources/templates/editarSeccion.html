@@ -36,7 +36,7 @@
                     
                     <div class = "col-6 d-flex flex-column align-items-center">
                         <label for="inputImagenSecciones">Selecciona una imagen:</label>
-                        <input type="file" id="inputImagenSecciones" name="imagen" accept="image/*" class="form-control mt-2" required>
+                        <input type="file" id="inputImagenSecciones" name="imagen" accept="image/*" class="form-control mt-2">
 
                         <img id="mostrarImagenSeccionesForm" th:src="@{/seccion/{id}/pic(id=${seccionEditable.id})}" alt="Vista previa" style="display: block; max-width: 200px; margin-top: 10px;">
                     </div>
@@ -49,7 +49,7 @@
                     </div>
 
                     <div id = "contenedorVariables" class="row g-3 justify-content-center mt-2">
-                        <button id = "botonCrearVariable" style="min-height: 30px; max-height: 80px;" class = "col-3 btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearVariables"> 
+                        <button id = "botonCrearVariable" style="min-height: 30px; max-height: 80px;" class = "col-3 btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearVariables" type = "button"> 
                             Crear variable
                         </button>
 
@@ -143,7 +143,6 @@
     </div>
 
     <th:block th:replace="fragments/footer.html :: footer" />
-
 </body>
 
 </html>

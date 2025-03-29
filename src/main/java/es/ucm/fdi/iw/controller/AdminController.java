@@ -192,7 +192,7 @@ public class AdminController {
         // Crear una respuesta JSON con el mensaje
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode response = objectMapper.createObjectNode();
-        response.put("mensaje", "Seccion guardada correctamente");
+        response.put("mensaje", "Seccion editada correctamente");
 
         JsonNode seccionNode = json.get("seccionN");
         if (seccionNode == null || !seccionNode.has("nombre") || !seccionNode.has("tipo")) {
@@ -202,8 +202,13 @@ public class AdminController {
         String nombre = seccionNode.get("nombre").asText();
         String grupo = seccionNode.get("tipo").asText();
 
-        Seccion seccion = entityManager.find(Seccion.class, nombre);
-        seccion.setGrupo(grupo);
+        //Seccion seccion = entityManager.find(Seccion.class, nombre);
+        TypedQuery<Seccion> queryEditarSeccion = entityManager.createQuery("SELECT u FROM Seccion u WHERE u.nombre = :nombre",Seccion.class);;
+        queryEditarSeccion.setParameter("nombre", nombre);
+
+        Seccion seccion = queryEditarSeccion.getSingleResult();
+
+        seccion.setGrupo(grupo);    
         entityManager.merge(seccion);
 
 
@@ -225,12 +230,14 @@ public class AdminController {
         }
 
         JsonNode imageDataNode = json.get("imageData");
-        if (imageDataNode != null && imageDataNode.has("image")) {
+        if (imageDataNode != null && imageDataNode.has("image") && !imageDataNode.get("image").isNull()) {
             String base64Image = imageDataNode.get("image").asText();
-            String filename = imageDataNode.get("filename").asText();
-            
-            MultipartFile photo = convertirBase64AMultipartFile(base64Image, filename);
-            setPic(photo, seccion.getNombre());
+            String filename = imageDataNode.has("filename") ? imageDataNode.get("filename").asText() : "";
+        
+            if (!base64Image.isEmpty()) {
+                MultipartFile photo = convertirBase64AMultipartFile(base64Image, filename);
+                setPic(photo, seccion.getNombre());
+            }
         }
         return ResponseEntity.ok(response);
     }

@@ -286,52 +286,48 @@ async function editarSeccion(event) {
         formularioEditar.reportValidity(); 
         return;
     }
+    const nombreS = document.getElementById("inputNombreSeccion").value.trim(); //el trim elimina espacios en blanco innecesarios
+    const tipo = document.getElementById("inputTipoSeccion").value.trim();
+    const file = document.getElementById("inputImagenSecciones").files[0] || null;
 
-    const isNombreValido = await verificarNombreSeccion();
-    if(isNombreValido){
-        const nombreS = document.getElementById("inputNombreSeccion").value.trim(); //el trim elimina espacios en blanco innecesarios
-        const tipo = document.getElementById("inputTipoSeccion").value.trim();
-        const file = document.getElementById("inputImagenSecciones").files[0] || null;
+    const tipoS = tipo.charAt(0).toUpperCase() + tipo.slice(1);
 
-        const tipoS = tipo.charAt(0).toUpperCase() + tipo.slice(1);
+    let base64Image = null;
+    let fileName = null;
+    if (file != null) {base64Image = await toBase64(file); fileName = file.name;}
 
-        let base64Image = await toBase64(file);
+    if(nombreS != "" && tipoS != ""){
+        const divs = document.querySelectorAll("#contenedorVariables .variableSeccion");
+        const variables = [];
 
-        if(nombreS != "" && tipoS != "" && file != null){
-            const divs = document.querySelectorAll("#contenedorVariables .variableSeccion");
-            const variables = [];
+        divs.forEach(div => {
+            const nombreV = div.querySelector(".nombreVariableSpan").innerText;
+            const tipoV = div.querySelector(".tipoVariableSpan").innerText;
+            variables.push({ nombreV, tipoV });
+        });
 
-            divs.forEach(div => {
-                const nombreV = div.querySelector(".nombreVariableSpan").innerText;
-                const tipoV = div.querySelector(".tipoVariableSpan").innerText;
-                variables.push({ nombreV, tipoV });
-            });
+        const jsonData = {
+            seccionN: { nombre: nombreS, tipo: tipoS },
+            imageData: { // Aquí se incluye la imagen
+                image: base64Image,
+                filename: fileName
+            },
+            arrayVariables: variables
+        };
 
-            const jsonData = {
-                seccionN: { nombre: nombreS, tipo: tipoS },
-                imageData: { // Aquí se incluye la imagen
-                    image: base64Image,
-                    filename: file.name
-                },
-                arrayVariables: variables
-            };
-
-            go(`/admin/guardarSeccion`, "POST", jsonData)
-            .then(data => {
-                console.log("Respuesta recibida:", data.mensaje);
-                //formulario.reset();
-                document.getElementById("mostrarImagenSeccionesForm").style.display = "none";
-                document.getElementById("contenedorVariables").innerHTML = `
-                <button id = "botonCrearVariable" style="min-height: 30px; max-height: 80px;" class = "col-3 btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearVariables" type = "button"> 
-                    Crear variable
-                </button>
-                `;
-            })
-            .catch(error => console.error("Error go:", error));
-        }
-    }
-    else{
-        event.preventDefault();
+        console.log("pregoEditar");
+        go(`/admin/editarSeccion`, "POST", jsonData)
+        .then(data => {
+            console.log("Respuesta recibida:", data.mensaje);
+            formularioEditar.reset();
+            document.getElementById("mostrarImagenSeccionesForm").style.display = "none";
+            document.getElementById("contenedorVariables").innerHTML = `
+            <button id = "botonCrearVariable" style="min-height: 30px; max-height: 80px;" class = "col-3 btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearVariables" type = "button"> 
+                Crear variable
+            </button>
+            `;
+        })
+        .catch(error => console.error("Error go:", error));
     }
 }
 
