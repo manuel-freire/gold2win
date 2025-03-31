@@ -4,6 +4,10 @@
 <head>  
     <th:block th:replace="fragments/head :: header"/>
     <title>Eventos</title>
+    
+    <link rel="stylesheet" th:href="@{/css/simple-datatables-10.css}" href="/css/simple-datatables-10.css"
+    type="text/css" />
+
 </head>
 
 <body>
@@ -42,6 +46,8 @@
         </tbody>
     </table>
 
-
-
+    <script type="module">
+        import { DataTable } from "../js/simple-datatables-10.js"
+        new DataTable("#myTable");
+    </script>
 </body>
