@@ -4,7 +4,9 @@ import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Objects;
 
@@ -80,7 +82,7 @@ public class RootController {
 	@GetMapping("/")
     public String index(Model model) {
         //obtengo los eventos (solo los 10 primeros que no hayan sucedido ya)
-        LocalDateTime ahora = LocalDateTime.now();
+        LocalDateTime ahora =LocalDateTime.ofInstant(Instant.now(), ZoneOffset.UTC);
         String queryEventos = "SELECT e FROM Evento e WHERE e.fechaCierre > :ahora ORDER BY e.fechaCierre ASC";
         TypedQuery<Evento> query = entityManager.createQuery(queryEventos, Evento.class);
         query.setParameter("ahora", ahora);
@@ -180,7 +182,7 @@ public class RootController {
             query = entityManager.createQuery(queryEventos, Evento.class);
         }
 
-        LocalDateTime ahora = LocalDateTime.now();
+        LocalDateTime ahora = LocalDateTime.ofInstant(Instant.now(), ZoneOffset.UTC);
         query.setParameter("ahora", ahora);
         query.setMaxResults(10);
         List<Evento> eventos = query.getResultList();
@@ -211,25 +213,6 @@ public class RootController {
             UserController.class.getClassLoader().getResourceAsStream(
                 "static/img/default-pic.jpg")));
     }
-
-    
-    @GetMapping("/evento/{id}/apostar")
-    public String apostar(@PathVariable long id, Model model, HttpSession session){
-        String queryApuestas = "SELECT a FROM FormulaApuesta a WHERE a.evento.id = :id";
-        List<FormulaApuesta> apuestas = entityManager.createQuery(queryApuestas).setParameter("id", id).getResultList();
-
-        String queryVariables = "SELECT v FROM Variable v WHERE v.evento.id = :id";
-        List<Variable> variables = entityManager.createQuery(queryVariables).setParameter("id", id).getResultList();
-
-        Evento eventoSel = entityManager.find(Evento.class, id);
-
-        model.addAttribute("apuestas", apuestas);
-        model.addAttribute("variables", variables);
-        model.addAttribute("eventoSel", eventoSel);
-
-        return "crearApuesta";
-    }
-
 
     @GetMapping("/misApuestas")
     public String misApuestas(Model model){

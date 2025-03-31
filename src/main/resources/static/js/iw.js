@@ -109,6 +109,37 @@ function go(url, method, data = {}, headers = false) {
         });
 }
 
+function goTexto(url, method, data = {}, headers = false) {
+    let params = {
+        method: method, // POST, GET, POST, PUT, DELETE, etc.
+        headers: headers === false ? {
+            "Content-Type": "application/json; charset=utf-8",
+        } : headers,
+        body: data instanceof FormData ? data : JSON.stringify(data)
+    };
+    if (method === "GET") {
+        // GET requests cannot have body; I could URL-encode, but it would not be used here
+        delete params.body;
+    } else {
+        params.headers["X-CSRF-TOKEN"] = config.csrf.value;
+    }
+    console.log("sending", url, params)
+    return fetch(url, params)
+        .then(response => {
+            const r = response;
+            if (r.ok) {
+                return r.text().then(json => Promise.resolve(json));
+            } else {
+                return r.text().then(text => Promise.reject({
+                    url,
+                    data: JSON.stringify(data),
+                    status: r.status,
+                    text
+                }));
+            }
+        });
+}
+
 /**
  * Fills an image element with the image retrieved from a URL.
  * 

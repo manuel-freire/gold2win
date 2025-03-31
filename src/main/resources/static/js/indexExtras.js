@@ -8,7 +8,6 @@ let fechaAnterior = new Date(0); // fecha del ultimo evento cargado (para separa
 
 fechaUltimoEvento(); //carga fecha anterior
 
-
 //FUNCIONES PARA LA BARRA BUSCADORA
 var cargando = false
 
@@ -26,7 +25,7 @@ document.getElementById("queryEventos").addEventListener("keypress", function(ev
                 vaciarContenedorEventos();
                 offset = 0;
 
-                cargarEventos(offset, fechaInicio, seccionId).then(() => {
+                cargarEventos().then(() => {
                     cargando = false;
                 }).catch((error) => {
                     cargando = false;
@@ -37,14 +36,14 @@ document.getElementById("queryEventos").addEventListener("keypress", function(ev
                 cargando = false;
             }
         }
-        else{
+        else if(buscado != busqueda){
             offset = 0;
-            echaInicio = new Date().toISOString();
+            fechaInicio = new Date().toISOString();
             fechaAnterior = new Date(0);
             buscado = busqueda;
             vaciarContenedorEventos();
 
-            cargarEventos(offset, fechaInicio, seccionId).then(() => {
+            cargarEventos().then(() => {
                 cargando = false;
             }).catch((error) => {
                 cargando = false;
@@ -66,7 +65,7 @@ function vaciarContenedorEventos(){
 botonVerMas.addEventListener("click", function() {
     if(!cargando){
         cargando = true;
-        cargarEventos(offset, fechaInicio, seccionId).then(() => {
+        cargarEventos().then(() => {
             cargando = false;
         }).catch((error) => {
             cargando = false;
@@ -75,7 +74,7 @@ botonVerMas.addEventListener("click", function() {
     }
 });
 
-async function cargarEventos(_offset,_fechaInicio,_seccionId){ //la funcion se ejecuta de manera asincrona
+async function cargarEventos(){ //la funcion se ejecuta de manera asincrona
     botonVerMas.disabled = true; 
 
     try{
