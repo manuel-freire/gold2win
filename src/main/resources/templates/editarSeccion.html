@@ -53,7 +53,7 @@
                             Crear variable
                         </button>
 
-                        <div th:each="variable,i: ${seccionEditable.plantilla}" class="col-3 variableSeccion">
+                        <div th:each="variable,i: ${seccionEditable.plantilla}" class="col-3 variableSeccionAnt">
                             <span th:text="'Nombre: ' + ${variable.nombre}"></span>
                             <span th:if="${variable.numerico}">Tipo de variable: Valor numérico</span>
                             <span th:if="${!variable.numerico}">Tipo de variable: Texto</span>
@@ -138,8 +138,8 @@
 
 
     <div id="menuOpcionesSeccion">
-        <a href="#">Editar evento</a>
-        <a href="#" data-bs-toggle="modal" data-bs-target="#modalEliminarSeccion">Eliminar evento</a>
+        <a href="#">Editar seccion</a>
+        <a href="#" data-bs-toggle="modal" data-bs-target="#modalEliminarSeccion">Eliminar seccion</a>
     </div>
 
     <th:block th:replace="fragments/footer.html :: footer" />

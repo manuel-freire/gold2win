@@ -163,7 +163,7 @@ public class AdminController {
             String filename = imageDataNode.get("filename").asText();
             
             MultipartFile photo = convertirBase64AMultipartFile(base64Image, filename);
-            setPic(photo, nuevaSeccion.getNombre());
+            setPic(photo, "seccion", ""+ nuevaSeccion.getId());
         }
         return ResponseEntity.ok(response);
     }
@@ -202,7 +202,6 @@ public class AdminController {
         String nombre = seccionNode.get("nombre").asText();
         String grupo = seccionNode.get("tipo").asText();
 
-        //Seccion seccion = entityManager.find(Seccion.class, nombre);
         TypedQuery<Seccion> queryEditarSeccion = entityManager.createQuery("SELECT u FROM Seccion u WHERE u.nombre = :nombre",Seccion.class);;
         queryEditarSeccion.setParameter("nombre", nombre);
 
@@ -211,10 +210,12 @@ public class AdminController {
         seccion.setGrupo(grupo);    
         entityManager.merge(seccion);
 
-
-        //Seguramente rente borrar todas las variables y volver a crearlas ya que es dificil saber si se han modificado
         JsonNode itemsNode = json.get("arrayVariables");
-        if (itemsNode != null && itemsNode.isArray()) {
+        if (itemsNode != null && itemsNode.isArray() && itemsNode.size() > 0) {
+            //borrar las variables antiguas
+            String queryDelete = "DELETE FROM VariableSeccion v WHERE v.seccion = :seccion";
+            entityManager.createQuery(queryDelete).setParameter("seccion", seccion).executeUpdate();
+
             for (JsonNode item : itemsNode) {
 
                 String nombreV = item.get("nombreV").asText();
@@ -236,16 +237,16 @@ public class AdminController {
         
             if (!base64Image.isEmpty()) {
                 MultipartFile photo = convertirBase64AMultipartFile(base64Image, filename);
-                setPic(photo, seccion.getNombre());
+                setPic(photo, "seccion", ""+seccion.getId());
             }
         }
         return ResponseEntity.ok(response);
     }
 
     @ResponseBody
-    public String setPic(@RequestParam("photo") MultipartFile photo, @PathVariable String nombre) throws IOException {
+    public String setPic(MultipartFile photo, String carpeta, String nombre) throws IOException {
 		log.info("Updating photo for user {}", nombre);
-		File f = localData.getFileAux("", "imagen"+nombre+".jpg");
+		File f = localData.getFile(carpeta, nombre+".jpg");
 		if (photo.isEmpty()) {
 			log.info("failed to upload photo: emtpy file?");
 		} else {

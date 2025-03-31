@@ -62,16 +62,4 @@ public class LocalData {
     public File getFile(String folderName, String fileName) {
     	return new File(getFolder(folderName), fileName);
     }
-
-    public File getFileAux(String folder, String filename) {
-      // Usa la carpeta "uploads" en la raíz del proyecto
-      String basePath = new File("iwdata").getAbsolutePath();
-      
-      File dir = new File(basePath + "/" + "seccion" + "/" + folder);
-      if (!dir.exists()) {
-          dir.mkdirs(); // Crea la carpeta si no existe
-      }
-  
-      return new File(dir, filename);
-  }
 }

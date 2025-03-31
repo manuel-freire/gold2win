@@ -180,6 +180,7 @@ function eliminarSeccion() {
     go(`/admin/eliminarSeccion/${seccionSeleccionadaId}`, "DELETE")
     .then(data => {
         console.log("Sección eliminada:", data.mensaje);
+        window.location.href = "/admin/secciones";
     })
     .catch(error => console.error("Error al eliminar la sección:", error));
 }    
@@ -236,13 +237,14 @@ async function guardarSeccion(event) {
             go(`/admin/guardarSeccion`, "POST", jsonData)
             .then(data => {
                 console.log("Respuesta recibida:", data.mensaje);
-                formulario.reset();
-                document.getElementById("mostrarImagenSeccionesForm").style.display = "none";
-                document.getElementById("contenedorVariables").innerHTML = `
-                <button id = "botonCrearVariable" style="min-height: 30px; max-height: 80px;" class = "col-3 btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearVariables" type = "button"> 
-                    Crear variable
-                </button>
-                `;
+                //formulario.reset();
+                //document.getElementById("mostrarImagenSeccionesForm").style.display = "none";
+                //document.getElementById("contenedorVariables").innerHTML = `
+                //<button id = "botonCrearVariable" style="min-height: 30px; max-height: 80px;" class = "col-3 btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearVariables" type = "button"> 
+                //    Crear variable
+                //</button>
+                //`;
+                window.location.href = "/admin/secciones";
             })
             .catch(error => console.error("Error go:", error));
         }
@@ -319,74 +321,10 @@ async function editarSeccion(event) {
         go(`/admin/editarSeccion`, "POST", jsonData)
         .then(data => {
             console.log("Respuesta recibida:", data.mensaje);
-            formularioEditar.reset();
-            document.getElementById("mostrarImagenSeccionesForm").style.display = "none";
-            document.getElementById("contenedorVariables").innerHTML = `
-            <button id = "botonCrearVariable" style="min-height: 30px; max-height: 80px;" class = "col-3 btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearVariables" type = "button"> 
-                Crear variable
-            </button>
-            `;
+            window.location.href = "/admin/secciones";
         })
         .catch(error => console.error("Error go:", error));
     }
-}
-
-function actualizarBarraEventos() {
-    fetch('/admin/obtenerEventos') // 🔄 Endpoint que obtiene los eventos actualizados
-        .then(response => response.json())
-        .then(eventos => {
-            const navSecciones = document.getElementById("navSeccionesAdmin");
-            navSecciones.innerHTML = ""; // Limpia la barra antes de actualizar
-
-            eventos.forEach(evento => {
-                const navSeccionesAdmin = document.querySelector('.navSeccionesAdmin');
-            navSeccionesAdmin.innerHTML = ''; // Limpiar el contenedor antes de actualizar
-
-            // Iterar a través de las secciones y agregar el HTML de cada una
-            secciones.forEach((seccion, i) => {
-                const grupoSeccionesDiv = document.createElement('div');
-                grupoSeccionesDiv.classList.add('d-flex', 'flex-column', 'grupoSecciones');
-
-                // Si es la primera de su grupo o el grupo cambia, agregar el título del grupo
-                if (i === 0 || seccion.grupo !== secciones[i - 1]?.grupo) {
-                    const tituloSeccionAdmin = document.createElement('span');
-                    tituloSeccionAdmin.classList.add('tituloSeccionAdmin', 'text-nowrap');
-                    tituloSeccionAdmin.textContent = seccion.grupo;
-                    grupoSeccionesDiv.appendChild(tituloSeccionAdmin);
-                }
-
-                // Crear el enlace de la sección
-                const enlaceSeccionAdmin = document.createElement('a');
-                enlaceSeccionAdmin.classList.add('enlaceSeccionAdmin', 'nav-link', 'text-nowrap', 'mt-2');
-                enlaceSeccionAdmin.setAttribute('href', `/admin/secciones/${seccion.id}/editar`);
-                enlaceSeccionAdmin.setAttribute('data-id', seccion.id);
-
-                // Agregar la imagen
-                const imagenSeccion = document.createElement('img');
-                imagenSeccion.setAttribute('width', '50');
-                imagenSeccion.setAttribute('height', '50');
-                imagenSeccion.setAttribute('src', `/seccion/${seccion.id}/pic`);
-
-                // Agregar el nombre de la sección
-                const spanNombreSeccion = document.createElement('span');
-                spanNombreSeccion.classList.add('ms-2', 'spanAjustadoAdmin', 'font-size: 20px;');
-                spanNombreSeccion.textContent = seccion.nombre;
-
-                // Añadir la imagen y el nombre al enlace
-                enlaceSeccionAdmin.appendChild(imagenSeccion);
-                enlaceSeccionAdmin.appendChild(spanNombreSeccion);
-
-                // Agregar el enlace al contenedor del grupo
-                grupoSeccionesDiv.appendChild(enlaceSeccionAdmin);
-
-                // Si es la última de su grupo o el grupo cambia, cerrar el div del grupo
-                if (i === secciones.length - 1 || seccion.grupo !== secciones[i + 1]?.grupo) {
-                    navSeccionesAdmin.appendChild(grupoSeccionesDiv);
-                }
-            });
-        })
-        .catch(error => console.error("Error al actualizar barra de eventos:", error));
-    });
 }
 
 var variableSeccionesForm = document.getElementById("variableSeccionForm");
