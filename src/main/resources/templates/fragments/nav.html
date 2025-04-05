@@ -118,7 +118,7 @@
                         </th:block>
                         <th:block th:unless="${session.u}">
                             <li class="nav-item d-none d-lg-block"  th:classappend="${active == 'register'} ? 'active'">
-                                <a th:href="${active == 'register'} ? '#' : @{/login}" class="botonOvalado nav-link">Registrarse</a></li>
+                                <a th:href="${active == 'register'} ? '#' : @{/register}" class="botonOvalado nav-link">Registrarse</a></li>
                             <li class="nav-item" th:classappend="${active == 'login'} ? 'active'">
                                 <a th:href="${active == 'login'} ? '#' : @{/login}" class="botonOvalado nav-link" >Iniciar sesión</a></li>
                             <li class="nav-item d-flex align-items-center mx-3">
@@ -202,6 +202,13 @@
                                             <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
                                         </svg>
                                         <span class="mx-auto">Login</span>
+                                      </a>
+                                      <a class=" col-4 nav-link d-flex flex-column cambiadorTema" th:href= "@{/register}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-fill-add mx-auto mb-1" viewBox="0 0 16 16">
+                                            <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                                            <path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
+                                        </svg>
+                                        <span class="mx-auto">Registrarse</span>
                                       </a>
                                   </div>
                               </li>

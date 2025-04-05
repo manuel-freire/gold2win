@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,10 +27,15 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
+
+import com.fasterxml.jackson.databind.JsonNode;
+
 import es.ucm.fdi.iw.AppConfig;
 import es.ucm.fdi.iw.LocalData;
 import es.ucm.fdi.iw.model.Apuesta;
@@ -44,6 +50,7 @@ import es.ucm.fdi.iw.model.VariableSeccion;
 
 import es.ucm.fdi.iw.model.Transferable;
 import java.util.stream.Collectors;
+import java.util.Map;
 
 import java.io.File;
 
@@ -74,9 +81,69 @@ public class RootController {
         this.authenticationManagerBean = authenticationManagerBean;
     }
 
+    @PostMapping("/register")
+    @Transactional
+    @ResponseBody
+    public Map<String, Object> handleRegister(@RequestBody JsonNode o, Model model) {
+        Map<String, Object> response = new HashMap<>();
+
+        String username = o.get("username").asText();
+        String password = o.get("password").asText();
+        String email = o.get("email").asText();
+        String firstName = o.get("firstName").asText();
+        String lastName = o.get("lastName").asText();
+
+        // Verificar si el nombre de usuario ya existe
+        String queryUsername = "SELECT COUNT(u) FROM User u WHERE u.username = :username";
+        Long countUsername = entityManager.createQuery(queryUsername, Long.class)
+                .setParameter("username", username)
+                .getSingleResult();
+
+        if (countUsername > 0) {
+            response.put("success", false);
+            response.put("error", "username");
+            return response;
+        }
+
+        // Verificar si el correo electrónico ya existe
+        String queryEmail = "SELECT COUNT(u) FROM User u WHERE u.email = :email";
+        Long countEmail = entityManager.createQuery(queryEmail, Long.class)
+                .setParameter("email", email)
+                .getSingleResult();
+
+        if (countEmail > 0) {
+            response.put("success", false);
+            response.put("error", "email");
+            return response;
+        }
+
+        User user = new User();
+
+        user.setUsername(username);
+        user.setPassword(password); // Sustituye esto con la encriptación de contraseña
+        user.setEmail(email);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setEnabled(true); // Inicialmente deshabilitado
+        user.setRoles("USER"); // Rol por defecto
+        user.setDineroDisponible(0.0); // Inicialmente sin dinero disponible
+        user.setDineroRetenido(0.0); // Inicialmente sin dinero retenido
+
+        entityManager.persist(user);
+        entityManager.flush();
+        
+        response.put("success", true);
+        return response;
+    }
+
 	@GetMapping("/login")
     public String login(Model model) {
         return "login";
+    }
+
+    @GetMapping("/register")
+    public String register(Model model) {
+        return "register";
     }
 
 	@GetMapping("/")
