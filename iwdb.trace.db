@@ -267,6 +267,7 @@ The connection was not closed by the application and is garbage collected [90018
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:678)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
 	... 17 more
+<<<<<<< HEAD
 2025-04-06 14:24:06 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientException: Tipo de dato desconocido : "SET"
 Unknown data type: "SET"; SQL statement:
@@ -364,3 +365,5 @@ select evento0_.id as id1_1_, evento0_.cancelado as cancelad2_1_, evento0_.deter
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "EVENTOIWUSER" no encontrada
 Table "EVENTOIWUSER" not found; SQL statement:
 SELECT * FROM EVENTOIWUSER [42102-214]
+=======
+>>>>>>> main
