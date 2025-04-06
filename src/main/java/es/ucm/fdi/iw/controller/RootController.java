@@ -26,6 +26,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -74,6 +75,13 @@ public class RootController {
     private LocalData localData;
 
 	private static final Logger log = LogManager.getLogger(RootController.class);
+
+    @ModelAttribute
+    public void populateModel(HttpSession session, Model model) {        
+        for (String name : new String[] { "u", "url", "ws", "topics"}) {
+          model.addAttribute(name, session.getAttribute(name));
+        }
+    }
 
     RootController(AdminController adminController, AppConfig appConfig, AuthenticationManager authenticationManagerBean) {
         this.adminController = adminController;
