@@ -45,9 +45,9 @@ public class FormulaApuesta implements Transferable<FormulaApuesta.Transfer> {
     @Transient
     public double calcularCuota(boolean aFavor) {
         if (aFavor) {
-            return dineroEnContra > 0 ? (((dineroAfavor + dineroEnContra) / dineroAfavor)) : 1.0;
+            return dineroAfavor > 0 ? (((dineroAfavor + dineroEnContra) / dineroAfavor)) : 1.0;
         } else {
-            return dineroAfavor > 0 ? (((dineroEnContra + dineroAfavor) / dineroEnContra)) : 1.0;
+            return dineroEnContra > 0 ? (((dineroEnContra + dineroAfavor) / dineroEnContra)) : 1.0;
         }
     }
 
