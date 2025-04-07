@@ -16,20 +16,21 @@ INSERT INTO SECCION (ID, ENABLED, GRUPO, NOMBRE) VALUES
 (14, true, 'eSports', 'Rocket League');
 
 -- insert eventos
-INSERT INTO EVENTO (ID, CANCELADO, FECHA_CIERRE, FECHA_CREACION, NOMBRE, SECCION_ID) VALUES
-(1, false, '2025-06-10 18:00:00', '2025-03-01 12:00:00', 'Final Liga Española', 1),
-(2, false, '2025-06-22 20:30:00', '2025-03-02 14:15:00', 'NBA Playoffs - Lakers vs Celtics', 2),
-(3, false, '2025-06-10 16:00:00', '2025-03-03 10:30:00', 'Serie Mundial de Beisbol', 3),
-(4, false, '2025-05-20 19:00:00', '2025-03-05 09:45:00', 'Copa Europa de Balonmano', 4),
-(5, false, '2025-1-02 15:00:00', '2025-03-06 08:00:00', 'Campeonato Mundial de Esgrima', 5),
-(6, false, '2025-06-22 21:00:00', '2025-03-07 13:20:00', 'Roland Garros - Final Masculina', 6),
-(7, false, '2025-06-23 11:00:00', '2025-03-08 07:30:00', 'Torneo Internacional de Ping Pong', 7),
-(8, false, '2025-06-23 09:00:00', '2025-03-09 06:00:00', 'Tour de Francia - Etapa 5', 8),
-(9, false, '2025-05-20 13:00:00', '2025-03-10 11:15:00', 'Masters de Golf en Augusta', 9),
-(10, false, '2025-05-20 17:30:00', '2025-03-11 15:45:00', 'Worlds - League of Legends', 10),
-(11, false, '2025-06-08 19:00:00', '2025-03-12 10:50:00', 'Major de Counter Strike', 11),
-(12, false, '2025-06-08 20:00:00', '2025-03-13 14:25:00', 'Final de Valorant Champions', 12),
-(13, false, '2025-03-11 10:30:00', '2024-06-08 20:00:00', 'LEC: MDK vs FNC', 12);
+INSERT INTO EVENTO (ID, CANCELADO, FECHA_CIERRE, FECHA_CREACION, NOMBRE, SECCION_ID, DETERMINADO) VALUES
+(1, false, '2025-06-10 18:00:00', '2025-03-01 12:00:00', 'Final Liga Española', 1, false),
+(2, false, '2025-06-22 20:30:00', '2025-03-02 14:15:00', 'NBA Playoffs - Lakers vs Celtics', 2, false),
+(3, false, '2025-06-10 16:00:00', '2025-03-03 10:30:00', 'Serie Mundial de Beisbol', 3, false),
+(4, false, '2025-05-20 19:00:00', '2025-03-05 09:45:00', 'Copa Europa de Balonmano', 4, false),
+(5, false, '2025-1-02 15:00:00', '2025-03-06 08:00:00', 'Campeonato Mundial de Esgrima', 5, false),
+(6, false, '2025-06-22 21:00:00', '2025-03-07 13:20:00', 'Roland Garros - Final Masculina', 6, false),
+(7, false, '2025-06-23 11:00:00', '2025-03-08 07:30:00', 'Torneo Internacional de Ping Pong', 7, false),
+(8, false, '2025-06-23 09:00:00', '2025-03-09 06:00:00', 'Tour de Francia - Etapa 5', 8, false),
+(9, false, '2025-05-20 13:00:00', '2025-03-10 11:15:00', 'Masters de Golf en Augusta', 9, false),
+(10, false, '2025-05-20 17:30:00', '2025-03-11 15:45:00', 'Worlds - League of Legends', 10, false),
+(11, false, '2025-06-08 19:00:00', '2025-03-12 10:50:00', 'Major de Counter Strike', 11, false),
+(12, false, '2025-06-08 20:00:00', '2025-03-13 14:25:00', 'Final de Valorant Champions', 12, false),
+(13, false, '2025-03-11 10:30:00', '2024-06-08 20:00:00', 'LEC: MDK vs FNC', 12, false);
+
 
 -- inserta etiquetas
 INSERT INTO EVENTO_ETIQUETAS (EVENTO_ID, ETIQUETAS) VALUES
@@ -146,6 +147,18 @@ INSERT INTO VARIABLE (ID, NOMBRE, NUMERICO, RESOLUCION, ID_EVENTO) VALUES
 (10, 'torres destruidas', TRUE, NULL, 10),
 (11, 'rounds ganados', TRUE, NULL, 11),
 (12, 'mapas ganados', TRUE, NULL, 12);
+
+INSERT INTO VARIABLE (ID, NOMBRE, NUMERICO, RESOLUCION, ID_EVENTO) VALUES
+(15, 'numToquesEspaña', TRUE, NULL, 5),
+(16, 'numToquesRusia', TRUE, NULL, 5),
+(17, 'duracionCombateSegundos', TRUE, NULL, 5),
+(18, 'toquesDobles', TRUE, NULL, 5),
+(19, 'tarjetasAmarillasEspaña', TRUE, NULL, 5),
+(20, 'tarjetasAmarillasRusia', TRUE, NULL, 5),
+(21, 'tarjetasRojasEspaña', TRUE, NULL, 5),
+(22, 'tarjetasRojasRusia', TRUE, NULL, 5),
+(23, 'paradasEspaña', TRUE, NULL, 5),
+(24, 'paradasRusia', TRUE, NULL, 5);
 
 
 

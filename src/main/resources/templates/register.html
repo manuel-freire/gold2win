@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html class="h-100" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="fragments/head :: header" />
+    <title>REGISTER</title>
+</head>
+
+<body class="d-flex flex-column h-100">
+    <header th:replace="fragments/nav.html :: nav('register')"></header>
+
+    <main class="flex-grow-1 d-flex flex-column">
+        <form id="formularioRegister" class="contenedorLogin mx-auto my-auto " method="post" th:action="@{/register}" novalidate>
+            <h2 class="text-center mb-4 mx-auto">Registrarse</h2>
+        
+            <div id="apartadoNombre" class="d-flex flex-column">
+                <div class="mb-3">
+                    <label for="firstName" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Ingrese su nombre" required>
+                    <div id="nombreInvalido"class="invalid-feedback"></div>
+                </div>
+        
+                <div class="mb-3">
+                    <label for="lastName" class="form-label">Apellido</label>
+                    <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Ingrese su Apellido" required>
+                    <div id="apellidosInvalido" class="invalid-feedback"></div>
+                </div>
+        
+                <div class="mb-4">
+                    <label for="username" class="form-label">Nombre de Usuario</label>
+                    <input type="text" id="username" name="username" class="form-control" placeholder="Ingrese su nombre de usuario" required>
+                    <div id="usernameInvalido" class="invalid-feedback">Por favor, introduzca un nombre de usuario.</div>
+                </div>
+        
+                <button type="button" class="btn btn-secondary mb-1 mx-auto" id="btnSiguiente">Siguiente</button>
+            </div>
+        
+            <div id="apartadoCredenciales" class="desaparece">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Correo</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese su email" required>
+                    <div id="emailInvalido" class="invalid-feedback">Por favor, introduzca un correo válido.</div>
+                </div>
+        
+                <div class="mb-4">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Ingrese su contraseña" required>
+                    <div id="passwordInvalida" class="invalid-feedback">Por favor, introduzca una contraseña.</div>
+                </div>
+        
+                <div class="w-100 d-flex justify-content-between">
+                    <button type="button" class="btn btn-secondary mb-1" id="btnAtras">Atras</button>
+                    <button type="submit" class="btn btn-primary mb-1">Registrarse</button>
+                </div>
+            </div>
+        </form>
+        <div class = "d-flex flex-grow-0" id="debugUsersBar">
+            <form class="d-flex" th:action="@{/login}" method="post">
+                <input type="hidden" name="username" value="Jose Luis">
+                <input type="hidden" name="password" value="aa">
+                <button type="submit" class="btn btn-outline-danger btn-sm">b</button>
+            </form>
+
+            <form class="d-flex" th:action="@{/login}" method="post">
+                <input type="hidden" name="username" value="Ramon">
+                <input type="hidden" name="password" value="aa">
+                <button type="submit" class="btn btn-outline-danger btn-sm">a</button>
+            </form>
+        </div>
+    </main>
+
+    <th:block th:replace="fragments/footer.html :: footer" />
+    <script th:src="@{/js/register.js}" src="js/register.js"></script>
+</body>
+
+</html>

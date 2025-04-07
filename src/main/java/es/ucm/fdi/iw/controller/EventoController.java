@@ -90,7 +90,7 @@ public class EventoController {
         if(formula == null)
             return "Id invalido";
 
-        if(cantidad < 0)
+        if(cantidad <= 0)
             return "Cantidad no válida";
         
         if(cantidad > u.getDineroDisponible())

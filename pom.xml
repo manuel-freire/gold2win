@@ -71,6 +71,14 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- evaluar las formulas matematicas de los usuarios-->
+		<dependency>
+			<groupId>com.ezylang</groupId>
+			<artifactId>EvalEx</artifactId>
+			<version>3.4.0</version>
+		</dependency>
+
+
 		<!-- pruebas con Karate https://github.com/karatelabs/karate -->
 		<dependency>
 			<groupId>com.intuit.karate</groupId>
