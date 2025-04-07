@@ -16,8 +16,8 @@ class ExternalRunner {
 
     
     @Karate.Test
-    Karate testCrearApuesta() {
-        return Karate.run("crearApuesta").relativeTo(getClass());
+    Karate testVerApuestaExterna() {
+        return Karate.run("verApuestaExterna").relativeTo(getClass());
     }  
 
     @Karate.Test
