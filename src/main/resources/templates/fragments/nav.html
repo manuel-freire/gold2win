@@ -42,16 +42,19 @@
                     <th:block th:if="${session.u}">
                         <ul class="navbar-nav">
                             <li class="d-flex">
-                                <a class= "nav-link" href="/cartera/ingresar" style="font-size: 11px; color:#dee2e6;">
+                                <!-- Mostrar dinero disponible en tiempo real -->
+                                <a class="nav-link" th:href="@{/cartera/ingresar}" style="font-size: 11px; color:#dee2e6;">
                                     <div class="d-flex flex-column justify-content-center align-items-center">
                                         <span>Disponible</span>
-                                        <span class="text-success" th:text="${session.u.dineroDisponible}">0,00$</span>
+                                        <!-- Mostrar el saldo dinámicamente o 0 si es null -->
+                                        <span class="text-success" th:text="${dineroDisponible != null ? #numbers.formatDecimal(dineroDisponible, 1, 2) : '0.00'} + '€'">0,00€</span>
                                     </div>
                                 </a>
-                                <a class= "nav-link" href="/cartera/ingresar" style="font-size: 11px; color:#dee2e6;">
-                                    <div class=" d-flex flex-column justify-content-center align-items-center">
+                                <a class="nav-link" th:href="@{/cartera/ingresar}" style="font-size: 11px; color:#dee2e6;">
+                                    <div class="d-flex flex-column justify-content-center align-items-center">
                                         <span>Retenido</span>
-                                        <span class="text-danger" th:text="${session.u.dineroRetenido}">0,00$</span>
+                                                                                <!-- no se si se llama dinerorestringido o no -->
+                                        <span class="text-danger" th:text="${dineroRestringido != null ? #numbers.formatDecimal(dineroRestringido, 1, 2) : '0.00'} + '$'">0,00$</span>
                                     </div>
                                 </a>
                             </li>
