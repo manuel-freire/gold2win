@@ -267,7 +267,6 @@ The connection was not closed by the application and is garbage collected [90018
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:678)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
 	... 17 more
-<<<<<<< HEAD
 2025-04-06 14:24:06 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientException: Tipo de dato desconocido : "SET"
 Unknown data type: "SET"; SQL statement:

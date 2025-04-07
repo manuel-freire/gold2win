@@ -15,19 +15,19 @@ INSERT INTO SECCION (ID, ENABLED, GRUPO, NOMBRE) VALUES
 (14, true, 'eSports', 'Rocket League');
 
 -- insert eventos
-INSERT INTO EVENTO (ID, CANCELADO, FECHA_CIERRE, FECHA_CREACION, NOMBRE, SECCION_ID) VALUES
-(1, false, '2025-06-10 18:00:00', '2025-03-01 12:00:00', 'Final Liga Española', 1),
-(2, false, '2025-06-22 20:30:00', '2025-03-02 14:15:00', 'NBA Playoffs - Lakers vs Celtics', 2),
-(3, false, '2025-06-10 16:00:00', '2025-03-03 10:30:00', 'Serie Mundial de Beisbol', 3),
-(4, false, '2025-05-20 19:00:00', '2025-03-05 09:45:00', 'Copa Europa de Balonmano', 4),
-(5, false, '2025-1-02 15:00:00', '2025-03-06 08:00:00', 'Campeonato Mundial de Esgrima', 5),
-(6, false, '2025-06-22 21:00:00', '2025-03-07 13:20:00', 'Roland Garros - Final Masculina', 6),
-(7, false, '2025-06-23 11:00:00', '2025-03-08 07:30:00', 'Torneo Internacional de Ping Pong', 7),
-(9, false, '2025-05-20 13:00:00', '2025-03-10 11:15:00', 'Masters de Golf en Augusta', 9),
-(10, false, '2025-05-20 17:30:00', '2025-03-11 15:45:00', 'Worlds - League of Legends', 10),
-(11, false, '2025-06-08 19:00:00', '2025-03-12 10:50:00', 'Major de Counter Strike', 11),
-(12, false, '2025-06-08 20:00:00', '2025-03-13 14:25:00', 'Final de Valorant Champions', 12),
-(13, false, '2025-03-11 10:30:00', '2024-06-08 20:00:00', 'LEC: MDK vs FNC', 12);
+INSERT INTO EVENTO (ID, CANCELADO, DETERMINADO, FECHA_CIERRE, FECHA_CREACION, NOMBRE, SECCION_ID) VALUES
+(1, false, false, '2025-06-10 18:00:00', '2025-03-01 12:00:00', 'Final Liga Española', 1),
+(2, false, false, '2025-06-22 20:30:00', '2025-03-02 14:15:00', 'NBA Playoffs - Lakers vs Celtics', 2),
+(3, false, false, '2025-06-10 16:00:00', '2025-03-03 10:30:00', 'Serie Mundial de Beisbol', 3),
+(4, false, false, '2025-05-20 19:00:00', '2025-03-05 09:45:00', 'Copa Europa de Balonmano', 4),
+(5, false, false, '2025-1-02 15:00:00', '2025-03-06 08:00:00', 'Campeonato Mundial de Esgrima', 5),
+(6, false, false, '2025-06-22 21:00:00', '2025-03-07 13:20:00', 'Roland Garros - Final Masculina', 6),
+(7, false, false, '2025-06-23 11:00:00', '2025-03-08 07:30:00', 'Torneo Internacional de Ping Pong', 7),
+(9, false, false, '2025-05-20 13:00:00', '2025-03-10 11:15:00', 'Masters de Golf en Augusta', 9),
+(10, false, false, '2025-05-20 17:30:00', '2025-03-11 15:45:00', 'Worlds - League of Legends', 10),
+(11, false, false, '2025-06-08 19:00:00', '2025-03-12 10:50:00', 'Major de Counter Strike', 11),
+(12, false, false, '2025-06-08 20:00:00', '2025-03-13 14:25:00', 'Final de Valorant Champions', 12),
+(13, false, false, '2025-03-11 10:30:00', '2024-06-08 20:00:00', 'LEC: MDK vs FNC', 12);
 
 -- inserta etiquetas
 INSERT INTO EVENTO_ETIQUETAS (EVENTO_ID, ETIQUETAS) VALUES
@@ -63,15 +63,16 @@ INSERT INTO IWUser (ID, DINERO_DISPONIBLE, DINERO_RETENIDO, EMAIL, ENABLED, FIRS
 (15, 250.0, 0.0, 'isabel.perez@example.com', TRUE, 'Isabel', 'Pérez López', '{bcrypt}$2a$10$2BpNTbrsarbHjNsUWgzfNubJqBRf.0Vz9924nRSHBqlbPKerkgX.W', 'ADMIN', 'iperez');
 
 -- INSERT FORMULA_APUESTA con FECHA_CREACION
-INSERT INTO FORMULA_APUESTA (ID, DINERO_AFAVOR, DINERO_EN_CONTRA, FORMULA, NOMBRE, RESULTADO, CREADOR_ID, EVENTO_ID, FECHA_CREACION) VALUES
+INSERT INTO FORMULA_APUESTA 
+    (ID, DINERO_AFAVOR, DINERO_EN_CONTRA, FORMULA, NOMBRE, RESULTADO, CREADOR_ID, EVENTO_ID, FECHA_CREACION)
+VALUES
 (1, 0, 0, 'goles Barsa > goles Madrid', 'Gana Barsa', 'INDETERMINADO', 1, 1, '2025-03-22 14:53:00'),
 (2, 0, 0, 'puntos Lakers > puntos Celtics', 'Victoria Lakers', 'INDETERMINADO', 2, 2, '2025-03-22 14:53:00'),
-(3, 0, 0, 'carreras Yankees > carreras Dodgers', 'Ganan Yankees', 'INDETERMINADO', 3, 3, '2025-03-22 14:53:00'),
+(3, 20, 55, 'carreras Yankees > carreras Dodgers', 'Ganan Yankees', 'INDETERMINADO', 3, 3, '2025-03-22 14:53:00'),
 (4, 0, 0, 'goles Kiel > goles Veszprem', 'Gana Kiel', 'INDETERMINADO', 4, 4, '2025-03-22 14:53:00'),
 (5, 0, 0, 'toques Alvarado > toques Smith', 'Victoria Alvarado', 'PERDIDO', 5, 5, '2025-03-22 14:53:00'),
 (6, 0, 0, 'sets Nadal > sets Djokovic', 'Gana Nadal', 'INDETERMINADO', 6, 6, '2025-03-22 14:53:00'),
 (7, 0, 0, 'puntos Wang > puntos Lee', 'Gana Wang', 'INDETERMINADO', 7, 7, '2025-03-22 14:53:00'),
-(8, 0, 0, 'tiempo Froome < tiempo Pogacar', 'Froome gana etapa', 'INDETERMINADO', 8, 8, '2025-03-22 14:53:00'),
 (9, 0, 0, 'golpes Woods > golpes McIlroy', 'Gana Woods', 'INDETERMINADO', 9, 9, '2025-03-22 14:53:00'),
 (10, 0, 0, 'torres destruidas G2 > torres destruidas T1', 'Gana G2', 'INDETERMINADO', 10, 10, '2025-03-22 14:53:00'),
 (11, 0, 0, 'rounds ganados NaVi > rounds ganados Vitality', 'Victoria NaVi', 'INDETERMINADO', 11, 11, '2025-03-22 14:53:00'),
@@ -119,7 +120,6 @@ INSERT INTO APUESTA (ID, CANTIDAD, A_FAVOR, APOSTADOR_ID, FORMULA) VALUES
 (5, 100.0, TRUE, 5, 5),
 (6, 45.0, TRUE, 6, 6),
 (7, 60.0, FALSE, 7, 7),
-(8, 25.0, TRUE, 8, 8),
 (9, 90.0, FALSE, 9, 9),
 (10, 15.0, TRUE, 10, 10),
 (11, 120.0, FALSE, 11, 11),
@@ -134,7 +134,6 @@ INSERT INTO VARIABLE (ID, NOMBRE, NUMERICO, RESOLUCION, ID_EVENTO) VALUES
 (5, 'toques', TRUE, NULL, 5),
 (6, 'sets', TRUE, NULL, 6),
 (7, 'puntos', TRUE, NULL, 7),
-(8, 'tiempo', TRUE, NULL, 8),
 (9, 'golpes', TRUE, NULL, 9),
 (13, 'hoyos', TRUE, NULL, 9),
 (14, 'promedio birdies', TRUE, NULL, 9),
