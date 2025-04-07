@@ -1,3 +1,58 @@
+/*FUNCIONES PARA EL MODO OSCURO/CLARO */
+
+function setCookie(name, value, days) {
+    const expires = new Date(Date.now() + days * 864e5).toUTCString();
+    document.cookie = name + '=' + encodeURIComponent(value) + '; expires=' + expires + '; path=/';
+}
+
+function getCookie(name) {
+    return document.cookie.split('; ').reduce((r, v) => {
+        const parts = v.split('=');
+        return parts[0] === name ? decodeURIComponent(parts[1]) : r
+    }, null);
+}
+
+function applyThemeFromCookie() {
+    let theme = getCookie('theme');
+
+    // Si no hay cookie, se crea con valor "oscuro"
+    if (!theme) {
+        theme = 'oscuro';
+        setCookie('theme', theme, 365); 
+    }
+
+    const html = document.documentElement;
+
+    if (theme === 'oscuro') {
+        html.setAttribute('data-bs-theme', 'dark');
+    } else {
+        html.removeAttribute('data-bs-theme');
+    }
+}
+
+document.querySelectorAll(".cambiadorTema").forEach(elemento => {
+    elemento.addEventListener("click", function () {
+        const html = document.documentElement;
+        let theme = getCookie('theme');
+
+        if (theme === 'oscuro' || theme === null) {
+            theme = 'claro';
+            html.removeAttribute('data-bs-theme');
+            setCookie('theme', theme, 365); 
+        }
+        else{
+            theme = 'oscuro';
+            html.setAttribute('data-bs-theme', 'dark');
+            setCookie('theme', theme, 365); // dura 1 año
+        }
+    });
+});
+
+// Ejecutar al cargar la página
+applyThemeFromCookie();
+
+/* OTRAS FUNCIONES GLOBALES*/
+
 function actualizarTiempoRestante() {
     console.log("entra1");
     const elementosTiempoRestante = document.querySelectorAll(".tiempo-restante");
@@ -39,15 +94,6 @@ if(tiempoRestanteAux.length != 0){
     actualizarTiempoRestante();
     setInterval(actualizarTiempoRestante, 60000); // Actualizar cada minuto
 }
-
-document.querySelectorAll(".cambiadorTema").forEach(elemento => {
-    elemento.addEventListener("click", function () {
-        const html = document.documentElement;
-        const newTheme = html.getAttribute("data-bs-theme") === "dark" ? "light" : "dark";
-        html.setAttribute("data-bs-theme", newTheme);
-        localStorage.setItem("theme", newTheme); // Guardar preferencia
-    });
-});
 
 document.querySelectorAll(".botonDesplegable").forEach(cell => {
     cell.addEventListener("click", () => {
