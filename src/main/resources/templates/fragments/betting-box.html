@@ -7,12 +7,12 @@
 <body class="d-flex flex-column h-100">
     <div class="container-fluid my-3 px-3">
         <div th:fragment="betting-box(apuesta)">
-            <div class="bettingBox mx-auto p-1 w-100 shadow-lg rounded" th:id="'bettingBox-' + ${apuesta.id}"
+            <div class="bettingBox mx-auto p-1 w-100 shadow-lg rounded"
                 th:data-formula="${apuesta.formulaApuesta.nombre}" 
                 th:data-cantidad="${apuesta.cantidad}" 
                 th:data-a-favor="${apuesta.aFavor}">
                 
-                <div class="headRowBettingBox d-flex align-items-center justify-content-between p-2" 
+                <div class="headRowBettingBox d-flex align-items-center justify-content-between p-2"  th:id="'bettingBox-' + ${apuesta.id}"
                     type="button" data-bs-toggle="collapse" 
                     th:data-bs-target="'#miDesplegable' + ${apuesta.id}" 
                     aria-expanded="false" 
