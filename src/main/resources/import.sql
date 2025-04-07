@@ -76,7 +76,7 @@ VALUES
 (9, 0, 0, 'golpes Woods > golpes McIlroy', 'Gana Woods', 'INDETERMINADO', 9, 9, '2025-03-22 14:53:00'),
 (10, 0, 0, 'torres destruidas G2 > torres destruidas T1', 'Gana G2', 'INDETERMINADO', 10, 10, '2025-03-22 14:53:00'),
 (11, 0, 0, 'rounds ganados NaVi > rounds ganados Vitality', 'Victoria NaVi', 'INDETERMINADO', 11, 11, '2025-03-22 14:53:00'),
-(12, 50, 750, 'mapas ganados Fnatic > mapas ganados Sentinels', 'Gana Fnatic', 'GANADO', 12, 12, '2025-03-22 14:53:00'),
+(12, 50, 750, 'mapas ganados Fnatic > mapas ganados Sentinels', 'Gana Fnatic', 'PERDIDO', 12, 12, '2025-03-22 14:53:00'),
 (13, 0, 0, 'hoyos Woods > hoyos McIlroy', 'Gana Woods', 'INDETERMINADO', 9, 9, '2025-03-22 14:53:00'),
 (14, 0, 0, 'promedio birdies Woods < promedio birdies McIlroy', 'Gana McIlroy', 'INDETERMINADO', 9, 9, '2025-03-22 14:53:00');
 
@@ -123,7 +123,10 @@ INSERT INTO APUESTA (ID, CANTIDAD, A_FAVOR, APOSTADOR_ID, FORMULA) VALUES
 (9, 90.0, FALSE, 9, 9),
 (10, 15.0, TRUE, 10, 10),
 (11, 120.0, FALSE, 11, 11),
-(12, 35.0, TRUE, 12, 12);
+(12, 35.0, TRUE, 12, 12),
+(13, 400.0, FALSE, 12, 12),
+(14, 350.0, FALSE, 12, 12),
+(15, 15.0, TRUE, 12, 12);
 
 -- INSERT VARIABLESECCION
 INSERT INTO VARIABLE (ID, NOMBRE, NUMERICO, RESOLUCION, ID_EVENTO) VALUES

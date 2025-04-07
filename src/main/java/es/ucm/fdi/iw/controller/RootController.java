@@ -22,6 +22,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -48,13 +50,14 @@ import es.ucm.fdi.iw.model.User;
 import es.ucm.fdi.iw.model.Variable;
 import es.ucm.fdi.iw.model.User.Role;
 import es.ucm.fdi.iw.model.VariableSeccion;
-
 import es.ucm.fdi.iw.model.Transferable;
 import java.util.stream.Collectors;
 import java.util.Map;
 
 import java.io.File;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  *  Non-authenticated requests only.
@@ -333,26 +336,77 @@ public class RootController {
     	return "tarjeta";
 	}
 
+
+    
     @GetMapping("/misApuestas/todas")
-    public String todasMisApuestas(Model model){
-        String queryApuestas = "SELECT a FROM Apuesta a";
-        List<Apuesta> apuestas = entityManager.createQuery(queryApuestas, Apuesta.class).getResultList();
+    public String todasMisApuestas(Model model) {
+        // Obtener el username desde el contexto de seguridad
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+    
+        // Buscar el usuario por su username
+        String queryUser = "SELECT u FROM User u WHERE u.username = :username";
+        User user = entityManager.createQuery(queryUser, User.class)
+                                 .setParameter("username", username)
+                                 .getSingleResult();
+    
+        // Ya tienes el ID
+        Long id = user.getId();
+    
+        // Buscar solo las apuestas del usuario actual
+        String queryApuestas = "SELECT a FROM Apuesta a WHERE a.apostador.id = :id";
+        List<Apuesta> apuestas = entityManager.createQuery(queryApuestas, Apuesta.class)
+                                              .setParameter("id", id)
+                                              .getResultList();
+    
         model.addAttribute("apuestas", apuestas);
         return "misApuestas-todas";
     }
+    
+    
 
     @GetMapping("/misApuestas/determinadas")
     public String apuestasDeterminadas(Model model){
-        String queryDeterminadas = "SELECT a FROM Apuesta a WHERE a.formulaApuesta.resultado IN ('GANADO', 'PERDIDO')";
-        List<Apuesta> apuestasDeterminadas = entityManager.createQuery(queryDeterminadas, Apuesta.class).getResultList();
+        // Obtener el username desde el contexto de seguridad
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+    
+        // Buscar el usuario por su username
+        String queryUser = "SELECT u FROM User u WHERE u.username = :username";
+        User user = entityManager.createQuery(queryUser, User.class)
+                                    .setParameter("username", username)
+                                    .getSingleResult();
+    
+        // Ya tienes el ID
+        Long id = user.getId();
+
+        String queryDeterminadas = "SELECT a FROM Apuesta a WHERE a.formulaApuesta.resultado IN ('GANADO', 'PERDIDO') AND a.apostador.id = :id";
+        List<Apuesta> apuestasDeterminadas = entityManager.createQuery(queryDeterminadas, Apuesta.class)
+                                                            .setParameter("id", id)
+                                                            .getResultList();
         model.addAttribute("apuestasDeterminadas", apuestasDeterminadas);
         return "misApuestas-determinadas";
     }
 
     @GetMapping("/misApuestas/pendientes")
     public String apuestasPendientes(Model model){
-        String queryPendientes = "SELECT a FROM Apuesta a WHERE a.formulaApuesta.resultado = 'INDETERMINADO'";
-        List<Apuesta> apuestasPendientes = entityManager.createQuery(queryPendientes, Apuesta.class).getResultList();
+        // Obtener el username desde el contexto de seguridad
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+    
+        // Buscar el usuario por su username
+        String queryUser = "SELECT u FROM User u WHERE u.username = :username";
+        User user = entityManager.createQuery(queryUser, User.class)
+                                    .setParameter("username", username)
+                                    .getSingleResult();
+    
+        // Ya tienes el ID
+        Long id = user.getId();
+
+        String queryDeterminadas = "SELECT a FROM Apuesta a WHERE a.formulaApuesta.resultado = 'INDETERMINADO' AND a.apostador.id = :id";
+        List<Apuesta> apuestasPendientes = entityManager.createQuery(queryDeterminadas, Apuesta.class)
+                                                            .setParameter("id", id)
+                                                            .getResultList();
         model.addAttribute("apuestasPendientes", apuestasPendientes);
         return "misApuestas-pendientes";
     }
