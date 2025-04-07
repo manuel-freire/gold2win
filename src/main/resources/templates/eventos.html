@@ -17,6 +17,29 @@
         <div th:replace="fragments/menuAdmin.html :: navAdmin('Eventos')"></div>
     </div>
 
+    <div class="modal fade" id="cancelarEventoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+            <div class="modal-content" style="position: relative;">
+                <div id="ocultador-formulario1">
+                    <form id="apostarForm1">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Eliminar evento</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
+                    
+                        <div class="modal-body">
+                            <span> ¿Seguro que quiere eliminar permanentemente este evento?</span>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button class="btn btn-danger" data-bs-dismiss="modal">Eliminar evento</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <table id="myTable" class="display">
         <thead>
             <tr>
@@ -40,13 +63,15 @@
                     </a>
                 </td>
                 <td>
-                    <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#cancelarEventoModal">
+                    <button class="btn btn-danger" type="button" href="#" data-bs-toggle="modal" data-bs-target="#cancelarEventoModal">
                         Cancelar
                     </button>
                 </td>
             </tr>
         </tbody>
     </table>
+
+    
 
     <script type="module">
         import { DataTable } from "../js/simple-datatables-10.js"
