@@ -129,7 +129,7 @@ function anadirFormula(formula){
                 favorable
             </button>
 
-            <input type="number" id="cantidad-${formula.id}" class ="form-control mx-2 flex-grow-1" placeholder="cantidad...">
+            <input type="number" id="cantidad-${formula.id}" class ="form-control mx-2 flex-grow-1" placeholder="cantidad..." required>
 
             <button type="button" class="btn btn-success botonApostarDesfavorable" onclick="enviarFormulario(false,${formula.id})">
                 desfavorable
@@ -258,9 +258,10 @@ document.getElementById("crearApuestaForm").addEventListener("submit", function(
 var enviandoFormulario = false; // Para evitar que si clicas varias veces en el mismo botón apuestes varias veces
 
 function enviarFormulario(esFavorable,id) {
-    if(!enviandoFormulario){
+    var input = document.getElementById("cantidad-"+id);
+    
+    if(!enviandoFormulario && input.value != ""){
         enviandoFormulario = true;
-        var input = document.getElementById("cantidad-"+id);
         const cantidad = parseFloat(input.value);
         const idFormula = id;
         const decision = esFavorable;

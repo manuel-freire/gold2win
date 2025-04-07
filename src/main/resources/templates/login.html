@@ -9,10 +9,13 @@
 <body class="d-flex flex-column h-100">
     <header th:replace="fragments/nav.html :: nav('login')"></header>
 
-    <main class="flex-shrink-0">
-        <div class="container">
-            <form class="form-signin" method="post" th:action="@{/login}">
-                <h2 class="form-signin-heading">Please sign in</h2>
+    <main class="flex-grow-1 d-flex flex-column">
+        <form class="contenedorLogin mx-auto my-auto" method="post" th:action="@{/login}">
+            <h2 class="text-center mb-4 mx-auto">Iniciar Sesión</h2>
+
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Ingrese su username" required="required">
                 <p th:if="${#request.getQueryString() == 'error'}" class="error">
                     Error en nombre de usuario o contraseña
                 </p>

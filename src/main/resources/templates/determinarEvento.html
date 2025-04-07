@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html class="h-100" xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
+
+<head>
+    <th:block th:replace="fragments/head :: header"/>
+    <title>CREAR APUESTA</title>
+</head>
+
+<body class="d-flex flex-column h-100">
+    
+    <header th:replace="fragments/nav.html :: nav('deportes')"></header>
+
+    <form style="display: none;" id="datos">
+        <input type="hidden" id="root" name="root" th:value="@{/}">
+        <input type="hidden" id="idEvento" name="idEvento" th:value="${eventoSel.id}">
+    </form>
+
+    <div class="w-100 px-3 pt-2 d-flex flex-column">
+        <div class="d-flex justify-content-between align-items-center border-bottom pb-2">
+            <h5 class="mb-0" th:text="${eventoSel.nombre}"></h5>
+            <a th:href="@{/admin/eventos}" href="/admin/eventos" class="btn-close" aria-label="Cerrar"></a>
+        </div>
+
+        <div id="contendorVariables" class="d-flex flex-wrap mx-auto" style="max-width: 1200px ;">
+            <div th:each="variable,i: ${eventoSel.variables}" class="mb-3 estilo-contenedor-adaptable p-2 m-3 flex-grow-1" style="width: 300px;">
+                <label th:for="${'_' + variable.nombre}" class="form-label mb-1" th:text="${variable.nombre}">error</label>
+                <input th:unless="${variable.numerico}" type="text" class="form-control" th:id="${'_' + variable.nombre}" th:name="${variable.nombre}" placeholder="Ingrese texto" required>
+                <input th:if="${variable.numerico}" type="number" class="form-control" th:id="${'_' + variable.nombre}" th:name="${variable.nombre}" placeholder="Ingrese un numero" required>
+                <div class="invalid-feedback">Campo obligatorio</div>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" id="btn_determinar" class="btn btn-primary mx-auto"> Determinar </button>
+
+    <th:block th:replace="fragments/footer.html :: footer" />
+    <script th:src="@{/js/determinarEvento.js}" src="js/determinarEvento.js"></script>
+</body>
+
+
+</html>

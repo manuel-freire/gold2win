@@ -25,6 +25,7 @@ public class Evento implements Transferable<Evento.Transfer>{
     private LocalDateTime fechaCreacion;
     private LocalDateTime fechaCierre;
     private boolean cancelado;
+    private boolean determinado = false;
 
     @ElementCollection
     private List<String> etiquetas = new ArrayList<>();

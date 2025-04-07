@@ -451,7 +451,7 @@ a.botonOvalado.nav-link:hover{
 }
 
 .desaparece{
-    display: none;
+    display: none !important;
 }
 
 .contenedor-apuesta{
@@ -593,4 +593,21 @@ a.botonOvalado.nav-link:hover{
 .botonVerMas{
     max-width: 250px;
     border-radius: 20px;
+}
+
+/*ESTILOS PARA EL LOGIN Y REGISTER*/
+
+.contenedorLogin{
+    display: flex;
+    flex-direction: column;
+    max-width: 350px;
+    min-width: 350px;
+    padding: 32px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+[data-bs-theme="dark"] .contenedorLogin{
+    background-color: #2d2d2d;
 }

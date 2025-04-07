@@ -142,6 +142,18 @@ INSERT INTO VARIABLE (ID, NOMBRE, NUMERICO, RESOLUCION, ID_EVENTO) VALUES
 (11, 'rounds ganados', TRUE, NULL, 11),
 (12, 'mapas ganados', TRUE, NULL, 12);
 
+INSERT INTO VARIABLE (ID, NOMBRE, NUMERICO, RESOLUCION, ID_EVENTO) VALUES
+(15, 'numToquesEspaña', TRUE, NULL, 5),
+(16, 'numToquesRusia', TRUE, NULL, 5),
+(17, 'duracionCombateSegundos', TRUE, NULL, 5),
+(18, 'toquesDobles', TRUE, NULL, 5),
+(19, 'tarjetasAmarillasEspaña', TRUE, NULL, 5),
+(20, 'tarjetasAmarillasRusia', TRUE, NULL, 5),
+(21, 'tarjetasRojasEspaña', TRUE, NULL, 5),
+(22, 'tarjetasRojasRusia', TRUE, NULL, 5),
+(23, 'paradasEspaña', TRUE, NULL, 5),
+(24, 'paradasRusia', TRUE, NULL, 5);
+
 
 
 -- start id numbering from a value that is larger than any assigned above
