@@ -57,7 +57,7 @@
                 <td th:text="${evento.fechaCierre}"></td>
                 <td>
                     <a th:href="@{eventos/determinar/{id}(id=${evento.id})}">
-                        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#determinarEventoModal">
+                        <button th:id = "'botonDeterminarEvento-' + ${evento.id}" class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#determinarEventoModal">
                             Determinar
                         </button>
                     </a>

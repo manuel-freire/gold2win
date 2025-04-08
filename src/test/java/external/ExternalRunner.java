@@ -16,12 +16,17 @@ class ExternalRunner {
 
     
     @Karate.Test
-    Karate testVerApuestaExterna() {
-        return Karate.run("verApuestaExterna").relativeTo(getClass());
+    Karate testCrearFormulaApuesta() {
+        return Karate.run("crearFormulaApuesta").relativeTo(getClass());
     }  
 
     @Karate.Test
-    Karate testCrearApuestaVista() {
-        return Karate.run("crearApuestaVista").relativeTo(getClass());
+    Karate testCrearApuesta() {
+        return Karate.run("crearApuesta").relativeTo(getClass());
+    }
+
+    @Karate.Test
+    Karate testDeterminarEvento() {  //esta prueba da error porque el servidor no responde al clickar el boton de determinar evento
+        return Karate.run("determinarEvento").relativeTo(getClass());
     }
 }

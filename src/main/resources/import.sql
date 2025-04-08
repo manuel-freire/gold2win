@@ -70,7 +70,7 @@ VALUES
 (2, 0, 0, 'puntos Lakers > puntos Celtics', 'Victoria Lakers', 'INDETERMINADO', 2, 2, '2025-03-22 14:53:00'),
 (3, 20, 55, 'carreras Yankees > carreras Dodgers', 'Ganan Yankees', 'INDETERMINADO', 3, 3, '2025-03-22 14:53:00'),
 (4, 0, 0, 'goles Kiel > goles Veszprem', 'Gana Kiel', 'INDETERMINADO', 4, 4, '2025-03-22 14:53:00'),
-(5, 0, 0, 'toques Alvarado > toques Smith', 'Victoria Alvarado', 'PERDIDO', 5, 5, '2025-03-22 14:53:00'),
+(5, 100, 30, 'toquesDobles > 3', 'Total toquesDobles', 'INDETERMINADO', 5, 5, '2025-03-22 14:53:00'),
 (6, 0, 0, 'sets Nadal > sets Djokovic', 'Gana Nadal', 'INDETERMINADO', 6, 6, '2025-03-22 14:53:00'),
 (7, 0, 0, 'puntos Wang > puntos Lee', 'Gana Wang', 'INDETERMINADO', 7, 7, '2025-03-22 14:53:00'),
 (9, 0, 0, 'golpes Woods > golpes McIlroy', 'Gana Woods', 'INDETERMINADO', 9, 9, '2025-03-22 14:53:00'),
@@ -117,7 +117,7 @@ INSERT INTO APUESTA (ID, CANTIDAD, A_FAVOR, APOSTADOR_ID, FORMULA) VALUES
 (2, 30.0, FALSE, 2, 2),
 (3, 75.5, TRUE, 3, 3),
 (4, 20.0, FALSE, 4, 4),
-(5, 100.0, TRUE, 5, 5),
+(5, 100.0, TRUE, 11, 5),
 (6, 45.0, TRUE, 6, 6),
 (7, 60.0, FALSE, 7, 7),
 (9, 90.0, FALSE, 9, 9),
@@ -126,7 +126,8 @@ INSERT INTO APUESTA (ID, CANTIDAD, A_FAVOR, APOSTADOR_ID, FORMULA) VALUES
 (12, 35.0, TRUE, 12, 12),
 (13, 400.0, FALSE, 12, 12),
 (14, 350.0, FALSE, 12, 12),
-(15, 15.0, TRUE, 12, 12);
+(15, 15.0, TRUE, 12, 12),
+(16, 30.0, FALSE, 11, 5);
 
 -- INSERT VARIABLESECCION
 INSERT INTO VARIABLE (ID, NOMBRE, NUMERICO, RESOLUCION, ID_EVENTO) VALUES
