@@ -301,11 +301,12 @@ public class AdminController {
                     entityManager.persist(user);
                 }
             }
-
-            evento.setDeterminado(true);
+            
             entityManager.persist(formula);
-            entityManager.persist(evento);
             entityManager.flush(); //forzamos a que se haga la consulta para que no se quede en la cola de espera
         }
+
+        evento.setDeterminado(true);
+        entityManager.persist(evento);
     }
 }
