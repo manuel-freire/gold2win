@@ -17,29 +17,48 @@
         <div th:replace="fragments/menuAdmin.html :: navAdmin('Eventos')"></div>
     </div>
 
-    <div class="modal fade" id="cancelarEventoModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
-            <div class="modal-content" style="position: relative;">
-                <div id="ocultador-formulario1">
-                    <form id="apostarForm1">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Eliminar evento</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                        </div>
-                    
-                        <div class="modal-body">
-                            <span> ¿Seguro que quiere eliminar permanentemente este evento?</span>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-danger" data-bs-dismiss="modal">Eliminar evento</button>
-                        </div>
-                    </form>
+    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalPrueba">
+        Modal de prueba
+      </button>
+      
+      <div class="modal fade" id="modalPrueba" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">¡Funciona!</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">Este modal debería funcionar si Bootstrap está bien cargado.</div>
+          </div>
+        </div>
+      </div>
+
+    <!-- Fuera de la tabla -->
+    <div th:each="evento : ${eventos}">
+        <div class="modal fade" th:id="'cancelarEventoModal-' + ${evento.id}" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+                <div class="modal-content" style="position: relative;">
+                    <div th:id="'ocultador-formulario-' + ${evento.id}">
+                        <form th:id="'apostarForm-' + ${evento.id}">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Eliminar evento</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                            </div>
+                        
+                            <div class="modal-body">
+                                <span> ¿Seguro que quiere eliminar permanentemente este evento?</span>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button class="btn btn-danger" data-bs-dismiss="modal">Eliminar evento</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
+    
     <table id="myTable" class="display">
         <thead>
             <tr>
@@ -50,7 +69,7 @@
                 <th> </th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id = "myTableBody">
             <tr th:each="evento : ${eventos}">
                 <td th:text="${evento.nombre}"></td>
                 <td th:text="${evento.fechaCreacion}"></td>
@@ -63,7 +82,7 @@
                     </a>
                 </td>
                 <td>
-                    <button class="btn btn-danger" type="button" href="#" data-bs-toggle="modal" data-bs-target="#cancelarEventoModal">
+                    <button class="btn btn-danger" type="button" data-bs-toggle="modal" th:attr="data-bs-target='#cancelarEventoModal-' + ${evento.id}">
                         Cancelar
                     </button>
                 </td>
@@ -73,8 +92,19 @@
 
     
 
+
     <script type="module">
         import { DataTable } from "../js/simple-datatables-10.js"
         new DataTable("#myTable");
     </script>
+
+
+    <th:block th:replace="fragments/footer.html :: footer" />
+
+    <script>
+
+    </script>
+
+
+
 </body>

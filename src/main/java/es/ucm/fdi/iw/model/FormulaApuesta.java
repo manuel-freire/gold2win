@@ -42,15 +42,15 @@ public class FormulaApuesta implements Transferable<FormulaApuesta.Transfer> {
     @OneToMany(mappedBy = "formulaApuesta")
     private List<Apuesta> apuestas;
 
+
     @Transient
     public double calcularCuota(boolean aFavor) {
-        double dineroTotal = dineroAfavor + dineroEnContra;
-        dineroTotal = dineroTotal * (1-0.05); // 5% de comision
-
         if (aFavor) {
-            return dineroAfavor > 0 ? (((dineroAfavor + dineroEnContra) / dineroAfavor)) : 1.0;
+            double dineroEnContraAux = dineroEnContra * (1-0.05); // 5% comision
+            return dineroAfavor > 0 ? (((dineroAfavor + dineroEnContraAux) / dineroAfavor)) : 1.0;
         } else {
-            return dineroEnContra > 0 ? (((dineroEnContra + dineroAfavor) / dineroEnContra)) : 1.0;
+            double dineroAfavorAux = dineroAfavor * (1-0.05); // 5% comision
+            return dineroEnContra > 0 ? (((dineroEnContra + dineroAfavorAux) / dineroEnContra)) : 1.0;
         }
     }
 

@@ -306,4 +306,27 @@ public class AdminController {
             entityManager.flush(); //forzamos a que se haga la consulta para que no se quede en la cola de espera
         }
     }
+
+    private void cancelarEvento(Evento evento) {
+        // Verificamos que el evento no sea null y que no esté ya cancelado
+        if (evento != null && !evento.isCancelado()) {
+            // Marcamos el evento como cancelado
+            evento.setCancelado(true);
+            entityManager.persist(evento); // Persistimos el cambio del estado del evento
+    
+            // Ahora vamos a revertir las apuestas asociadas al evento
+            for (FormulaApuesta formula : evento.getFormulasApuestas()) {
+                for (Apuesta apuesta : formula.getApuestas()) {
+                    // Devolver el dinero al apostador
+                    User user = apuesta.getApostador();
+                    user.setDineroRetenido(user.getDineroRetenido() - apuesta.getCantidad());
+                    user.setDineroDisponible(user.getDineroDisponible() + apuesta.getCantidad());
+                    entityManager.persist(user);
+                }
+            }
+            entityManager.flush(); // Aseguramos que todos los cambios se guardan en la base de datos
+        }
+    }
 }
+
+

@@ -68,5 +68,13 @@ public class Evento implements Transferable<Evento.Transfer>{
 	public String toString() {
 		return toTransfer().toString();
 	}
+
+    public boolean isCancelado() {
+        return cancelado;
+    }
+
+    public void setCancelado(boolean cancelado) {
+        this.cancelado = cancelado;
+    }
     
 }
