@@ -12,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,6 +48,9 @@ import jakarta.transaction.Transactional;
 @Controller
 @RequestMapping("admin")
 public class AdminController {
+
+    @Autowired
+    private SessionRegistry sessionRegistry;
 
     @Autowired
     private EntityManager entityManager;
@@ -214,6 +218,22 @@ public class AdminController {
         return "eventos";
     }
 
+
+    @GetMapping("/dineros")
+    @ResponseBody
+    public String dineros() {
+        StringBuilder todo = new StringBuilder();
+        for (Object o : sessionRegistry.getAllPrincipals()) {
+            sessionRegistry.getAllSessions(o, false).forEach(s -> {
+                // Sessions are NOT model.User, but whatever was created in IwUserDetailsService
+                //User user = (User) s.getPrincipal();
+                //todo.append("User: " + user.getUsername() + " - Dinero disponible: " + user.getDineroDisponible()
+                //        + " - Dinero retenido: " + user.getDineroRetenido() + "\n");
+            });
+        }
+        return "dineros: " + todo.toString();
+    }    
+
     // Logica para determinar evento
     // El evento tiene que haberse traido previamente de la base de datos y
     // verificado que no sea null
@@ -290,7 +310,7 @@ public class AdminController {
                     User user = apuesta.getApostador();
                     user.setDineroRetenido(user.getDineroRetenido() - apuesta.getCantidad());
                     user.setDineroDisponible(user.getDineroDisponible() + dineroGanado);
-                    entityManager.persist(user);
+                    entityManager.persist(user);                    
                 } else {
                     // Ha perdido por lo que se resta el dinero apostado del dinero retenido
 
