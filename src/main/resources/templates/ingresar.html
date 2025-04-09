@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html class="h-100" xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
 <head>
-    <th:block th:replace="fragments/head :: header"/>
+        <th:block th:replace="~{fragments/head :: header}" />
+
     <title>CARTERA</title>
 </head>
 
@@ -51,6 +52,7 @@
         </div>
     </div>
 
-    <th:block th:replace="fragments/footer.html :: footer"/>
+        <th:block th:replace="~{fragments/footer.html :: footer}" />
+
 </body>
 </html>
