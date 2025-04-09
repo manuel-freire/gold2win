@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +33,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
@@ -299,12 +301,13 @@ public class AdminController {
                     entityManager.persist(user);
                 }
             }
-
-            evento.setDeterminado(true);
+            
             entityManager.persist(formula);
-            entityManager.persist(evento);
             entityManager.flush(); //forzamos a que se haga la consulta para que no se quede en la cola de espera
         }
+
+        evento.setDeterminado(true);
+        entityManager.persist(evento);
     }
 
     private void cancelarEvento(Evento evento) {
